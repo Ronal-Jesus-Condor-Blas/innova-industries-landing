@@ -37,9 +37,22 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-white">Contacto</h3>
             <div className="mt-4 grid gap-2 text-sm text-white/70">
-              <Link href={`mailto:${brand.email}`} className="transition hover:text-primary">{brand.email}</Link>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-[#1C6DB5] focus:text-[#1C6DB5] outline-none underline underline-offset-2 decoration-[#1C6DB5] hover:decoration-2"
+                title="Enviar correo a INNOVA"
+                aria-label="Enviar correo a INNOVA"
+              >
+                a.rios@innovaindustriesperu.com
+              </a>
               <span>{brand.domain}</span>
-              <span>Dirección y mapa por confirmar</span>
+              <address className="not-italic mt-2">
+                Mza. B1 Lote. 3b Z.I. Lotizacion Industrial Hua (Alt. Petramas)<br />
+                San Antonio, Huarochiri<br />
+                Lima, Perú
+              </address>
             </div>
           </div>
         </div>

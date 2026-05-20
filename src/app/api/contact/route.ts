@@ -49,10 +49,15 @@ export async function POST(request: Request) {
 
     const apiKey = process.env.RESEND_API_KEY;
     const toEmail = process.env.CONTACT_TO_EMAIL ?? "a.rios@innovaindustriesperu.com";
+    const fromEmail = process.env.RESEND_FROM_EMAIL ?? "INNOVA Landing <onboarding@resend.dev>";
 
     if (!apiKey) {
       return NextResponse.json(
-        { success: false, error: "Servicio de correo no configurado." },
+        {
+          success: false,
+          error:
+            "No se ha configurado la clave de Resend. Establezca RESEND_API_KEY en el entorno."
+        },
         { status: 500 }
       );
     }
@@ -71,18 +76,41 @@ export async function POST(request: Request) {
       payload.message
     ].join("\n");
 
-    await resend.emails.send({
-      from: "INNOVA Landing <onboarding@resend.dev>",
+    const sendResponse = await resend.emails.send({
+      from: fromEmail,
       to: toEmail,
       replyTo: payload.email,
       subject: "Nueva consulta desde landing page INNOVA",
       text
     });
 
-    return NextResponse.json({ success: true });
-  } catch {
+    console.log("Resend response:", sendResponse);
+
+    if (sendResponse.error) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Resend error: ${sendResponse.error.message}`
+        },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      sendId: sendResponse.data?.id ?? null
+    });
+  } catch (error) {
+    console.error("Error en /api/contact:", error);
+
     return NextResponse.json(
-      { success: false, error: "No se pudo enviar la consulta." },
+      {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "No se pudo enviar la consulta."
+      },
       { status: 500 }
     );
   }

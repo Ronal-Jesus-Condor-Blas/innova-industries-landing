@@ -66,11 +66,15 @@ export function Contact() {
         type: "success",
         message: "Correo enviado exitosamente. Nuestro equipo se pondrá en contacto con usted."
       });
-    } catch {
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : "No se pudo enviar la consulta. Intente nuevamente o escríbanos directamente por WhatsApp.";
+
       setSubmitState({
         type: "error",
-        message:
-          "No se pudo enviar la consulta. Intente nuevamente o escríbanos directamente por WhatsApp."
+        message
       });
     } finally {
       setIsSubmitting(false);
@@ -91,17 +95,28 @@ export function Contact() {
           </p>
 
           <div className="mt-8 grid gap-4">
-            <Link href={`mailto:${brand.email}`} className="flex items-center gap-3 text-sm font-medium text-innova-black">
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-sm font-medium text-innova-black transition-colors hover:text-[#1C6DB5] focus:text-[#1C6DB5] outline-none"
+              title="Enviar correo a INNOVA"
+              aria-label="Enviar correo a INNOVA"
+            >
               <Mail className="h-5 w-5 text-primary" />
-              Correo: {brand.email}
-            </Link>
+              Correo: <span className="underline underline-offset-2 decoration-[#1C6DB5] hover:decoration-2">a.rios@innovaindustriesperu.com</span>
+            </a>
             <Link href={whatsappHref} className="flex items-center gap-3 text-sm font-medium text-innova-black">
               <FaWhatsapp className="h-5 w-5 shrink-0 text-[#25D366]" aria-hidden="true" />
               WhatsApp comercial
             </Link>
-            <div className="flex items-center gap-3 text-sm font-medium text-innova-black">
-              <MapPinned className="h-5 w-5 text-primary" />
-              Dirección y mapa por confirmar
+            <div className="flex items-start gap-3 text-sm font-medium text-innova-black">
+              <MapPinned className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+              <address className="not-italic">
+                Mza. B1 Lote. 3b Z.I. Lotizacion Industrial Hua (Alt. Petramas)<br />
+                San Antonio, Huarochiri<br />
+                Lima, Perú
+              </address>
             </div>
           </div>
         </div>

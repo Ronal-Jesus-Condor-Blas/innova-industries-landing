@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { CalendarDays } from "lucide-react";
+import Link from "next/link";
 
 import {
   communicationCategories,
@@ -14,14 +15,25 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 export function NewsQuality() {
-  const [selectedCategory, setSelectedCategory] = useState<CommunicationCategory>(
-    communicationCategories[0]
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string>("Todas");
 
-  const filteredPosts = useMemo(
-    () => communications.filter((post) => post.category === selectedCategory),
-    [selectedCategory]
-  );
+  const filteredPosts = useMemo(() => {
+    let posts = [];
+    if (selectedCategory === "Todas") {
+      posts = [...communications];
+    } else {
+      posts = communications.filter((post) => post.category === selectedCategory);
+    }
+    return posts
+      .sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      })
+      .slice(0, 3);
+  }, [selectedCategory]);
+
+  const categories = ["Todas", ...communicationCategories];
 
   return (
     <section id="comunicados-calidad" className="bg-muted/40 py-16 sm:py-20">
@@ -40,29 +52,30 @@ export function NewsQuality() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.45fr]">
-          <Card className="rounded-lg shadow-sm">
-            <CardHeader>
+        <div className="mt-10 grid gap-6 lg:items-start lg:grid-cols-[320px_1fr]">
+          <Card className="rounded-lg shadow-sm border-gray-200">
+            <CardHeader className="pb-4">
               <CardTitle className="text-lg">Categorías institucionales</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 lg:mx-0 lg:grid lg:overflow-visible lg:px-0 lg:pb-0">
-                {communicationCategories.map((category) => {
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => {
                   const isActive = category === selectedCategory;
 
                   return (
-                    <Button
+                    <button
                       key={category}
                       type="button"
-                      variant={isActive ? "default" : "outline"}
                       onClick={() => setSelectedCategory(category)}
                       className={cn(
-                        "h-auto shrink-0 justify-start whitespace-nowrap rounded-md px-4 py-3 text-left text-sm",
-                        !isActive && "border-gray-200 bg-white text-innova-black hover:border-primary/40 hover:bg-primary/5"
+                        "inline-flex items-center rounded-md border px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20",
+                        isActive
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-gray-200 bg-white text-innova-black hover:border-primary/40 hover:bg-primary/5"
                       )}
                     >
                       {category}
-                    </Button>
+                    </button>
                   );
                 })}
               </div>
@@ -71,35 +84,39 @@ export function NewsQuality() {
 
           <div className="grid gap-4">
             {filteredPosts.length > 0 ? (
-              filteredPosts.map((post) => (
-                <Card key={post.id} className="rounded-lg shadow-sm">
-                  <CardHeader>
-                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-                        <post.icon className="h-5 w-5" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <Badge className="rounded-md">{post.category}</Badge>
-                          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                            <CalendarDays className="h-3.5 w-3.5" />
-                            {post.date}
-                          </span>
+              <>
+                {filteredPosts.map((post) => (
+                  <Card key={post.id} className="rounded-lg shadow-sm border-gray-200">
+                    <CardHeader className="pb-2">
+                      <div className="flex gap-4 items-start">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/5 text-primary border border-primary/10">
+                          <post.icon className="h-5 w-5" />
                         </div>
-                        <CardTitle className="mt-3 text-xl text-innova-black">
-                          {post.title}
-                        </CardTitle>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <Badge className="bg-primary hover:bg-primary/90 rounded text-xs px-2 py-0.5">{post.category}</Badge>
+                            <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                              <CalendarDays className="h-4 w-4" />
+                              {post.date}
+                            </span>
+                          </div>
+                          <CardTitle className="mt-3 text-lg font-semibold text-innova-black leading-snug">
+                            {post.title}
+                          </CardTitle>
+                        </div>
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="leading-7 text-muted-foreground">{post.summary}</p>
-                  </CardContent>
-                </Card>
-              ))
+                    </CardHeader>
+                    <CardContent className="pt-2 sm:pl-[4.5rem]">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {post.summary}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </>
             ) : (
-              <Card className="rounded-lg shadow-sm">
-                <CardContent className="py-10 text-sm text-muted-foreground">
+              <Card className="rounded-lg shadow-sm border-gray-200">
+                <CardContent className="py-10 text-sm text-muted-foreground text-center">
                   No hay comunicados disponibles en esta categoría por el momento.
                 </CardContent>
               </Card>

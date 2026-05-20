@@ -3,7 +3,7 @@ export const brand = {
   shortName: "Innova America",
   email: "a.rios@innovaindustriesperu.com",
   domain: "www.innovaindustriesperu.com",
-  whatsappNumber: "51999999999",
+  whatsappNumber: "51986023382",
   colors: {
     blue: "#1C6DB5",
     gray: "#878787",
