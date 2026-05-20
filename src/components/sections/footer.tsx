@@ -11,11 +11,11 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
             <Image
-              src="/assets/logo-innova.png"
+              src="/assets/logo-innova-transparent.png"
               alt="Logo Innova America"
-              width={520}
-              height={166}
-              className="h-12 w-auto object-contain"
+              width={1187}
+              height={438}
+              className="h-14 w-auto object-contain sm:h-16"
             />
             <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
               Soluciones industriales para mineria, construccion y manufactura,
