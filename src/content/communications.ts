@@ -1,67 +1,75 @@
 import {
   Award,
-  BadgeCheck,
   ClipboardCheck,
   Factory,
   Leaf,
   ShieldCheck
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+export const communicationCategories = [
+  "Política de calidad",
+  "Comunicados oficiales",
+  "Certificaciones",
+  "Seguridad, salud y medio ambiente",
+  "Noticias institucionales"
+] as const;
+
+export type CommunicationCategory = (typeof communicationCategories)[number];
 
 export type Communication = {
+  id: string;
   title: string;
-  type: string;
+  category: CommunicationCategory;
   date: string;
   summary: string;
-  icon: typeof ClipboardCheck;
+  icon: LucideIcon;
 };
 
 export const communications: Communication[] = [
   {
-    title: "Politica de calidad",
-    type: "Calidad",
-    date: "Documento institucional",
+    id: "politica-calidad-institucional",
+    title: "Política de calidad institucional",
+    category: "Política de calidad",
+    date: "2026-05-19",
     summary:
-      "Compromiso permanente con productos confiables, trazabilidad operativa, mejora continua y atencion tecnica alineada a los requerimientos de nuestros clientes industriales.",
+      "INNOVA INDUSTRIES AMERICA SAC reafirma su compromiso con la fabricación, comercialización y soporte técnico de soluciones industriales bajo criterios de calidad, cumplimiento normativo y mejora continua.",
     icon: ClipboardCheck
   },
   {
-    title: "Comunicado institucional",
-    type: "Comunicado oficial",
-    date: "Actualizacion corporativa",
+    id: "comunicados-oficiales-corporativos",
+    title: "Comunicados oficiales corporativos",
+    category: "Comunicados oficiales",
+    date: "2026-05-19",
     summary:
-      "Canal formal para informar novedades de la empresa, avances operativos, cambios relevantes y anuncios dirigidos a clientes, proveedores y aliados estrategicos.",
+      "Canal destinado a publicar actualizaciones institucionales, disposiciones internas, novedades operativas y mensajes oficiales de la empresa.",
     icon: Factory
   },
   {
-    title: "Certificaciones y controles",
-    type: "Cumplimiento",
-    date: "Gestion documentaria",
+    id: "avances-gestion-certificacion",
+    title: "Avances en gestión y certificación",
+    category: "Certificaciones",
+    date: "2026-05-19",
     summary:
-      "Espacio destinado a compartir certificaciones, respaldos tecnicos, controles internos y evidencias de cumplimiento para operaciones industriales exigentes.",
+      "La empresa fortalece sus procesos documentarios, técnicos y operativos para sostener estándares de calidad aplicables a sus líneas industriales.",
     icon: Award
   },
   {
-    title: "Seguridad, salud y medio ambiente",
-    type: "SSOMA",
-    date: "Gestion preventiva",
+    id: "lineamientos-ssoma",
+    title: "Lineamientos de seguridad, salud y medio ambiente",
+    category: "Seguridad, salud y medio ambiente",
+    date: "2026-05-19",
     summary:
-      "Difusion de buenas practicas, lineamientos preventivos y compromisos ambientales orientados a una operacion responsable y sostenible.",
+      "Difusión de prácticas internas orientadas a operaciones responsables, prevención de riesgos, orden operativo y cuidado ambiental.",
     icon: Leaf
   },
   {
-    title: "Noticias institucionales",
-    type: "Noticias",
-    date: "Relacion corporativa",
+    id: "actualizaciones-institucionales",
+    title: "Actualizaciones institucionales",
+    category: "Noticias institucionales",
+    date: "2026-05-19",
     summary:
-      "Publicaciones sobre hitos comerciales, fortalecimiento tecnico, participacion en proyectos y desarrollo de soluciones para mineria e industria.",
-    icon: BadgeCheck
-  },
-  {
-    title: "Seguridad de suministro",
-    type: "Operaciones",
-    date: "Continuidad",
-    summary:
-      "Informacion sobre fabricacion local, disponibilidad, seguimiento de despachos y capacidad de respuesta para proyectos criticos.",
+      "Espacio para compartir novedades de la empresa, mejoras implementadas, nuevos proyectos y avances relevantes para clientes y aliados estratégicos.",
     icon: ShieldCheck
   }
 ];
