@@ -7,23 +7,23 @@ import { cn } from "@/lib/utils";
 
 const heroImages = [
   {
-    src: "/assets/hero/tuberias-polimeros.jpg",
-    alt: "Tuberias industriales para soluciones polimericas",
+    src: "/assets/hero/mineria-industrial.jpg",
+    alt: "Operacion minera industrial con agregados y maquinaria pesada",
     objectPosition: "center center"
   },
   {
-    src: "/assets/hero/mineria-industrial.jpg",
-    alt: "Operacion minera industrial con maquinaria pesada",
-    objectPosition: "center 70%"
+    src: "/assets/hero/tuberias-polimeros.jpg",
+    alt: "Tuberias polimericas industriales para infraestructura",
+    objectPosition: "center center"
   },
   {
     src: "/assets/hero/fiberims-50.jpg",
-    alt: "Infraestructura industrial relacionada a concreto y manufactura",
-    objectPosition: "center center"
+    alt: "FIBERIMS 50 fibra sintetica para concreto de Innova America",
+    objectPosition: "center 38%"
   },
   {
-    src: "/assets/hero/operacion-industrial.jpg",
-    alt: "Operacion industrial con personal tecnico especializado",
+    src: "/assets/hero/operacion-industrial.avif",
+    alt: "Operacion industrial relacionada a soluciones quimicas y manufactura",
     objectPosition: "center center"
   }
 ];
