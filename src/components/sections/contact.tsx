@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, MapPinned, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPinned } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,7 +29,7 @@ export function Contact() {
               {brand.email}
             </Link>
             <Link href={whatsappHref} className="flex items-center gap-3 text-sm font-medium text-innova-black">
-              <Phone className="h-5 w-5 text-primary" />
+              <FaWhatsapp className="h-5 w-5 shrink-0 text-[#25D366]" aria-hidden="true" />
               WhatsApp comercial
             </Link>
             <div className="flex items-center gap-3 text-sm font-medium text-innova-black">
@@ -74,9 +75,15 @@ export function Contact() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button type="button" className="h-11">Enviar consulta</Button>
-                <Button type="button" asChild variant="outline" className="h-11">
-                  <Link href={whatsappHref}>
-                    <MessageCircle /> WhatsApp
+                <Button
+                  type="button"
+                  asChild
+                  variant="outline"
+                  className="h-11 border-[#25D366]/40 text-innova-black hover:bg-[#25D366]/10 hover:text-innova-black"
+                >
+                  <Link href={whatsappHref} className="inline-flex items-center gap-2">
+                    <FaWhatsapp className="h-5 w-5 shrink-0 text-[#25D366]" aria-hidden="true" />
+                    Escribir por WhatsApp
                   </Link>
                 </Button>
               </div>
