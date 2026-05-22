@@ -40,7 +40,7 @@ export function HeroCarousel() {
   }, []);
 
   return (
-    <div className="relative min-h-[320px] overflow-hidden rounded-[24px] bg-innova-black shadow-[0_24px_70px_rgba(29,29,27,0.16)] sm:min-h-[420px] lg:min-h-[560px]">
+    <div className="animate-scale-in stagger-1 relative min-h-[320px] overflow-hidden rounded-[22px] bg-innova-black shadow-[0_22px_60px_rgba(29,29,27,0.14)] ring-1 ring-black/5 sm:min-h-[420px] lg:min-h-[560px]">
       {heroImages.map((image, index) => (
         <Image
           key={image.src}
@@ -52,7 +52,7 @@ export function HeroCarousel() {
           sizes="(min-width: 1024px) 48vw, 100vw"
           style={{ objectPosition: image.objectPosition }}
           className={cn(
-            "object-cover transition-opacity duration-1000 ease-out",
+            "object-cover transition-opacity duration-700 ease-out",
             index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
           )}
         />
@@ -67,8 +67,8 @@ export function HeroCarousel() {
             aria-label={`Mostrar imagen ${index + 1}`}
             onClick={() => setActiveIndex(index)}
             className={cn(
-              "h-2 rounded-full transition-all",
-              index === activeIndex ? "w-7 bg-primary" : "w-2 bg-innova-gray/40 hover:bg-innova-gray"
+              "h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/25",
+              index === activeIndex ? "w-7 bg-primary" : "w-2 bg-innova-gray/40 hover:bg-primary/60"
             )}
           />
         ))}

@@ -1,13 +1,13 @@
+import { Contact } from "@/components/sections/contact";
 import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
-import { Hero } from "@/components/sections/hero";
 
-export default function Home() {
+export default function ContactoPage() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <Hero />
+      <Contact />
       <Footer />
       <FloatingWhatsApp />
     </main>

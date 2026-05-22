@@ -13,10 +13,11 @@ export const brand = {
 };
 
 export const navItems = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Comunicados y Calidad", href: "#comunicados-calidad" },
-  { label: "Contacto", href: "#contacto" }
-];
+  { label: "Inicio", href: "/" },
+  { label: "Comunicados", href: "/comunicados" },
+  { label: "Calidad y Políticas", href: "/calidad" },
+  { label: "Contacto", href: "/contacto" }
+] as const;
 
 export const whatsappHref = `https://wa.me/${brand.whatsappNumber}?text=${encodeURIComponent(
   "Hola, quiero contactar con INNOVA INDUSTRIES AMERICA SAC."

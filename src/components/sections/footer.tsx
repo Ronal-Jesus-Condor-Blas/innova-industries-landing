@@ -10,7 +10,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
-            <div className="inline-flex rounded-md bg-white px-3 py-2">
+            <div className="inline-flex rounded-md bg-white px-3 py-2 shadow-sm">
               <Image
                 src="/assets/logo-innova-transparent.png"
                 alt="Logo Innova America"
@@ -28,7 +28,11 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-white">Enlaces rápidos</h3>
             <div className="mt-4 grid gap-2">
               {navItems.map((item) => (
-                <Link key={item.href} href={item.href} className="text-sm text-white/70 transition hover:text-primary">
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm text-white/70 transition-colors hover:text-white focus:text-white focus:outline-none"
+                >
                   {item.label}
                 </Link>
               ))}
@@ -41,14 +45,14 @@ export function Footer() {
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition hover:text-[#1C6DB5] focus:text-[#1C6DB5] outline-none underline underline-offset-2 decoration-[#1C6DB5] hover:decoration-2"
+                className="underline decoration-primary/70 underline-offset-2 outline-none transition hover:text-white hover:decoration-2 focus:text-white"
                 title="Enviar correo a INNOVA"
                 aria-label="Enviar correo a INNOVA"
               >
                 a.rios@innovaindustriesperu.com
               </a>
               <span>{brand.domain}</span>
-              <address className="not-italic mt-2">
+              <address className="mt-2 not-italic">
                 Mza. B1 Lote. 3b Z.I. Lotizacion Industrial Hua (Alt. Petramas)<br />
                 San Antonio, Huarochiri<br />
                 Lima, Perú

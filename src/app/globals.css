@@ -70,8 +70,84 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  text-rendering: optimizeLegibility;
 }
 
 section {
   scroll-margin-top: 96px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--innova-blue) 18%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-up {
+    animation: fade-up 440ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 360ms ease-out both;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .stagger-1 {
+    animation-delay: 80ms;
+  }
+
+  .stagger-2 {
+    animation-delay: 150ms;
+  }
+
+  .stagger-3 {
+    animation-delay: 220ms;
+  }
+}
+
+.interactive-card {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.interactive-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--innova-blue) 32%, white);
+  box-shadow: 0 16px 38px rgb(29 29 27 / 0.08);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
