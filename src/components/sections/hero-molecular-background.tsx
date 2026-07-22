@@ -8,20 +8,23 @@ const PARALLAX_Y = 12;
 
 export function HeroMolecularBackground() {
   const layerRef = useRef<HTMLDivElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
   const lightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const layer = layerRef.current;
+    const detail = detailRef.current;
     const light = lightRef.current;
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktopQuery = window.matchMedia("(min-width: 768px) and (pointer: fine)");
 
-    if (!layer || !light || motionQuery.matches || !desktopQuery.matches) {
+    if (!layer || !detail || !light || motionQuery.matches || !desktopQuery.matches) {
       return;
     }
 
     const reset = () => {
       layer.style.transform = "translate3d(0, 0, 0) scale(1.035)";
+      detail.style.transform = "translate3d(0, 0, 0) scale(1.035)";
       light.style.opacity = "0";
     };
 
@@ -31,7 +34,9 @@ export function HeroMolecularBackground() {
       const offsetX = normalizedX * -PARALLAX_X;
       const offsetY = normalizedY * -PARALLAX_Y;
 
-      layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(1.055)`;
+      const transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(1.055)`;
+      layer.style.transform = transform;
+      detail.style.transform = transform;
       light.style.background = `radial-gradient(circle 190px at ${event.clientX}px ${event.clientY}px, rgb(28 109 181 / 0.08), transparent 72%)`;
       light.style.opacity = "1";
     };
@@ -87,7 +92,21 @@ export function HeroMolecularBackground() {
         className="absolute inset-0 opacity-0 transition-opacity duration-700"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,rgba(28,109,181,0.085)_0%,transparent_40%)] dark:hidden" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.56)_0%,rgba(255,255,255,0.08)_48%,rgba(255,255,255,0)_74%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0.03)_48%,rgba(255,255,255,0)_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
+      <div
+        ref={detailRef}
+        className="absolute -inset-5 will-change-transform transition-transform duration-700 ease-out dark:hidden md:scale-[1.035]"
+      >
+        <div className="absolute inset-0 [mask-image:linear-gradient(to_right,black_0%,black_44%,transparent_76%)] [-webkit-mask-image:linear-gradient(to_right,black_0%,black_44%,transparent_76%)]">
+          <Image
+            src="/images/hero-molecular-3d.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.26] grayscale contrast-[2] mix-blend-multiply sm:opacity-[0.24] lg:object-center lg:opacity-[0.2]"
+          />
+        </div>
+      </div>
     </div>
   );
 }
