@@ -19,9 +19,17 @@ export function Reveal({ className, delay = 0, style, ...props }: RevealProps) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setIsVisible(true);
-        observer.unobserve(entry.target);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          return;
+        }
+
+        // Reset only after the section is back below the viewport. This keeps
+        // content visible while scrolling down and replays the entrance on the
+        // next downward visit.
+        if (entry.boundingClientRect.top > 0) {
+          setIsVisible(false);
+        }
       },
       { rootMargin: "0px 0px -10%", threshold: 0.12 }
     );
