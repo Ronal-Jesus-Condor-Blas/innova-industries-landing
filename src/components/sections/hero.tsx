@@ -1,50 +1,64 @@
-import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+"use client";
 
-import { HeroCarousel } from "@/components/sections/hero-carousel";
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+
+import { useLanguage } from "@/components/providers/language-provider";
+import { HeroMolecularBackground } from "@/components/sections/hero-molecular-background";
+import { RotatingPhrase } from "@/components/sections/rotating-phrase";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
+  const { locale } = useLanguage();
+  const copy = locale === "es"
+    ? {
+        title: "Soluciones que construyen",
+        description:
+          "Desarrollamos y suministramos soluciones químicas, poliméricas e industriales para minería, construcción y manufactura, con enfoque técnico, calidad y atención local",
+        about: "Conócenos",
+        contact: "Contáctanos"
+      }
+    : {
+        title: "Solutions that build",
+        description:
+          "We develop and supply chemical, polymeric and industrial solutions for mining, construction and manufacturing, with technical expertise, quality and local support",
+        about: "About us",
+        contact: "Contact us"
+      };
+
   return (
-    <section id="inicio" className="relative overflow-hidden bg-white">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 sm:py-12 lg:min-h-[680px] lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-8 lg:py-14">
-        <div className="animate-fade-up max-w-2xl">
-          <Badge className="mb-6 border border-primary/15 bg-primary/10 text-primary shadow-sm transition hover:bg-primary/15">
-            Industria, calidad y soporte técnico
-          </Badge>
-          <h1 className="text-4xl font-semibold leading-tight tracking-normal text-innova-black sm:text-5xl lg:text-6xl">
-            Calidad industrial para minería, construcción y manufactura.
+    <section
+      id="inicio"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-background pt-[92px] sm:pt-[96px]"
+    >
+      <HeroMolecularBackground />
+
+      <div className="relative z-10 mx-auto flex w-full max-w-[980px] flex-col items-center px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
+        <div className="animate-fade-up flex w-full flex-col items-center">
+          <h1 className="max-w-5xl text-[clamp(2.6rem,6.2vw,4.85rem)] leading-[1.02] tracking-[-0.045em] text-innova-black">
+            <span className="block font-normal">{copy.title}</span>
+            <RotatingPhrase />
           </h1>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            INNOVA INDUSTRIES AMERICA SAC desarrolla, fabrica y suministra
-            soluciones químicas e industriales con enfoque técnico, control de
-            calidad y atención local.
+          <p className="mt-10 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+            {copy.description}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg" className="h-12 rounded-full px-6">
-              <Link href="/contacto">
-                Contactar <ArrowRight />
-              </Link>
+          <div className="mt-9 flex w-full max-w-md flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row">
+            <Button
+              asChild
+              size="lg"
+              className="h-12 min-w-36 rounded-full bg-foreground px-7 text-base font-semibold text-background shadow-none hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link href="#quienes-somos">{copy.about}</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="h-12 rounded-full bg-white px-6">
-              <Link href="/comunicados">Ver comunicados</Link>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-12 min-w-36 rounded-full border-border bg-background px-7 text-base font-semibold shadow-none"
+            >
+              <Link href="/contacto">{copy.contact}</Link>
             </Button>
-          </div>
-          <div className="mt-10 grid gap-4 border-l-2 border-primary/40 pl-5 sm:grid-cols-3 sm:border-l-0 sm:pl-0">
-            {["Fabricación local", "Control de calidad", "Soporte técnico"].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-2 text-sm font-medium text-innova-black transition-colors hover:text-primary"
-              >
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-                {item}
-              </div>
-            ))}
           </div>
         </div>
-
-        <HeroCarousel />
       </div>
     </section>
   );

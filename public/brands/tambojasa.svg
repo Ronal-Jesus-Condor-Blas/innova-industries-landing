@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" role="img" aria-labelledby="title">
+  <title id="title">Tambojasa</title>
+  <g fill="none" stroke="#666666" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="38" cy="40" r="25"/>
+    <path d="M38 18v44M24 29c-7 5-7 17 0 22M52 29c7 5 7 17 0 22M27 40h22"/>
+  </g>
+  <text x="76" y="51" fill="#666666" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="600" letter-spacing="1.2">TAMBOJASA</text>
+</svg>

@@ -15,10 +15,15 @@ export const brand = {
 export const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Comunicados", href: "/comunicados" },
-  { label: "Calidad y Políticas", href: "/calidad" },
   { label: "Contacto", href: "/contacto" }
 ] as const;
 
-export const whatsappHref = `https://wa.me/${brand.whatsappNumber}?text=${encodeURIComponent(
-  "Hola, quiero contactar con INNOVA INDUSTRIES AMERICA SAC."
-)}`;
+export function getWhatsappHref(locale: "es" | "en" = "es") {
+  const message = locale === "es"
+    ? "Hola, quiero contactar con INNOVA INDUSTRIES AMERICA SAC."
+    : "Hello, I would like to contact INNOVA INDUSTRIES AMERICA SAC.";
+
+  return `https://wa.me/${brand.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+export const whatsappHref = getWhatsappHref();

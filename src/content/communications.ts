@@ -1,10 +1,4 @@
-import {
-  Award,
-  ClipboardCheck,
-  Factory,
-  Leaf,
-  ShieldCheck
-} from "lucide-react";
+import { Award, ClipboardCheck, Factory, Leaf, ShieldCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const communicationCategories = [
@@ -20,195 +14,34 @@ export type CommunicationCategory = (typeof communicationCategories)[number];
 export type Communication = {
   id: string;
   title: string;
+  titleEn: string;
   category: CommunicationCategory;
   date: string;
   summary: string;
+  summaryEn: string;
   icon: LucideIcon;
   featured?: boolean;
 };
 
 export const communications: Communication[] = [
-  {
-    id: "politica-calidad-institucional",
-    title: "Política de calidad institucional",
-    category: "Política de calidad",
-    date: "2026-05-19",
-    summary:
-      "INNOVA INDUSTRIES AMERICA SAC reafirma su compromiso con la fabricación, comercialización y soporte técnico de soluciones industriales bajo criterios de calidad, cumplimiento normativo y mejora continua.",
-    icon: ClipboardCheck,
-    featured: true
-  },
-  {
-    id: "comunicados-oficiales-corporativos",
-    title: "Comunicados oficiales corporativos",
-    category: "Comunicados oficiales",
-    date: "2026-05-19",
-    summary:
-      "Canal destinado a publicar actualizaciones institucionales, disposiciones internas, novedades operativas y mensajes oficiales de la empresa.",
-    icon: Factory
-  },
-  {
-    id: "avances-gestion-certificacion",
-    title: "Avances en gestión y certificación",
-    category: "Certificaciones",
-    date: "2026-05-19",
-    summary:
-      "La empresa fortalece sus procesos documentarios, técnicos y operativos para sostener estándares de calidad aplicables a sus líneas industriales.",
-    icon: Award,
-    featured: true
-  },
-  {
-    id: "lineamientos-ssoma",
-    title: "Lineamientos de seguridad, salud y medio ambiente",
-    category: "Seguridad, salud y medio ambiente",
-    date: "2026-05-18",
-    summary:
-      "Difusión de prácticas internas orientadas a operaciones responsables, prevención de riesgos, orden operativo y cuidado ambiental.",
-    icon: Leaf
-  },
-  {
-    id: "actualizaciones-institucionales",
-    title: "Actualizaciones institucionales",
-    category: "Noticias institucionales",
-    date: "2026-05-18",
-    summary:
-      "Espacio para compartir novedades de la empresa, mejoras implementadas, nuevos proyectos y avances relevantes para clientes y aliados estratégicos.",
-    icon: ShieldCheck
-  },
-  {
-    id: "nueva-certificacion-iso-9001",
-    title: "Obtención de certificación ISO 9001:2015",
-    category: "Certificaciones",
-    date: "2026-05-10",
-    summary:
-      "Nos complace anunciar que hemos revalidado nuestra certificación internacional, garantizando la eficiencia en nuestros procesos de gestión.",
-    icon: Award,
-    featured: true
-  },
-  {
-    id: "capacitacion-primeros-auxilios",
-    title: "Capacitación anual en primeros auxilios industriales",
-    category: "Seguridad, salud y medio ambiente",
-    date: "2026-05-02",
-    summary:
-      "Como parte de nuestro plan SSOMA, el equipo de planta y operaciones completó satisfactoriamente el taller práctico de respuesta a emergencias.",
-    icon: Leaf
-  },
-  {
-    id: "horario-feriado-junio",
-    title: "Horarios operativos por feriado nacional",
-    category: "Comunicados oficiales",
-    date: "2026-04-25",
-    summary:
-      "Se informa a todos nuestros proveedores y socios estratégicos que la planta operará en horario reducido durante los próximos feriados.",
-    icon: Factory
-  },
-  {
-    id: "participacion-perumin-2026",
-    title: "Participación en PERUMIN 2026",
-    category: "Noticias institucionales",
-    date: "2026-04-15",
-    summary:
-      "Innova America estará presente en la convención minera más importante del país exponiendo nuestras últimas soluciones estructurales.",
-    icon: ShieldCheck
-  },
-  {
-    id: "revision-manual-calidad",
-    title: "Actualización del manual de control de calidad",
-    category: "Política de calidad",
-    date: "2026-04-01",
-    summary:
-      "El comité técnico ha aprobado la versión 4.0 de nuestro manual de inspección, endureciendo las tolerancias radiográficas y dimensionales.",
-    icon: ClipboardCheck
-  },
-  {
-    id: "nueva-politica-seguridad-industrial",
-    title: "Nueva política de seguridad industrial",
-    category: "Seguridad, salud y medio ambiente",
-    date: "2026-05-20",
-    summary:
-      "Implementamos nuevas normas para la protección de nuestro personal y la prevención de accidentes en planta.",
-    icon: Leaf
-  },
-  {
-    id: "certificacion-ambiental-2026",
-    title: "Certificación ambiental 2026",
-    category: "Certificaciones",
-    date: "2026-05-20",
-    summary:
-      "Logramos la certificación ambiental por buenas prácticas en gestión de residuos y uso eficiente de recursos.",
-    icon: Award
-  },
-  {
-    id: "comunicado-operativo-mayo",
-    title: "Comunicado operativo de mayo",
-    category: "Comunicados oficiales",
-    date: "2026-05-20",
-    summary:
-      "Informamos sobre la actualización de los horarios de atención y protocolos de ingreso a planta.",
-    icon: Factory
-  },
-  {
-    id: "nueva-politica-calidad-2026",
-    title: "Nueva política de calidad 2026",
-    category: "Política de calidad",
-    date: "2026-05-20",
-    summary:
-      "Se refuerzan los estándares de inspección y control en todos los procesos productivos.",
-    icon: ClipboardCheck
-  },
-  {
-    id: "noticia-institucional-premio",
-    title: "Premio a la innovación institucional 2026",
-    category: "Noticias institucionales",
-    date: "2026-05-20",
-    summary:
-      "INNOVA INDUSTRIES AMERICA SAC ha sido reconocida por su aporte a la innovación en soluciones industriales.",
-    icon: ShieldCheck
-  },
-  {
-    id: "campana-salud-trabajadores",
-    title: "Campaña de salud para trabajadores",
-    category: "Seguridad, salud y medio ambiente",
-    date: "2026-05-19",
-    summary:
-      "Se realizó una campaña médica preventiva para todo el personal operativo y administrativo.",
-    icon: Leaf
-  },
-  {
-    id: "noticia-institucional-expansion",
-    title: "Expansión de operaciones a nivel nacional",
-    category: "Noticias institucionales",
-    date: "2026-05-19",
-    summary:
-      "La empresa amplía su cobertura de servicios industriales a nuevas regiones del país.",
-    icon: ShieldCheck
-  },
-  {
-    id: "comunicado-cambio-gerencia",
-    title: "Cambio en la gerencia general",
-    category: "Comunicados oficiales",
-    date: "2026-05-18",
-    summary:
-      "Se comunica el nombramiento de un nuevo gerente general para el periodo 2026-2028.",
-    icon: Factory
-  },
-  {
-    id: "certificacion-seguridad-industrial",
-    title: "Certificación en seguridad industrial avanzada",
-    category: "Certificaciones",
-    date: "2026-05-18",
-    summary:
-      "Obtuvimos la certificación por la implementación de sistemas avanzados de seguridad en planta.",
-    icon: Award
-  },
-  {
-    id: "noticia-institucional-aniversario",
-    title: "Celebración del aniversario institucional",
-    category: "Noticias institucionales",
-    date: "2026-05-17",
-    summary:
-      "Conmemoramos un año más de logros y crecimiento junto a nuestros colaboradores y clientes.",
-    icon: ShieldCheck
-  }
+  { id: "politica-calidad-institucional", title: "Política de calidad institucional", titleEn: "Institutional quality policy", category: "Política de calidad", date: "2026-05-19", summary: "INNOVA INDUSTRIES AMERICA SAC reafirma su compromiso con la fabricación, comercialización y soporte técnico de soluciones industriales bajo criterios de calidad, cumplimiento normativo y mejora continua", summaryEn: "INNOVA INDUSTRIES AMERICA SAC reaffirms its commitment to manufacturing, commercialization and technical support for industrial solutions under quality, regulatory compliance and continuous improvement standards", icon: ClipboardCheck, featured: true },
+  { id: "comunicados-oficiales-corporativos", title: "Comunicados oficiales corporativos", titleEn: "Official corporate announcements", category: "Comunicados oficiales", date: "2026-05-19", summary: "Canal destinado a publicar actualizaciones institucionales, disposiciones internas, novedades operativas y mensajes oficiales de la empresa", summaryEn: "A channel for institutional updates, internal provisions, operational news and official company messages", icon: Factory },
+  { id: "avances-gestion-certificacion", title: "Avances en gestión y certificación", titleEn: "Progress in management and certification", category: "Certificaciones", date: "2026-05-19", summary: "La empresa fortalece sus procesos documentarios, técnicos y operativos para sostener estándares de calidad aplicables a sus líneas industriales", summaryEn: "The company is strengthening its documentary, technical and operational processes to sustain quality standards across its industrial lines", icon: Award, featured: true },
+  { id: "lineamientos-ssoma", title: "Lineamientos de seguridad, salud y medio ambiente", titleEn: "Safety, health and environmental guidelines", category: "Seguridad, salud y medio ambiente", date: "2026-05-18", summary: "Difusión de prácticas internas orientadas a operaciones responsables, prevención de riesgos, orden operativo y cuidado ambiental", summaryEn: "Internal practices focused on responsible operations, risk prevention, operational discipline and environmental care", icon: Leaf },
+  { id: "actualizaciones-institucionales", title: "Actualizaciones institucionales", titleEn: "Institutional updates", category: "Noticias institucionales", date: "2026-05-18", summary: "Espacio para compartir novedades de la empresa, mejoras implementadas, nuevos proyectos y avances relevantes para clientes y aliados estratégicos", summaryEn: "A space for company news, implemented improvements, new projects and relevant progress for customers and strategic partners", icon: ShieldCheck },
+  { id: "nueva-certificacion-iso-9001", title: "Obtención de certificación ISO 9001:2015", titleEn: "ISO 9001:2015 certification achieved", category: "Certificaciones", date: "2026-05-10", summary: "Nos complace anunciar que hemos revalidado nuestra certificación internacional, garantizando la eficiencia en nuestros procesos de gestión", summaryEn: "We are pleased to announce the renewal of our international certification, supporting the efficiency of our management processes", icon: Award, featured: true },
+  { id: "capacitacion-primeros-auxilios", title: "Capacitación anual en primeros auxilios industriales", titleEn: "Annual industrial first-aid training", category: "Seguridad, salud y medio ambiente", date: "2026-05-02", summary: "Como parte de nuestro plan SSOMA, el equipo de planta y operaciones completó satisfactoriamente el taller práctico de respuesta a emergencias", summaryEn: "As part of our HSE plan, the plant and operations team successfully completed practical emergency response training", icon: Leaf },
+  { id: "horario-feriado-junio", title: "Horarios operativos por feriado nacional", titleEn: "Operating hours during national holidays", category: "Comunicados oficiales", date: "2026-04-25", summary: "Se informa a todos nuestros proveedores y socios estratégicos que la planta operará en horario reducido durante los próximos feriados", summaryEn: "Our suppliers and strategic partners are advised that the plant will operate on reduced hours during the upcoming holidays", icon: Factory },
+  { id: "participacion-perumin-2026", title: "Participación en PERUMIN 2026", titleEn: "Participation in PERUMIN 2026", category: "Noticias institucionales", date: "2026-04-15", summary: "Innova America estará presente en la convención minera más importante del país exponiendo nuestras últimas soluciones estructurales", summaryEn: "Innova America will attend the country's leading mining convention to present our latest structural solutions", icon: ShieldCheck },
+  { id: "revision-manual-calidad", title: "Actualización del manual de control de calidad", titleEn: "Quality control manual update", category: "Política de calidad", date: "2026-04-01", summary: "El comité técnico ha aprobado la versión 4.0 de nuestro manual de inspección, reforzando las tolerancias radiográficas y dimensionales", summaryEn: "The technical committee has approved version 4.0 of our inspection manual, strengthening radiographic and dimensional tolerances", icon: ClipboardCheck },
+  { id: "nueva-politica-seguridad-industrial", title: "Nueva política de seguridad industrial", titleEn: "New industrial safety policy", category: "Seguridad, salud y medio ambiente", date: "2026-05-20", summary: "Implementamos nuevas normas para la protección de nuestro personal y la prevención de accidentes en planta", summaryEn: "We implemented new standards to protect our personnel and prevent accidents at the plant", icon: Leaf },
+  { id: "certificacion-ambiental-2026", title: "Certificación ambiental 2026", titleEn: "2026 environmental certification", category: "Certificaciones", date: "2026-05-20", summary: "Logramos la certificación ambiental por buenas prácticas en gestión de residuos y uso eficiente de recursos", summaryEn: "We achieved environmental certification for best practices in waste management and efficient resource use", icon: Award },
+  { id: "comunicado-operativo-mayo", title: "Comunicado operativo de mayo", titleEn: "May operational announcement", category: "Comunicados oficiales", date: "2026-05-20", summary: "Informamos sobre la actualización de los horarios de atención y protocolos de ingreso a planta", summaryEn: "We are sharing updates to service hours and plant access protocols", icon: Factory },
+  { id: "nueva-politica-calidad-2026", title: "Nueva política de calidad 2026", titleEn: "New 2026 quality policy", category: "Política de calidad", date: "2026-05-20", summary: "Se refuerzan los estándares de inspección y control en todos los procesos productivos", summaryEn: "Inspection and control standards are being strengthened across all production processes", icon: ClipboardCheck },
+  { id: "noticia-institucional-premio", title: "Premio a la innovación institucional 2026", titleEn: "2026 institutional innovation award", category: "Noticias institucionales", date: "2026-05-20", summary: "INNOVA INDUSTRIES AMERICA SAC ha sido reconocida por su aporte a la innovación en soluciones industriales", summaryEn: "INNOVA INDUSTRIES AMERICA SAC has been recognized for its contribution to innovation in industrial solutions", icon: ShieldCheck },
+  { id: "campana-salud-trabajadores", title: "Campaña de salud para trabajadores", titleEn: "Employee health campaign", category: "Seguridad, salud y medio ambiente", date: "2026-05-19", summary: "Se realizó una campaña médica preventiva para todo el personal operativo y administrativo", summaryEn: "A preventive medical campaign was carried out for all operational and administrative personnel", icon: Leaf },
+  { id: "noticia-institucional-expansion", title: "Expansión de operaciones a nivel nacional", titleEn: "Nationwide operations expansion", category: "Noticias institucionales", date: "2026-05-19", summary: "La empresa amplía su cobertura de servicios industriales a nuevas regiones del país", summaryEn: "The company is expanding its industrial service coverage to new regions across the country", icon: ShieldCheck },
+  { id: "comunicado-cambio-gerencia", title: "Cambio en la gerencia general", titleEn: "General management change", category: "Comunicados oficiales", date: "2026-05-18", summary: "Se comunica el nombramiento de un nuevo gerente general para el periodo 2026-2028", summaryEn: "The appointment of a new general manager for the 2026–2028 term is hereby announced", icon: Factory },
+  { id: "certificacion-seguridad-industrial", title: "Certificación en seguridad industrial avanzada", titleEn: "Advanced industrial safety certification", category: "Certificaciones", date: "2026-05-18", summary: "Obtuvimos la certificación por la implementación de sistemas avanzados de seguridad en planta", summaryEn: "We obtained certification for implementing advanced safety systems at the plant", icon: Award },
+  { id: "noticia-institucional-aniversario", title: "Celebración del aniversario institucional", titleEn: "Company anniversary celebration", category: "Noticias institucionales", date: "2026-05-17", summary: "Conmemoramos un año más de logros y crecimiento junto a nuestros colaboradores y clientes", summaryEn: "We celebrate another year of achievements and growth alongside our employees and customers", icon: ShieldCheck }
 ];

@@ -1,24 +1,49 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
-import { CalendarDays } from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 
+import { useLanguage } from "@/components/providers/language-provider";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { communicationCategories, communications } from "@/content/communications";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { communicationCategories, communications, type CommunicationCategory } from "@/content/communications";
 import { cn } from "@/lib/utils";
 
-const categories = ["Todas", ...communicationCategories] as const;
+const categoryImages: Record<CommunicationCategory, string> = {
+  "Política de calidad": "/assets/hero/operacion-industrial.avif",
+  "Comunicados oficiales": "/assets/hero/operacion-industrial.avif",
+  Certificaciones: "/assets/hero/tuberias-polimeros.jpg",
+  "Seguridad, salud y medio ambiente": "/assets/hero/mineria-industrial.jpg",
+  "Noticias institucionales": "/assets/hero/operacion-industrial.avif"
+};
+
+const storyImages = [
+  "/assets/hero/tuberias-polimeros.jpg",
+  "/assets/hero/operacion-industrial.avif",
+  "/assets/hero/mineria-industrial.jpg",
+  "/assets/hero/tuberias-polimeros.jpg"
+] as const;
+
+const categoryEnglish: Record<CommunicationCategory, string> = {
+  "Política de calidad": "Quality policy",
+  "Comunicados oficiales": "Official announcements",
+  Certificaciones: "Certifications",
+  "Seguridad, salud y medio ambiente": "Safety, health and environment",
+  "Noticias institucionales": "Company news"
+};
 
 export function NewsQuality() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("Todas");
+  const { locale } = useLanguage();
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [showAll, setShowAll] = useState(false);
+  const copy = locale === "es"
+    ? { all: "Todas", featured: "Comunicado destacado", view: "Ver comunicado", empty: "No hay comunicados disponibles en esta categoría por el momento", less: "Ver menos", more: "Ver más comunicados" }
+    : { all: "All", featured: "Featured announcement", view: "View announcement", empty: "There are no announcements available in this category", less: "Show less", more: "View more announcements" };
 
   const filteredPosts = useMemo(() => {
-    const posts =
-      selectedCategory === "Todas"
-        ? [...communications]
-        : communications.filter((post) => post.category === selectedCategory);
-
+    const posts = selectedCategory === "all" ? [...communications] : communications.filter((post) => post.category === selectedCategory);
     return posts.sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
@@ -26,86 +51,65 @@ export function NewsQuality() {
     });
   }, [selectedCategory]);
 
+  const featuredPost = filteredPosts[0];
+  const remainingPosts = filteredPosts.slice(1);
+  const visiblePosts = showAll ? remainingPosts : remainingPosts.slice(0, 6);
+  const categoryLabel = (category: CommunicationCategory) => locale === "es" ? category : categoryEnglish[category];
+  const formatDate = (date: string) => new Intl.DateTimeFormat(locale === "es" ? "es-PE" : "en-US", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T00:00:00Z`));
+
+  function selectCategory(category: string) {
+    setSelectedCategory(category);
+    setShowAll(false);
+  }
+
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-background pb-24 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-[320px_1fr] lg:items-start">
-          <Card className="animate-fade-up rounded-lg border-gray-200/80 shadow-sm lg:sticky lg:top-28">
-            <CardHeader className="border-b border-gray-100 pb-4">
-              <CardTitle className="text-lg text-innova-black">Categorías institucionales</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-5">
-              <div className="flex flex-wrap gap-2 lg:grid">
-                {categories.map((category) => {
-                  const isActive = category === selectedCategory;
-
-                  return (
-                    <button
-                      key={category}
-                      type="button"
-                      onClick={() => setSelectedCategory(category)}
-                      className={cn(
-                        "inline-flex items-center rounded-md border px-3 py-2 text-left text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 active:scale-[0.99]",
-                        isActive
-                          ? "border-primary/25 bg-primary/10 text-primary shadow-sm"
-                          : "border-gray-200 bg-white text-innova-black hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
-                      )}
-                    >
-                      {category}
-                    </button>
-                  );
-                })}
+        {featuredPost ? (
+          <Card className="animate-fade-up grid overflow-hidden rounded-[1.75rem] border-border/60 bg-card shadow-[0_22px_60px_rgba(0,0,0,0.12)] md:grid-cols-[1.05fr_0.95fr]">
+            <div className="relative min-h-72 overflow-hidden md:min-h-[430px]">
+              <Image src={categoryImages[featuredPost.category]} alt="" fill priority sizes="(min-width: 768px) 52vw, 100vw" className="object-cover grayscale-[0.2] transition-transform duration-700 hover:scale-[1.025]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            </div>
+            <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
+              <div className="flex flex-wrap items-center gap-3">
+                <Badge variant="outline" className="rounded-full border-primary/20 bg-primary/5 px-3 py-1 text-primary shadow-none">{categoryLabel(featuredPost.category)}</Badge>
+                <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground"><CalendarDays className="h-4 w-4" />{formatDate(featuredPost.date)}</span>
               </div>
-            </CardContent>
+              <CardTitle className="mt-6 text-3xl font-semibold leading-tight tracking-[-0.025em] text-innova-black sm:text-4xl">{locale === "es" ? featuredPost.title : featuredPost.titleEn}</CardTitle>
+              <p className="mt-5 text-base leading-7 text-muted-foreground">{locale === "es" ? featuredPost.summary : featuredPost.summaryEn}</p>
+              <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-innova-black">{copy.featured}<ArrowRight className="h-4 w-4 text-primary" /></div>
+            </div>
           </Card>
+        ) : null}
 
-          <div className="grid gap-4">
-            {filteredPosts.length > 0 ? (
-              filteredPosts.map((post, index) => (
-                <Card
-                  key={post.id}
-                  id={post.id}
-                  className={cn(
-                    "interactive-card animate-fade-up rounded-lg border-gray-200/80 shadow-sm",
-                    index === 1 && "stagger-1",
-                    index >= 2 && "stagger-2"
-                  )}
-                >
-                  <CardHeader className="pb-2">
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-primary/10 bg-primary/5 text-primary transition group-hover:bg-primary/10">
-                        <post.icon className="h-5 w-5" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <Badge className="rounded bg-primary px-2 py-0.5 text-xs shadow-none hover:bg-primary/90">
-                            {post.category}
-                          </Badge>
-                          <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                            <CalendarDays className="h-4 w-4" />
-                            {post.date}
-                          </span>
-                        </div>
-                        <CardTitle className="mt-3 text-lg font-semibold leading-snug text-innova-black">
-                          {post.title}
-                        </CardTitle>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-2 sm:pl-[4.5rem]">
-                    <p className="leading-relaxed text-muted-foreground">{post.summary}</p>
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              <Card className="rounded-lg border-gray-200 shadow-sm">
-                <CardContent className="py-10 text-center text-sm text-muted-foreground">
-                  No hay comunicados disponibles en esta categoría por el momento.
-                </CardContent>
-              </Card>
-            )}
+        <div className="mt-14 border-y border-border/60 py-4 sm:mt-16">
+          <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {["all", ...communicationCategories].map((category) => {
+              const isActive = category === selectedCategory;
+              const label = category === "all" ? copy.all : categoryLabel(category as CommunicationCategory);
+              return <Button key={category} type="button" variant={isActive ? "default" : "ghost"} onClick={() => selectCategory(category)} className={cn("shrink-0 rounded-full px-4", isActive ? "bg-foreground text-background hover:bg-foreground/90" : "text-muted-foreground hover:bg-muted hover:text-foreground")} aria-pressed={isActive}>{label}</Button>;
+            })}
           </div>
         </div>
+
+        {visiblePosts.length > 0 ? (
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {visiblePosts.map((post, index) => (
+              <Card key={post.id} id={post.id} className={cn("group flex h-full flex-col overflow-hidden rounded-2xl border-border/60 bg-card shadow-none transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_18px_42px_rgba(0,0,0,0.14)]", index === 1 && "stagger-1", index >= 2 && "stagger-2")}>
+                <div className="relative aspect-[16/9] overflow-hidden bg-muted"><Image src={storyImages[index % storyImages.length]} alt="" fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover grayscale-[0.25] transition-transform duration-500 group-hover:scale-[1.035]" /></div>
+                <CardHeader className="space-y-0 px-6 pb-3 pt-6">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2"><span className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">{categoryLabel(post.category)}</span><span className="text-xs text-muted-foreground">{formatDate(post.date)}</span></div>
+                  <CardTitle className="mt-4 text-xl font-semibold leading-snug tracking-[-0.015em] text-innova-black">{locale === "es" ? post.title : post.titleEn}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-1 px-6 pb-4 pt-0"><p className="line-clamp-3 text-sm leading-6 text-muted-foreground">{locale === "es" ? post.summary : post.summaryEn}</p></CardContent>
+                <CardFooter className="px-6 pb-6 pt-0"><span className="inline-flex items-center gap-2 text-sm font-semibold text-innova-black transition-colors group-hover:text-primary">{copy.view}<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></CardFooter>
+              </Card>
+            ))}
+          </div>
+        ) : <Card className="mt-10 rounded-2xl border-border/60 shadow-none"><CardContent className="py-14 text-center text-sm text-muted-foreground">{copy.empty}</CardContent></Card>}
+
+        {remainingPosts.length > 6 ? <div className="mt-12 flex justify-center"><Button type="button" variant="outline" size="lg" onClick={() => setShowAll((current) => !current)} className="h-12 rounded-full border-border bg-background px-7 text-foreground shadow-none hover:bg-muted">{showAll ? copy.less : `${copy.more} (${remainingPosts.length - 6})`}</Button></div> : null}
       </div>
     </section>
   );

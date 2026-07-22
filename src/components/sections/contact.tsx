@@ -2,17 +2,28 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { Mail, MapPinned, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
+import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { whatsappHref } from "@/lib/site";
+import { getWhatsappHref } from "@/lib/site";
 
 const requiredFields = ["name", "company", "email", "subject", "message"] as const;
+
+const emailHref =
+  "https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A";
 
 type SubmitState = {
   type: "idle" | "success" | "error";
@@ -20,11 +31,45 @@ type SubmitState = {
 };
 
 export function Contact() {
+  const { locale } = useLanguage();
+  const whatsappHref = getWhatsappHref(locale);
+  const localizedEmailHref = locale === "es"
+    ? emailHref
+    : "https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Inquiry%20from%20the%20INNOVA%20website&body=Hello%20INNOVA%20team%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AMessage%3A";
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
     message: ""
   });
+  const copy = locale === "es"
+    ? {
+        eyebrow: "Contacto", title: "Hablemos de tu", accent: "próximo proyecto",
+        intro: "Cuéntanos qué necesita tu operación y nuestro equipo revisará la consulta para brindarte una respuesta clara y oportuna",
+        channels: "Canales directos", channelsText: "Elige el medio que resulte más cómodo para tu consulta",
+        email: "Correo", emailAria: "Enviar correo a INNOVA", whatsapp: "WhatsApp comercial",
+        conversation: "Iniciar una conversación", location: "Ubicación", formTitle: "Cuéntanos qué necesitas",
+        requiredNote: "Los campos marcados con * son obligatorios", name: "Nombre *", company: "Empresa *",
+        emailField: "Correo *", phone: "Teléfono", subject: "Asunto *", message: "Mensaje *",
+        namePlaceholder: "Tu nombre", companyPlaceholder: "Nombre de la empresa", subjectPlaceholder: "¿En qué podemos ayudarte?",
+        messagePlaceholder: "Describe brevemente tu requerimiento", submitting: "Enviando...", submit: "Enviar consulta",
+        missing: "Complete los campos obligatorios antes de enviar la consulta",
+        success: "Consulta enviada correctamente. Nuestro equipo se pondrá en contacto contigo",
+        error: "No se pudo enviar la consulta. Intenta nuevamente o escríbenos por WhatsApp"
+      }
+    : {
+        eyebrow: "Contact", title: "Let's discuss your", accent: "next project",
+        intro: "Tell us what your operation needs and our team will review your inquiry to provide a clear and timely response",
+        channels: "Direct channels", channelsText: "Choose the most convenient way to reach our team",
+        email: "Email", emailAria: "Email INNOVA", whatsapp: "Business WhatsApp",
+        conversation: "Start a conversation", location: "Location", formTitle: "Tell us what you need",
+        requiredNote: "Fields marked with * are required", name: "Name *", company: "Company *",
+        emailField: "Email *", phone: "Phone", subject: "Subject *", message: "Message *",
+        namePlaceholder: "Your name", companyPlaceholder: "Company name", subjectPlaceholder: "How can we help?",
+        messagePlaceholder: "Briefly describe your requirements", submitting: "Sending...", submit: "Send inquiry",
+        missing: "Please complete the required fields before sending your inquiry",
+        success: "Your inquiry was sent successfully. Our team will contact you shortly",
+        error: "We couldn't send your inquiry. Please try again or contact us on WhatsApp"
+      };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -40,7 +85,7 @@ export function Contact() {
     if (hasMissingFields) {
       setSubmitState({
         type: "error",
-        message: "Complete los campos obligatorios antes de enviar la consulta."
+        message: copy.missing
       });
       return;
     }
@@ -58,19 +103,19 @@ export function Contact() {
       const result = (await response.json()) as { success?: boolean; error?: string };
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error ?? "No se pudo enviar la consulta.");
+        throw new Error(locale === "es" ? (result.error ?? copy.error) : copy.error);
       }
 
       form.reset();
       setSubmitState({
         type: "success",
-        message: "Correo enviado exitosamente. Nuestro equipo se pondrá en contacto con usted."
+        message: copy.success
       });
     } catch (error) {
       const message =
         error instanceof Error && error.message
           ? error.message
-          : "No se pudo enviar la consulta. Intente nuevamente o escríbanos directamente por WhatsApp.";
+          : copy.error;
 
       setSubmitState({
         type: "error",
@@ -82,127 +127,211 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="bg-white py-16 sm:py-20">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <div className="animate-fade-up">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Contacto</p>
-          <h2 className="mt-4 text-3xl font-semibold text-innova-black sm:text-4xl">
-            Conversemos sobre los requerimientos de su operación.
-          </h2>
-          <p className="mt-5 leading-7 text-muted-foreground">
-            Comparta sus datos y nuestro equipo revisará su consulta técnica o
-            institucional para brindarle una respuesta oportuna.
-          </p>
-
-          <div className="mt-8 grid gap-3">
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-lg border border-gray-200/80 bg-white px-4 py-3 text-sm font-medium text-innova-black shadow-sm transition hover:border-primary/25 hover:bg-primary/5 hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary/15"
-              title="Enviar correo a INNOVA"
-              aria-label="Enviar correo a INNOVA"
-            >
-              <Mail className="h-5 w-5 text-primary" />
-              <span>
-                Correo:{" "}
-                <span className="underline underline-offset-2 decoration-primary/60 group-hover:decoration-2">
-                  a.rios@innovaindustriesperu.com
-                </span>
-              </span>
-            </a>
-            <Link
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-lg border border-gray-200/80 bg-white px-4 py-3 text-sm font-medium text-innova-black shadow-sm transition hover:border-[#25D366]/35 hover:bg-[#25D366]/10"
-            >
-              <FaWhatsapp className="h-5 w-5 shrink-0 text-[#25D366]" aria-hidden="true" />
-              WhatsApp comercial
-            </Link>
-            <div className="flex items-start gap-3 rounded-lg border border-gray-200/80 bg-white px-4 py-3 text-sm font-medium text-innova-black shadow-sm">
-              <MapPinned className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-              <address className="not-italic">
-                Mza. B1 Lote. 3b Z.I. Lotizacion Industrial Hua (Alt. Petramas)<br />
-                San Antonio, Huarochiri<br />
-                Lima, Perú
-              </address>
-            </div>
+    <section id="contacto" className="bg-background pb-24 pt-16 sm:pb-28 sm:pt-20 lg:pt-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.75fr] lg:gap-20">
+          <div className="animate-fade-up">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              {copy.eyebrow}
+            </p>
+            <h1 className="mt-5 max-w-4xl text-5xl font-normal leading-[0.98] tracking-[-0.045em] text-innova-black sm:text-6xl lg:text-7xl">
+              {copy.title}
+              <span className="block font-semibold text-primary">{copy.accent}</span>
+            </h1>
           </div>
+          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end">
+            {copy.intro}
+          </p>
         </div>
 
-        <Card className="animate-fade-up stagger-1 rounded-lg border-gray-200/80 shadow-[0_18px_45px_rgba(29,29,27,0.08)]">
-          <CardHeader className="border-b border-gray-100 bg-muted/25">
-            <CardTitle>Solicitar información</CardTitle>
-          </CardHeader>
-          <CardContent className="p-5 sm:p-6">
-            <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Nombre</Label>
-                  <Input id="name" name="name" autoComplete="name" required />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="company">Empresa</Label>
-                  <Input id="company" name="company" autoComplete="organization" required />
+        <div className="mt-14 grid gap-6 lg:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
+          <Card className="animate-fade-up overflow-hidden rounded-2xl border-border/60 bg-card shadow-none">
+            <CardHeader className="p-7 pb-5 sm:p-8 sm:pb-5">
+              <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
+                {copy.channels}
+              </CardTitle>
+              <CardDescription className="text-sm leading-6">
+                {copy.channelsText}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="px-7 pb-7 pt-0 sm:px-8 sm:pb-8">
+              <Separator className="mb-1 bg-border/60" />
+              <a
+                href={localizedEmailHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-4 py-5 outline-none transition-colors focus-visible:text-primary"
+                title={copy.emailAria}
+                aria-label={copy.emailAria}
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <span className="min-w-0 pt-0.5">
+                  <span className="block text-sm font-semibold text-innova-black">{copy.email}</span>
+                  <span className="mt-1 block break-all text-sm text-muted-foreground transition-colors group-hover:text-primary">
+                    a.rios@innovaindustriesperu.com
+                  </span>
+                </span>
+              </a>
+              <Separator className="bg-border/60" />
+              <Link
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-4 py-5 outline-none transition-colors focus-visible:text-primary"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
+                  <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <span className="pt-0.5">
+                  <span className="block text-sm font-semibold text-innova-black">
+                    {copy.whatsapp}
+                  </span>
+                  <span className="mt-1 block text-sm text-muted-foreground transition-colors group-hover:text-primary">
+                    {copy.conversation}
+                  </span>
+                </span>
+              </Link>
+              <Separator className="bg-border/60" />
+              <div className="flex items-start gap-4 py-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <div className="pt-0.5">
+                  <p className="text-sm font-semibold text-innova-black">{copy.location}</p>
+                  <address className="mt-1 text-sm not-italic leading-6 text-muted-foreground">
+                    Mza. B1 Lote. 3b Z.I. Lotización Industrial Hua (Alt. Petramas)<br />
+                    San Antonio, Huarochirí<br />
+                    Lima, Perú
+                  </address>
                 </div>
               </div>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Correo</Label>
-                  <Input id="email" name="email" type="email" autoComplete="email" required />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="phone">Teléfono</Label>
-                  <Input id="phone" name="phone" type="tel" autoComplete="tel" />
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="subject">Asunto</Label>
-                <Input id="subject" name="subject" required />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="message">Mensaje</Label>
-                <Textarea id="message" name="message" className="min-h-32" required />
-              </div>
+            </CardContent>
+          </Card>
 
-              {submitState.message ? (
-                <p
-                  className={
-                    submitState.type === "success"
-                      ? "animate-fade-in rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800"
-                      : "animate-fade-in rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
-                  }
-                >
-                  {submitState.message}
-                </p>
-              ) : null}
+          <Card className="animate-fade-up stagger-1 rounded-2xl border-border/60 bg-card shadow-[0_22px_60px_rgba(29,29,27,0.08)]">
+            <CardHeader className="p-7 pb-3 sm:p-8 sm:pb-3">
+              <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
+                {copy.formTitle}
+              </CardTitle>
+              <CardDescription className="leading-6">
+                {copy.requiredNote}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-7 pt-5 sm:p-8 sm:pt-5">
+              <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="grid gap-2">
+                    <Label htmlFor="name">{copy.name}</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      autoComplete="name"
+                      placeholder={copy.namePlaceholder}
+                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="company">{copy.company}</Label>
+                    <Input
+                      id="company"
+                      name="company"
+                      autoComplete="organization"
+                      placeholder={copy.companyPlaceholder}
+                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">{copy.emailField}</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="nombre@empresa.com"
+                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="phone">{copy.phone}</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      placeholder="+51 999 999 999"
+                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                    />
+                  </div>
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="subject">{copy.subject}</Label>
+                  <Input
+                    id="subject"
+                    name="subject"
+                    placeholder={copy.subjectPlaceholder}
+                    className="h-12 rounded-xl bg-muted/25 shadow-none"
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="message">{copy.message}</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder={copy.messagePlaceholder}
+                    className="min-h-36 resize-y rounded-xl bg-muted/25 shadow-none"
+                    required
+                  />
+                </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button type="submit" className="h-11 rounded-full px-5" disabled={isSubmitting}>
-                  {isSubmitting ? "Enviando..." : "Enviar consulta"}
-                  <Send />
-                </Button>
-                <Button
-                  type="button"
-                  asChild
-                  variant="outline"
-                  className="h-11 rounded-full border-[#25D366]/40 bg-white text-innova-black hover:bg-[#25D366]/10 hover:text-innova-black"
-                >
-                  <Link
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2"
+                {submitState.message ? (
+                  <p
+                    role="status"
+                    aria-live="polite"
+                    className={
+                      submitState.type === "success"
+                        ? "animate-fade-in rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800"
+                        : "animate-fade-in rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+                    }
                   >
-                    <FaWhatsapp className="h-5 w-5 shrink-0 text-[#25D366]" aria-hidden="true" />
-                    Escribir por WhatsApp
-                  </Link>
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+                    {submitState.message}
+                  </p>
+                ) : null}
+
+                <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="h-12 rounded-full bg-foreground px-7 text-base text-background shadow-none hover:bg-primary hover:text-primary-foreground"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? copy.submitting : copy.submit}
+                    <Send />
+                  </Button>
+                  <Button
+                    type="button"
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="h-12 rounded-full border-border bg-background px-7 text-base text-innova-black shadow-none hover:border-primary/20 hover:bg-muted"
+                  >
+                    <Link href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                      <FaWhatsapp className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                      WhatsApp
+                    </Link>
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </section>
   );

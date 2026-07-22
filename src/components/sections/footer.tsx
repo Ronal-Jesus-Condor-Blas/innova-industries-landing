@@ -1,69 +1,43 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand-logo";
+import { useLanguage } from "@/components/providers/language-provider";
 import { Separator } from "@/components/ui/separator";
 import { brand, navItems } from "@/lib/site";
 
 export function Footer() {
+  const { locale } = useLanguage();
+  const copy = locale === "es"
+    ? { description: "Soluciones industriales para minería, construcción y manufactura, con enfoque en calidad, soporte técnico y mejora continua", links: "Enlaces rápidos", contact: "Contacto", rights: "Todos los derechos reservados", emailTitle: "Enviar correo a INNOVA", nav: ["Inicio", "Comunicados", "Contacto"] }
+    : { description: "Industrial solutions for mining, construction and manufacturing, focused on quality, technical support and continuous improvement", links: "Quick links", contact: "Contact", rights: "All rights reserved", emailTitle: "Email INNOVA", nav: ["Home", "Newsroom", "Contact"] };
+
   return (
-    <footer className="bg-innova-black text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
-          <div>
-            <div className="inline-flex rounded-md bg-white px-3 py-2 shadow-sm">
-              <Image
-                src="/assets/logo-innova-transparent.png"
-                alt="Logo Innova America"
-                width={1187}
-                height={438}
-                className="h-14 w-auto object-contain sm:h-16"
-              />
-            </div>
-            <p className="mt-5 max-w-md text-sm leading-6 text-white/70">
-              Soluciones industriales para minería, construcción y manufactura,
-              con enfoque en calidad, soporte técnico y mejora continua.
-            </p>
+    <footer className="border-t border-border/40 bg-background text-innova-black">
+      <div className="mx-auto max-w-7xl px-6 pb-12 pt-16 sm:px-6 sm:pb-14 sm:pt-20 lg:px-8 lg:pt-24">
+        <div className="grid gap-12 text-center md:grid-cols-[1.25fr_0.75fr_0.85fr] md:items-start md:gap-12 md:text-left lg:gap-16">
+          <div className="flex flex-col items-center md:items-start">
+            <BrandLogo className="h-14 w-56 max-w-full sm:h-16 sm:w-64 md:h-[72px] md:w-[288px]" />
+            <p className="mx-auto mt-5 max-w-sm text-sm leading-6 text-muted-foreground md:mx-0 md:max-w-md">{copy.description}</p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Enlaces rápidos</h3>
-            <div className="mt-4 grid gap-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm text-white/70 transition-colors hover:text-white focus:text-white focus:outline-none"
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <h3 className="text-sm font-semibold text-innova-black">{copy.links}</h3>
+            <div className="mt-4 grid justify-items-center gap-2 md:justify-items-start">
+              {navItems.map((item, index) => <Link key={item.href} href={item.href} className="text-sm text-muted-foreground transition-colors hover:text-primary focus:text-primary focus:outline-none">{copy.nav[index]}</Link>)}
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Contacto</h3>
-            <div className="mt-4 grid gap-2 text-sm text-white/70">
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline decoration-primary/70 underline-offset-2 outline-none transition hover:text-white hover:decoration-2 focus:text-white"
-                title="Enviar correo a INNOVA"
-                aria-label="Enviar correo a INNOVA"
-              >
-                a.rios@innovaindustriesperu.com
-              </a>
+            <h3 className="text-sm font-semibold text-innova-black">{copy.contact}</h3>
+            <div className="mt-4 grid justify-items-center gap-2 text-sm text-muted-foreground md:justify-items-start">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com" target="_blank" rel="noopener noreferrer" className="break-all underline decoration-primary/50 underline-offset-2 outline-none transition hover:text-primary hover:decoration-2 focus:text-primary sm:break-normal" title={copy.emailTitle} aria-label={copy.emailTitle}>a.rios@innovaindustriesperu.com</a>
               <span>{brand.domain}</span>
-              <address className="mt-2 not-italic">
-                Mza. B1 Lote. 3b Z.I. Lotizacion Industrial Hua (Alt. Petramas)<br />
-                San Antonio, Huarochiri<br />
-                Lima, Perú
-              </address>
+              <address className="mx-auto mt-2 max-w-sm not-italic md:mx-0">Mza. B1 Lote. 3b Z.I. Lotización Industrial Hua (Alt. Petramas)<br />San Antonio, Huarochirí<br />Lima, Perú</address>
             </div>
           </div>
         </div>
-        <Separator className="my-8 bg-white/10" />
-        <p className="text-center text-sm text-white/60">
-          © 2026 {brand.name}. Todos los derechos reservados.
-        </p>
+        <Separator className="my-9 bg-border/50" />
+        <p className="mx-auto max-w-lg text-center text-sm leading-6 text-muted-foreground">© 2026 {brand.name}. {copy.rights}</p>
       </div>
     </footer>
   );

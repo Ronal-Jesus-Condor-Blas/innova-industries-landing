@@ -1,26 +1,26 @@
+"use client";
+
+import { useLanguage } from "@/components/providers/language-provider";
 import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
 import { NewsQuality } from "@/components/sections/news-quality";
-import { Badge } from "@/components/ui/badge";
 
 export default function ComunicadosPage() {
+  const { locale } = useLanguage();
+  const copy = locale === "es"
+    ? { eyebrow: "Sala de prensa", title: "Comunicados", accent: "institucionales", description: "Noticias, certificaciones y actualizaciones oficiales de Innova América, reunidas en un espacio claro y accesible" }
+    : { eyebrow: "Newsroom", title: "Company", accent: "announcements", description: "News, certifications and official updates from Innova America, brought together in a clear and accessible space" };
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <section className="border-b bg-muted/40 py-14 sm:py-16">
+      <section className="bg-background pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="animate-fade-up max-w-4xl">
-            <Badge variant="outline" className="border-primary/30 bg-white text-primary shadow-sm">
-              Comunicados
-            </Badge>
-            <h1 className="mt-4 text-4xl font-semibold tracking-normal text-innova-black sm:text-5xl">
-              Comunicados institucionales
-            </h1>
-            <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              Canal oficial para publicar políticas, certificaciones, lineamientos internos,
-              comunicados corporativos y actualizaciones relevantes de INNOVA INDUSTRIES AMERICA SAC.
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{copy.eyebrow}</p>
+            <h1 className="mt-5 text-[2.55rem] font-normal leading-[0.98] tracking-[-0.045em] text-innova-black min-[375px]:text-5xl sm:text-6xl lg:text-7xl">{copy.title}<span className="block font-semibold text-primary">{copy.accent}</span></h1>
+            <p className="mt-7 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">{copy.description}</p>
           </div>
         </div>
       </section>
