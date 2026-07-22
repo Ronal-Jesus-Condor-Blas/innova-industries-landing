@@ -27,7 +27,7 @@ const lines = [
 
 export function BusinessLines() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-background py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Lineas de negocio</p>

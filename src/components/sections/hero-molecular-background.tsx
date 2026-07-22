@@ -75,7 +75,7 @@ export function HeroMolecularBackground() {
           fill
           priority
           sizes="100vw"
-          className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.44] brightness-[0.96] contrast-[1.24] saturate-[1.08] dark:hidden sm:opacity-55 lg:object-center lg:opacity-[0.72]"
+          className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.44] brightness-[1.015] contrast-[1.24] saturate-[1.06] dark:hidden sm:opacity-55 lg:object-center lg:opacity-[0.72]"
         />
         <Image
           src="/images/hero-molecular-3d.png"
@@ -91,7 +91,6 @@ export function HeroMolecularBackground() {
         ref={lightRef}
         className="absolute inset-0 opacity-0 transition-opacity duration-700"
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,rgba(28,109,181,0.085)_0%,transparent_40%)] dark:hidden" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0.03)_48%,rgba(255,255,255,0)_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
       <div
         ref={detailRef}
@@ -103,7 +102,7 @@ export function HeroMolecularBackground() {
             alt=""
             fill
             sizes="100vw"
-            className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.26] grayscale contrast-[2] mix-blend-multiply sm:opacity-[0.24] lg:object-center lg:opacity-[0.2]"
+            className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.26] brightness-[1.03] grayscale contrast-[2] mix-blend-multiply sm:opacity-[0.24] lg:object-center lg:opacity-[0.2]"
           />
         </div>
       </div>
