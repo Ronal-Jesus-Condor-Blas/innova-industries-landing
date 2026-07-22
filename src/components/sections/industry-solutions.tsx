@@ -3,6 +3,12 @@
 import { Building2, Factory, Pickaxe } from "lucide-react";
 
 import { useLanguage } from "@/components/providers/language-provider";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -82,10 +88,36 @@ export function IndustrySolutions() {
               <span className="block font-semibold text-primary">{copy.accent}</span>
             </h2>
           </div>
-          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end">{copy.description}</p>
+          <p className="max-w-xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7 lg:justify-self-end lg:text-lg lg:leading-8">{copy.description}</p>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3 lg:mt-16">
+        <Accordion type="single" collapsible defaultValue="industry-01" className="mt-9 border-t border-border/60 md:hidden">
+          {industries[locale].map((industry) => (
+            <AccordionItem key={industry.title} value={`industry-${industry.number}`} className="border-border/60">
+              <AccordionTrigger className="py-5 text-left hover:no-underline">
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
+                    <industry.icon className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-base font-semibold text-innova-black">{industry.title}</span>
+                    <span className="mt-0.5 block font-mono text-[10px] tracking-[0.16em] text-muted-foreground">[{industry.number}]</span>
+                  </span>
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 pl-[3.25rem]">
+                <p className="text-sm leading-6 text-muted-foreground">{industry.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {industry.applications.map((application) => (
+                    <Badge key={application} variant="outline" className="rounded-full border-border/70 bg-background px-2.5 py-1 text-xs font-normal text-muted-foreground shadow-none">{application}</Badge>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+
+        <div className="mt-12 hidden gap-5 md:grid md:grid-cols-3 lg:mt-16">
           {industries[locale].map((industry) => (
             <Card key={industry.title} className="group relative overflow-hidden rounded-2xl border-border/60 bg-card shadow-none transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_20px_48px_rgba(0,0,0,0.14)]">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

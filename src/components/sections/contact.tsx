@@ -127,26 +127,26 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="bg-background pb-24 pt-16 sm:pb-28 sm:pt-20 lg:pt-24">
+    <section id="contacto" className="bg-background pb-16 pt-12 sm:pb-28 sm:pt-20 lg:pt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.75fr] lg:gap-20">
           <div className="animate-fade-up">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
               {copy.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-normal leading-[0.98] tracking-[-0.045em] text-innova-black sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 max-w-4xl text-4xl font-normal leading-[1.02] tracking-[-0.04em] text-innova-black sm:mt-5 sm:text-6xl lg:text-7xl">
               {copy.title}
               <span className="block font-semibold text-primary">{copy.accent}</span>
             </h1>
           </div>
-          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end">
+          <p className="max-w-xl text-sm leading-6 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end">
             {copy.intro}
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
           <Card className="animate-fade-up overflow-hidden rounded-2xl border-border/60 bg-card shadow-none">
-            <CardHeader className="p-7 pb-5 sm:p-8 sm:pb-5">
+            <CardHeader className="p-5 pb-4 sm:p-8 sm:pb-5">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.channels}
               </CardTitle>
@@ -154,13 +154,13 @@ export function Contact() {
                 {copy.channelsText}
               </CardDescription>
             </CardHeader>
-            <CardContent className="px-7 pb-7 pt-0 sm:px-8 sm:pb-8">
+            <CardContent className="px-5 pb-5 pt-0 sm:px-8 sm:pb-8">
               <Separator className="mb-1 bg-border/60" />
               <a
                 href={localizedEmailHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start gap-4 py-5 outline-none transition-colors focus-visible:text-primary"
+                className="group flex items-start gap-4 py-4 outline-none transition-colors focus-visible:text-primary sm:py-5"
                 title={copy.emailAria}
                 aria-label={copy.emailAria}
               >
@@ -179,7 +179,7 @@ export function Contact() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start gap-4 py-5 outline-none transition-colors focus-visible:text-primary"
+                className="group flex items-start gap-4 py-4 outline-none transition-colors focus-visible:text-primary sm:py-5"
               >
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
                   <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
@@ -194,7 +194,7 @@ export function Contact() {
                 </span>
               </Link>
               <Separator className="bg-border/60" />
-              <div className="flex items-start gap-4 py-5">
+              <div className="flex items-start gap-4 py-4 sm:py-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
                   <MapPin className="h-4 w-4" aria-hidden="true" />
                 </span>
@@ -211,7 +211,7 @@ export function Contact() {
           </Card>
 
           <Card className="animate-fade-up stagger-1 rounded-2xl border-border/60 bg-card shadow-[0_22px_60px_rgba(29,29,27,0.08)]">
-            <CardHeader className="p-7 pb-3 sm:p-8 sm:pb-3">
+            <CardHeader className="p-5 pb-3 sm:p-8 sm:pb-3">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.formTitle}
               </CardTitle>
@@ -219,9 +219,9 @@ export function Contact() {
                 {copy.requiredNote}
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-7 pt-5 sm:p-8 sm:pt-5">
-              <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
-                <div className="grid gap-5 sm:grid-cols-2">
+            <CardContent className="p-5 pt-4 sm:p-8 sm:pt-5">
+              <form className="grid gap-4 sm:gap-5" onSubmit={handleSubmit} noValidate>
+                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                   <div className="grid gap-2">
                     <Label htmlFor="name">{copy.name}</Label>
                     <Input
@@ -229,7 +229,7 @@ export function Contact() {
                       name="name"
                       autoComplete="name"
                       placeholder={copy.namePlaceholder}
-                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
                       required
                     />
                   </div>
@@ -240,12 +240,12 @@ export function Contact() {
                       name="company"
                       autoComplete="organization"
                       placeholder={copy.companyPlaceholder}
-                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
                       required
                     />
                   </div>
                 </div>
-                <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                   <div className="grid gap-2">
                     <Label htmlFor="email">{copy.emailField}</Label>
                     <Input
@@ -254,7 +254,7 @@ export function Contact() {
                       type="email"
                       autoComplete="email"
                       placeholder="nombre@empresa.com"
-                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
                       required
                     />
                   </div>
@@ -266,7 +266,7 @@ export function Contact() {
                       type="tel"
                       autoComplete="tel"
                       placeholder="+51 999 999 999"
-                      className="h-12 rounded-xl bg-muted/25 shadow-none"
+                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
                     />
                   </div>
                 </div>
@@ -276,7 +276,7 @@ export function Contact() {
                     id="subject"
                     name="subject"
                     placeholder={copy.subjectPlaceholder}
-                    className="h-12 rounded-xl bg-muted/25 shadow-none"
+                    className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
                     required
                   />
                 </div>
@@ -286,7 +286,7 @@ export function Contact() {
                     id="message"
                     name="message"
                     placeholder={copy.messagePlaceholder}
-                    className="min-h-36 resize-y rounded-xl bg-muted/25 shadow-none"
+                    className="min-h-28 resize-y rounded-xl bg-muted/25 shadow-none sm:min-h-36"
                     required
                   />
                 </div>
