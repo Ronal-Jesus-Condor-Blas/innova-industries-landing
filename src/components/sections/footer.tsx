@@ -14,7 +14,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/40 bg-background text-innova-black">
-      <div className="mx-auto max-w-7xl px-6 pb-32 pt-12 sm:px-8 sm:pb-20 sm:pt-14 md:px-6 md:pb-12 md:pt-16 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-12 sm:px-8 sm:pb-10 sm:pt-14 md:px-6 md:pb-8 md:pt-16 lg:px-8">
         <div className="grid gap-8 text-center min-[520px]:grid-cols-2 min-[520px]:gap-x-10 min-[520px]:gap-y-8 md:grid-cols-[1.25fr_0.75fr_0.9fr] md:items-start md:gap-12 md:text-left lg:gap-16">
           <div className="flex flex-col items-center min-[520px]:col-span-2 md:col-span-1 md:items-start">
             <BrandLogo className="h-12 w-48 max-w-full sm:h-14 sm:w-56 md:h-16 md:w-64" />
@@ -36,7 +36,9 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <p className="mx-auto mt-10 max-w-sm px-8 text-center text-xs leading-5 text-muted-foreground sm:max-w-lg sm:px-0 md:mt-9">© 2026 {brand.name}. {copy.rights}</p>
+      </div>
+      <div className="px-20 pb-5 pt-4 text-center sm:px-6 sm:pb-6">
+        <p className="mx-auto max-w-md text-xs leading-5 text-muted-foreground">© 2026 {brand.name}. {copy.rights}</p>
       </div>
     </footer>
   );

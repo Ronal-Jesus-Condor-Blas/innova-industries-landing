@@ -70,7 +70,7 @@ export function HeroMolecularBackground() {
           fill
           priority
           sizes="100vw"
-          className="hero-molecule-breathe object-cover object-[62%_center] opacity-25 contrast-[1.14] saturate-[1.12] dark:hidden sm:opacity-48 lg:object-center lg:opacity-[0.68]"
+          className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.44] brightness-[0.96] contrast-[1.24] saturate-[1.08] dark:hidden sm:opacity-55 lg:object-center lg:opacity-[0.72]"
         />
         <Image
           src="/images/hero-molecular-3d.png"
@@ -86,8 +86,8 @@ export function HeroMolecularBackground() {
         ref={lightRef}
         className="absolute inset-0 opacity-0 transition-opacity duration-700"
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,rgba(28,109,181,0.055)_0%,transparent_38%)] dark:hidden" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.16)_44%,rgba(255,255,255,0.02)_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,rgba(28,109,181,0.085)_0%,transparent_40%)] dark:hidden" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.56)_0%,rgba(255,255,255,0.08)_48%,rgba(255,255,255,0)_74%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
     </div>
   );
 }
