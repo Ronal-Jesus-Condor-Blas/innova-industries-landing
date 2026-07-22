@@ -138,7 +138,7 @@ export function Header() {
           className="flex min-w-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-4"
           aria-label={copy.homeAria}
         >
-          <BrandLogo className="h-8 w-[112px] min-[375px]:h-9 min-[375px]:w-[136px] sm:h-[46px] sm:w-[184px]" />
+          <BrandLogo className="h-8 w-24 min-[350px]:w-[112px] min-[375px]:h-9 min-[375px]:w-[126px] sm:h-[46px] sm:w-[184px]" />
         </Link>
 
         <NavigationMenu className="hidden justify-self-center lg:flex">
@@ -178,10 +178,22 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-end gap-1 min-[375px]:gap-2 lg:hidden">
+        <div className="flex items-center justify-end gap-1 min-[390px]:gap-1.5 lg:hidden">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={toggleLocale}
+            className="h-9 w-9 rounded-full border-border/70 bg-background/80 text-[10px] font-semibold shadow-none hover:bg-muted min-[375px]:h-10 min-[375px]:w-10 min-[375px]:text-xs"
+            aria-label={copy.language}
+            title={copy.language}
+          >
+            {locale.toUpperCase()}
+          </Button>
+
           <Button
             asChild
-            className="h-9 rounded-full bg-foreground px-3 text-xs text-background shadow-[0_8px_20px_rgba(29,29,27,0.14)] hover:bg-primary hover:text-primary-foreground min-[375px]:h-10 min-[375px]:px-4 min-[375px]:text-sm sm:px-5"
+            className="h-9 rounded-full bg-foreground px-2.5 text-[11px] text-background shadow-[0_8px_20px_rgba(29,29,27,0.14)] hover:bg-primary hover:text-primary-foreground min-[375px]:h-10 min-[375px]:px-3 min-[375px]:text-xs sm:px-5 sm:text-sm"
           >
             <Link href="/contacto">{copy.contactCta}</Link>
           </Button>

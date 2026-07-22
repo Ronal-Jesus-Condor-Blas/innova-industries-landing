@@ -13,14 +13,14 @@ export function Hero() {
     ? {
         title: "Soluciones que construyen",
         description:
-          "Desarrollamos y suministramos soluciones químicas, poliméricas e industriales para minería, construcción y manufactura, con enfoque técnico, calidad y atención local",
+          "Soluciones industriales confiables para minería, construcción y manufactura",
         about: "Conócenos",
         contact: "Contáctanos"
       }
     : {
         title: "Solutions that build",
         description:
-          "We develop and supply chemical, polymeric and industrial solutions for mining, construction and manufacturing, with technical expertise, quality and local support",
+          "Reliable industrial solutions for mining, construction and manufacturing",
         about: "About us",
         contact: "Contact us"
       };
@@ -41,11 +41,11 @@ export function Hero() {
           <p className="mt-10 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             {copy.description}
           </p>
-          <div className="mt-9 flex w-full max-w-md flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row">
+          <div className="mt-10 flex w-full max-w-sm flex-row justify-center gap-2.5 sm:w-auto sm:max-w-none sm:gap-3">
             <Button
               asChild
               size="lg"
-              className="h-12 min-w-36 rounded-full bg-foreground px-7 text-base font-semibold text-background shadow-none hover:bg-primary hover:text-primary-foreground"
+              className="h-12 min-w-0 flex-1 rounded-full bg-foreground px-3 text-sm font-semibold text-background shadow-none hover:bg-primary hover:text-primary-foreground sm:min-w-36 sm:flex-none sm:px-7 sm:text-base"
             >
               <Link href="#quienes-somos">{copy.about}</Link>
             </Button>
@@ -53,7 +53,7 @@ export function Hero() {
               asChild
               variant="outline"
               size="lg"
-              className="h-12 min-w-36 rounded-full border-border bg-background px-7 text-base font-semibold shadow-none"
+              className="h-12 min-w-0 flex-1 rounded-full border-border bg-background px-3 text-sm font-semibold shadow-none sm:min-w-36 sm:flex-none sm:px-7 sm:text-base"
             >
               <Link href="/contacto">{copy.contact}</Link>
             </Button>
