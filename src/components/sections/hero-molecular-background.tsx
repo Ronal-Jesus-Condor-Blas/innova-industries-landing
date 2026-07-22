@@ -65,9 +65,33 @@ export function HeroMolecularBackground() {
           </feComponentTransfer>
         </filter>
       </svg>
+
+      {/*
+        Mobile Safari can change the color of filtered, blended and animated
+        layers when it promotes them to the GPU. Keep the mobile composition
+        deliberately static: one image, one opacity and no blend mode.
+      */}
+      <Image
+        src="/images/hero-molecular-3d.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[62%_center] opacity-[0.5] dark:hidden md:hidden"
+      />
+      <Image
+        src="/images/hero-molecular-3d.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="hidden object-cover object-[62%_center] opacity-[0.64] dark:block md:dark:hidden"
+        style={{ filter: "url(#molecule-white)" }}
+      />
+
       <div
         ref={layerRef}
-        className="absolute -inset-5 will-change-transform transition-transform duration-700 ease-out md:scale-[1.035]"
+        className="absolute -inset-5 hidden will-change-transform transition-transform duration-700 ease-out md:block md:scale-[1.035]"
       >
         <Image
           src="/images/hero-molecular-3d.png"
@@ -94,7 +118,7 @@ export function HeroMolecularBackground() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0.03)_48%,rgba(255,255,255,0)_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
       <div
         ref={detailRef}
-        className="absolute -inset-5 will-change-transform transition-transform duration-700 ease-out dark:hidden md:scale-[1.035]"
+        className="absolute -inset-5 hidden will-change-transform transition-transform duration-700 ease-out dark:hidden md:block md:scale-[1.035]"
       >
         <div className="absolute inset-0 [mask-image:linear-gradient(to_right,black_0%,black_44%,transparent_76%)] [-webkit-mask-image:linear-gradient(to_right,black_0%,black_44%,transparent_76%)]">
           <Image
