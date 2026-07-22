@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { useLanguage } from "@/components/providers/language-provider";
+import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
 const companies = [
@@ -41,12 +42,12 @@ export function TrustedCompanies() {
 
   return (
     <section className="overflow-hidden bg-background pb-40 pt-20 sm:pb-48 sm:pt-24 lg:pb-56 lg:pt-28" aria-labelledby="trusted-companies-title">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 id="trusted-companies-title" className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-innova-black">{title}</h2>
-      </div>
-      <div className="trusted-marquee mt-10 overflow-hidden bg-background sm:mt-12" tabIndex={0} aria-label={`${title}: ${companies.map((company) => company.name).join(", ")}`}>
+      <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 id="trusted-companies-title" className="text-center font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-innova-black">{title}</h2>
+      </Reveal>
+      <Reveal delay={80} className="trusted-marquee mt-10 overflow-hidden bg-background sm:mt-12" tabIndex={0} aria-label={`${title}: ${companies.map((company) => company.name).join(", ")}`}>
         <div className="trusted-marquee-track flex w-max items-center"><CompanyRow /><CompanyRow duplicate /></div>
-      </div>
+      </Reveal>
     </section>
   );
 }

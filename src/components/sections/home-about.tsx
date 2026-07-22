@@ -3,6 +3,7 @@
 import { BadgeCheck, Leaf, Lightbulb, UsersRound } from "lucide-react";
 
 import { useLanguage } from "@/components/providers/language-provider";
+import { Reveal } from "@/components/ui/reveal";
 
 const content = {
   es: {
@@ -40,24 +41,24 @@ export function HomeAbout() {
   return (
     <section id="quienes-somos" className="bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <Reveal className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
-            <h2 className="mt-4 max-w-xl text-3xl font-semibold leading-tight tracking-[-0.025em] text-innova-black sm:text-4xl lg:text-[2.75rem]">
-              {copy.title}{" "}<span className="text-primary">{copy.accent}</span>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
+            <h2 className="mt-4 max-w-xl text-3xl font-normal leading-tight tracking-[-0.025em] text-innova-black sm:text-4xl lg:text-[2.75rem]">
+              {copy.title}{" "}<span className="font-semibold text-primary">{copy.accent}</span>
             </h2>
           </div>
           <p className="max-w-xl self-end text-sm leading-6 text-muted-foreground md:hidden">{copy.mobileDescription}</p>
           <p className="hidden max-w-2xl self-end text-base leading-7 text-muted-foreground md:block md:text-lg md:leading-8">{copy.description}</p>
-        </div>
+        </Reveal>
 
         <div className="mt-10 grid grid-cols-2 border-y border-border/50 lg:mt-14 lg:grid-cols-4">
           {copy.attributes.map((attribute, index) => (
-            <article key={attribute.title} className={`flex min-h-36 flex-col justify-center px-3 py-5 sm:min-h-44 sm:px-6 sm:py-7 lg:min-h-48 lg:px-8 lg:py-8 ${index % 2 === 1 ? "border-l border-border/50" : ""} ${index >= 2 ? "border-t border-border/50 lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-border/50" : ""}`}>
+            <Reveal key={attribute.title} delay={index * 70} className={`flex min-h-36 flex-col justify-center px-3 py-5 sm:min-h-44 sm:px-6 sm:py-7 lg:min-h-48 lg:px-8 lg:py-8 ${index % 2 === 1 ? "border-l border-border/50" : ""} ${index >= 2 ? "border-t border-border/50 lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-border/50" : ""}`}>
               <attribute.icon className="h-5 w-5 text-primary" aria-hidden="true" />
               <h3 className="mt-3 text-sm font-semibold leading-5 text-innova-black sm:mt-4 sm:text-base">{attribute.title}</h3>
               <p className="mt-1.5 text-xs leading-5 text-muted-foreground sm:mt-2 sm:text-sm sm:leading-6">{attribute.text}</p>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

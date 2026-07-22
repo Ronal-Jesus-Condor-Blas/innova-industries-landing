@@ -1,4 +1,5 @@
 import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
+import { FinalCta } from "@/components/sections/final-cta";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
 import { Hero } from "@/components/sections/hero";
@@ -15,6 +16,7 @@ export default function Home() {
         <IndustrySolutions />
         <HomeAbout />
         <TrustedCompanies />
+        <FinalCta />
       </main>
       <Footer />
       <FloatingWhatsApp />

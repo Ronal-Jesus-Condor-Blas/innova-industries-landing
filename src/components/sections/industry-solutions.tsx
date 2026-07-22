@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Reveal } from "@/components/ui/reveal";
 
 const industries = {
   es: [
@@ -80,16 +81,16 @@ export function IndustrySolutions() {
   return (
     <section id="soluciones" className="bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
+        <Reveal className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{copy.eyebrow}</p>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-primary">{copy.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl text-4xl font-normal leading-[1.05] tracking-[-0.035em] text-innova-black sm:text-5xl lg:text-6xl">
               {copy.title}
               <span className="block font-semibold text-primary">{copy.accent}</span>
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7 lg:justify-self-end lg:text-lg lg:leading-8">{copy.description}</p>
-        </div>
+        </Reveal>
 
         <Accordion type="single" collapsible defaultValue="industry-01" className="mt-9 border-t border-border/60 md:hidden">
           {industries[locale].map((industry) => (
@@ -118,8 +119,9 @@ export function IndustrySolutions() {
         </Accordion>
 
         <div className="mt-12 hidden gap-5 md:grid md:grid-cols-3 lg:mt-16">
-          {industries[locale].map((industry) => (
-            <Card key={industry.title} className="group relative overflow-hidden rounded-2xl border-border/60 bg-card shadow-none transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_20px_48px_rgba(0,0,0,0.14)]">
+          {industries[locale].map((industry, index) => (
+            <Reveal key={industry.title} delay={index * 80}>
+            <Card className="interactive-card group relative h-full overflow-hidden rounded-2xl border-border/60 bg-card shadow-none hover:border-primary/20">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <CardHeader className="space-y-0 p-7 pb-5 sm:p-8 sm:pb-5">
                 <div className="flex items-start justify-between gap-6">
@@ -139,6 +141,7 @@ export function IndustrySolutions() {
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
           ))}
         </div>
       </div>
