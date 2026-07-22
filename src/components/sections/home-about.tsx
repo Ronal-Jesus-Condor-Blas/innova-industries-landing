@@ -38,7 +38,7 @@ export function HomeAbout() {
   const copy = content[locale];
 
   return (
-    <section id="quienes-somos" className="bg-background pb-12 pt-16 sm:pb-14 sm:pt-16 lg:pb-16 lg:pt-20">
+    <section id="quienes-somos" className="bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>

@@ -15,7 +15,7 @@ export default function ComunicadosPage() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <section className="bg-background pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24">
+      <section className="bg-background pb-16 pt-20 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="animate-fade-up max-w-4xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{copy.eyebrow}</p>

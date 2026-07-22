@@ -15,7 +15,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/40 bg-background text-innova-black">
-      <div className="mx-auto max-w-7xl px-6 pb-12 pt-16 sm:px-6 sm:pb-14 sm:pt-20 lg:px-8 lg:pt-24">
+      <div className="mx-auto max-w-7xl px-6 pb-12 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pt-28">
         <div className="grid gap-12 text-center md:grid-cols-[1.25fr_0.75fr_0.85fr] md:items-start md:gap-12 md:text-left lg:gap-16">
           <div className="flex flex-col items-center md:items-start">
             <BrandLogo className="h-14 w-56 max-w-full sm:h-16 sm:w-64 md:h-[72px] md:w-[288px]" />

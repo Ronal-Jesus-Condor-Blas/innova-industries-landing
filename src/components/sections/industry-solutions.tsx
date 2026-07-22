@@ -78,7 +78,7 @@ export function IndustrySolutions() {
       };
 
   return (
-    <section id="soluciones" className="bg-background pb-12 pt-20 sm:pb-14 sm:pt-24 lg:pb-16 lg:pt-28">
+    <section id="soluciones" className="bg-background py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
           <div>

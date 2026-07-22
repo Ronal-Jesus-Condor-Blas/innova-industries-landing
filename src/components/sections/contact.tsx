@@ -127,7 +127,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="bg-background pb-16 pt-12 sm:pb-28 sm:pt-20 lg:pt-24">
+    <section id="contacto" className="bg-background pb-20 pt-20 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.75fr] lg:gap-20">
           <div className="animate-fade-up">

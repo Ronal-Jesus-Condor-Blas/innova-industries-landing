@@ -138,7 +138,7 @@ section {
   }
 
   .trusted-marquee-track {
-    animation: trusted-marquee 30s linear infinite;
+    animation: trusted-marquee 36s linear infinite;
   }
 
   .trusted-marquee:hover .trusted-marquee-track,

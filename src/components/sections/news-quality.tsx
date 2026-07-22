@@ -63,7 +63,7 @@ export function NewsQuality() {
   }
 
   return (
-    <section className="bg-background pb-24 sm:pb-28">
+    <section className="bg-background pb-20 sm:pb-24 lg:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {featuredPost ? (
           <Card className="animate-fade-up grid overflow-hidden rounded-[1.75rem] border-border/60 bg-card shadow-[0_22px_60px_rgba(0,0,0,0.12)] md:grid-cols-[1.05fr_0.95fr]">
