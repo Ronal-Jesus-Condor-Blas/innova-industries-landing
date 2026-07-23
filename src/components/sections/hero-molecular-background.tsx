@@ -77,7 +77,7 @@ export function HeroMolecularBackground() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[62%_center] opacity-[0.5] dark:hidden md:hidden"
+        className="object-cover object-[62%_center] opacity-[0.57] dark:hidden md:hidden"
       />
       <Image
         src="/images/hero-molecular-3d.png"
@@ -115,7 +115,8 @@ export function HeroMolecularBackground() {
         ref={lightRef}
         className="absolute inset-0 opacity-0 transition-opacity duration-700"
       />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0.03)_48%,rgba(255,255,255,0)_72%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)]" />
+      <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.015)_48%,rgba(255,255,255,0)_72%)] md:block dark:hidden" />
+      <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)] dark:block" />
       <div
         ref={detailRef}
         className="absolute -inset-5 hidden will-change-transform transition-transform duration-700 ease-out dark:hidden md:block md:scale-[1.035]"
