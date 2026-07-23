@@ -24,14 +24,17 @@ export function Reveal({ className, delay = 0, style, ...props }: RevealProps) {
           return;
         }
 
-        // Reset only after the section is back below the viewport. This keeps
-        // content visible while scrolling down and replays the entrance on the
-        // next downward visit.
-        if (entry.boundingClientRect.top > 0) {
+        // Once an item leaves through the top it stays visible, avoiding a
+        // distracting disappearance while the user continues downward. When
+        // it returns below the viewport, reset it so the next downward visit
+        // replays the entrance on desktop and touch devices alike.
+        const viewportBottom = entry.rootBounds?.bottom ?? window.innerHeight;
+
+        if (entry.boundingClientRect.top >= viewportBottom) {
           setIsVisible(false);
         }
       },
-      { rootMargin: "0px 0px -10%", threshold: 0.12 }
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.04 }
     );
 
     observer.observe(element);
