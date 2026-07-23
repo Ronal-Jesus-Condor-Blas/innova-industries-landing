@@ -17,7 +17,7 @@ export function Footer() {
         location: ["San Antonio, Huarochirí", "Lima, Perú"],
         rights: "Todos los derechos reservados",
         emailTitle: "Enviar correo a INNOVA",
-        nav: ["Inicio", "Comunicados", "Contacto"]
+        nav: ["Inicio", "Comunicados", "Portal proveedores", "Contacto"]
       }
     : {
         description: "Industrial solutions for mining, construction and manufacturing, focused on quality, technical support and continuous improvement",
@@ -27,7 +27,7 @@ export function Footer() {
         location: ["San Antonio, Huarochirí", "Lima, Peru"],
         rights: "All rights reserved",
         emailTitle: "Email INNOVA",
-        nav: ["Home", "Newsroom", "Contact"]
+        nav: ["Home", "Newsroom", "Supplier portal", "Contact"]
       };
 
   return (

@@ -15,6 +15,7 @@ export const brand = {
 export const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Comunicados", href: "/comunicados" },
+  { label: "Portal proveedores", href: "/proveedores" },
   { label: "Contacto", href: "/contacto" }
 ] as const;
 

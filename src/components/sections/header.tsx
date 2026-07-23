@@ -41,6 +41,7 @@ export function Header() {
     ? {
         home: "Inicio",
         communications: "Comunicados",
+        suppliers: "Portal proveedores",
         contact: "Contacto",
         contactCta: "Contactar",
         menu: "Abrir menú",
@@ -54,6 +55,7 @@ export function Header() {
     : {
         home: "Home",
         communications: "Newsroom",
+        suppliers: "Supplier portal",
         contact: "Contact",
         contactCta: "Contact us",
         menu: "Open menu",
@@ -72,7 +74,9 @@ export function Header() {
         ? copy.home
         : item.href === "/comunicados"
           ? copy.communications
-          : copy.contact
+          : item.href === "/proveedores"
+            ? copy.suppliers
+            : copy.contact
   }));
 
   useEffect(() => {
@@ -142,28 +146,20 @@ export function Header() {
         </Link>
 
         <NavigationMenu className="hidden justify-self-center lg:flex">
-          <NavigationMenuList className="relative grid w-[450px] grid-cols-3 gap-1 rounded-full border border-border/60 bg-muted/65 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]">
-            <span
-              aria-hidden="true"
-              className={cn(
-                "pointer-events-none absolute bottom-1 left-1 top-1 w-[calc((100%-0.5rem)/3)] rounded-full bg-background shadow-[0_5px_16px_rgba(29,29,27,0.09)] transition-transform duration-300 ease-out",
-                pathname === "/comunicados" && "translate-x-[calc(100%+0.25rem)]",
-                pathname === "/contacto" && "translate-x-[calc(200%+0.5rem)]"
-              )}
-            />
+          <NavigationMenuList className="flex gap-1 rounded-full border border-border/60 bg-muted/65 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]">
             {localizedNavItems.map((item) => {
               const isActive = pathname === item.href;
 
               return (
-                <NavigationMenuItem key={item.href} className="min-w-0">
+                <NavigationMenuItem key={item.href}>
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
                       className={cn(
-                        "relative z-10 flex w-full items-center justify-center whitespace-nowrap rounded-full px-2 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25",
+                        "flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-[color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 xl:px-6",
                         isActive
-                          ? "text-foreground"
-                          : "text-muted-foreground hover:bg-background/70 hover:text-foreground"
+                          ? "bg-background text-foreground shadow-[0_5px_16px_rgba(29,29,27,0.09)]"
+                          : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                       )}
                       aria-current={isActive ? "page" : undefined}
                     >
