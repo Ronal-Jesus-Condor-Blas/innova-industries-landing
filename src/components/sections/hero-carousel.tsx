@@ -12,16 +12,6 @@ const heroImages = [
     objectPosition: "center center"
   },
   {
-    src: "/assets/hero/tuberias-polimeros.jpg",
-    alt: "Tuberias polimericas industriales para infraestructura",
-    objectPosition: "center center"
-  },
-  {
-    src: "/assets/hero/fiberims-50.jpg",
-    alt: "FIBERIMS 50 fibra sintetica para concreto de Innova America",
-    objectPosition: "center 38%"
-  },
-  {
     src: "/assets/hero/operacion-industrial.avif",
     alt: "Operacion industrial relacionada a soluciones quimicas y manufactura",
     objectPosition: "center center"

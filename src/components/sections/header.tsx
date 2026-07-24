@@ -41,9 +41,9 @@ export function Header() {
     ? {
         home: "Inicio",
         communications: "Comunicados",
-        suppliers: "Portal proveedores",
+        careers: "Talento",
         contact: "Contacto",
-        contactCta: "Contactar",
+        contactCta: "Contacto",
         menu: "Abrir menú",
         homeAria: "Ir al inicio",
         navigation: "Navegación principal de Innova América",
@@ -55,9 +55,9 @@ export function Header() {
     : {
         home: "Home",
         communications: "Newsroom",
-        suppliers: "Supplier portal",
+        careers: "Careers",
         contact: "Contact",
-        contactCta: "Contact us",
+        contactCta: "Contact",
         menu: "Open menu",
         homeAria: "Go to homepage",
         navigation: "Innova America main navigation",
@@ -74,8 +74,8 @@ export function Header() {
         ? copy.home
         : item.href === "/comunicados"
           ? copy.communications
-          : item.href === "/proveedores"
-            ? copy.suppliers
+          : item.href === "/trabaja-con-nosotros"
+            ? copy.careers
             : copy.contact
   }));
 
@@ -142,7 +142,7 @@ export function Header() {
           className="flex min-w-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-4"
           aria-label={copy.homeAria}
         >
-          <BrandLogo className="h-8 w-24 min-[350px]:w-[112px] min-[375px]:h-9 min-[375px]:w-[126px] sm:h-[46px] sm:w-[184px]" />
+          <BrandLogo className="h-8 w-[112px] min-[375px]:h-9 min-[375px]:w-[126px] sm:h-[46px] sm:w-[184px]" />
         </Link>
 
         <NavigationMenu className="hidden justify-self-center lg:flex">
@@ -182,7 +182,7 @@ export function Header() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-end gap-1 min-[390px]:gap-1.5 lg:hidden">
+        <div className="flex items-center justify-end gap-1.5 min-[390px]:gap-2 lg:hidden">
           <Button
             type="button"
             variant="outline"
@@ -197,7 +197,7 @@ export function Header() {
 
           <Button
             asChild
-            className="h-9 rounded-full bg-foreground px-2.5 text-[11px] text-background shadow-[0_8px_20px_rgba(29,29,27,0.14)] hover:bg-primary hover:text-primary-foreground min-[375px]:h-10 min-[375px]:px-3 min-[375px]:text-xs sm:px-5 sm:text-sm"
+            className="h-9 rounded-full bg-foreground px-3 text-[11px] font-semibold text-background shadow-[0_8px_20px_rgba(29,29,27,0.14)] hover:bg-primary hover:text-primary-foreground min-[375px]:h-10 min-[375px]:px-4 min-[375px]:text-xs sm:px-5 sm:text-sm"
           >
             <Link href="/contacto">{copy.contactCta}</Link>
           </Button>
@@ -207,10 +207,10 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-9 w-9 rounded-full text-foreground shadow-none hover:bg-muted min-[375px]:h-10 min-[375px]:w-10"
+                className="h-10 w-10 rounded-full text-foreground shadow-none hover:bg-muted"
                 aria-label={copy.menu}
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" strokeWidth={2.5} />
               </Button>
             </SheetTrigger>
             <SheetContent

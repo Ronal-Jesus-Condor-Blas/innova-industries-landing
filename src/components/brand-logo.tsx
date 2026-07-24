@@ -2,7 +2,26 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 
-export function BrandLogo({ className }: { className?: string }) {
+type BrandLogoProps = {
+  className?: string;
+  darkVariant?: "brand" | "white";
+};
+
+export function BrandLogo({ className, darkVariant = "brand" }: BrandLogoProps) {
+  const darkLogo = darkVariant === "white"
+    ? {
+        src: "/assets/innova-america-logo-footer-white.png",
+        width: 1200,
+        height: 296,
+        className: "inset-0 h-full w-full object-contain object-left"
+      }
+    : {
+        src: "/assets/innova-america-logo-dark-horizontal.png",
+        width: 3159,
+        height: 825,
+        className: "left-0 top-1/2 h-[89%] w-full -translate-y-1/2 object-fill"
+      };
+
   return (
     <span className={cn("relative block overflow-hidden", className)}>
       <Image
@@ -11,17 +30,17 @@ export function BrandLogo({ className }: { className?: string }) {
         width={2050}
         height={513}
         priority
-        className="h-full w-auto object-contain dark:hidden"
+        className="h-full w-full object-contain object-left dark:hidden"
       />
-      <span className="relative hidden h-full w-full dark:block">
+      <span className="relative hidden h-full w-full overflow-hidden dark:block">
         <Image
-          src="/assets/innova-america-logo-dark.svg"
+          src={darkLogo.src}
           alt="Innova America Industries Resources"
-          width={855}
-          height={973}
+          width={darkLogo.width}
+          height={darkLogo.height}
           priority
-          unoptimized
-          className="absolute left-0 top-1/2 h-auto w-full -translate-y-1/2"
+          unoptimized={darkLogo.src.endsWith(".svg")}
+          className={cn("absolute", darkLogo.className)}
         />
       </span>
     </span>

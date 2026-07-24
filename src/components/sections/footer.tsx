@@ -10,24 +10,24 @@ export function Footer() {
   const { locale } = useLanguage();
   const copy = locale === "es"
     ? {
-        description: "Soluciones industriales para minería, construcción y manufactura, con enfoque en calidad, soporte técnico y mejora continua",
-        mobileDescription: "Soluciones industriales para minería, construcción y manufactura",
+        description: "Soluciones especializadas para minería, construcción y el sector automotriz, respaldadas por experiencia técnica y atención cercana.",
+        mobileDescription: "Soluciones especializadas para minería, construcción y el sector automotriz.",
         company: "Empresa",
         contact: "Contacto",
         location: ["San Antonio, Huarochirí", "Lima, Perú"],
         rights: "Todos los derechos reservados",
         emailTitle: "Enviar correo a INNOVA",
-        nav: ["Inicio", "Comunicados", "Portal proveedores", "Contacto"]
+        nav: ["Inicio", "Comunicados", "Talento", "Contacto"]
       }
     : {
-        description: "Industrial solutions for mining, construction and manufacturing, focused on quality, technical support and continuous improvement",
-        mobileDescription: "Industrial solutions for mining, construction and manufacturing",
+        description: "Specialized solutions for mining, construction and automotive operations, backed by technical expertise and close support.",
+        mobileDescription: "Specialized solutions for mining, construction and automotive operations.",
         company: "Company",
         contact: "Contact",
         location: ["San Antonio, Huarochirí", "Lima, Peru"],
         rights: "All rights reserved",
         emailTitle: "Email INNOVA",
-        nav: ["Home", "Newsroom", "Supplier portal", "Contact"]
+        nav: ["Home", "Newsroom", "Careers", "Contact"]
       };
 
   return (
@@ -35,7 +35,10 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 pb-14 pt-20 sm:px-8 sm:pb-16 sm:pt-24 md:px-6 md:pb-12 md:pt-16 lg:px-8">
         <div className="grid gap-12 text-center md:grid-cols-[1.25fr_0.7fr_0.9fr] md:items-start md:gap-12 md:text-left lg:gap-20">
           <div className="flex flex-col items-center md:items-start">
-            <BrandLogo className="h-10 w-40 max-w-full sm:h-11 sm:w-44 md:h-14 md:w-56" />
+            <BrandLogo
+              darkVariant="white"
+              className="h-8 w-[112px] min-[375px]:h-9 min-[375px]:w-[126px] sm:h-[46px] sm:w-[184px]"
+            />
             <p className="mx-auto mt-5 max-w-[18rem] text-sm leading-6 text-muted-foreground md:hidden">
               {copy.mobileDescription}
             </p>

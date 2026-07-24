@@ -14,13 +14,13 @@ export function FinalCta() {
     ? {
         eyebrow: "Conversemos",
         title: "¿Necesita una solución para su operación?",
-        description: "Nuestro equipo puede orientarlo desde el primer contacto",
+        description: "Nuestro equipo puede orientarlo desde el primer contacto.",
         action: "Solicitar información"
       }
     : {
         eyebrow: "Let's talk",
         title: "Do you need a solution for your operation?",
-        description: "Our team can guide you from the very first conversation",
+        description: "Our team can guide you from the very first conversation.",
         action: "Request information"
       };
 

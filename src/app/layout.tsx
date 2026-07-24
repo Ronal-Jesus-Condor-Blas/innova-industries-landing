@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.innovaindustriesperu.com"),
   title: "INNOVA INDUSTRIES AMERICA SAC | Soluciones industriales",
   description:
-    "Landing corporativa de INNOVA INDUSTRIES AMERICA SAC: soluciones quimicas industriales, aditivos, fibras, soporte tecnico, calidad y comunicados institucionales.",
+    "Soluciones químicas e industriales, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
   openGraph: {
     title: "INNOVA INDUSTRIES AMERICA SAC",
     description:
-      "Soluciones industriales para mineria, construccion y manufactura con enfoque en calidad, soporte tecnico y mejora continua.",
+      "Ingeniería, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
     url: "https://www.innovaindustriesperu.com",
     siteName: "Innova America",
     locale: "es_PE",
@@ -31,6 +31,20 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                window.localStorage.setItem("innova-theme-v2", "dark");
+                document.documentElement.classList.remove("light");
+                document.documentElement.classList.add("dark");
+                document.documentElement.style.colorScheme = "dark";
+              } catch {}
+            `
+          }}
+        />
+      </head>
       <body className={`${GeistSans.className} antialiased`}>
         <AppProviders>{children}</AppProviders>
       </body>

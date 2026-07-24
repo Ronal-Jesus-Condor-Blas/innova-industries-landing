@@ -10,26 +10,26 @@ const content = {
     eyebrow: "¿Quiénes somos?",
     title: "Comprometidos con la excelencia y el",
     accent: "desarrollo sostenible",
-    description: "En Innova América brindamos soluciones integrales para diferentes sectores industriales. Nuestra experiencia, capacidad técnica y equipo humano nos permiten desarrollar productos confiables y mantener relaciones de largo plazo con nuestros clientes",
-    mobileDescription: "Experiencia técnica, productos confiables y relaciones de largo plazo",
+    description: "En Innova América desarrollamos y suministramos soluciones especializadas para operaciones exigentes. Integramos experiencia técnica, productos confiables y atención cercana para generar resultados sostenibles y relaciones de largo plazo.",
+    mobileDescription: "Experiencia técnica, soluciones confiables y acompañamiento orientado al largo plazo.",
     attributes: [
-      { icon: BadgeCheck, title: "Calidad garantizada", text: "Procesos controlados y mejora continua" },
-      { icon: Lightbulb, title: "Innovación constante", text: "Soluciones eficientes para cada operación" },
-      { icon: UsersRound, title: "Equipo comprometido", text: "Profesionales orientados al soporte técnico" },
-      { icon: Leaf, title: "Sostenibilidad", text: "Operaciones responsables con el entorno" }
+      { icon: BadgeCheck, title: "Calidad garantizada", text: "Control riguroso de procesos y mejora continua." },
+      { icon: Lightbulb, title: "Innovación constante", text: "Desarrollo de soluciones eficientes para cada operación." },
+      { icon: UsersRound, title: "Equipo comprometido", text: "Especialistas enfocados en acompañamiento y respuesta técnica." },
+      { icon: Leaf, title: "Sostenibilidad", text: "Gestión responsable orientada al entorno y al largo plazo." }
     ]
   },
   en: {
     eyebrow: "Who we are",
     title: "Committed to excellence and",
     accent: "sustainable development",
-    description: "At Innova America, we provide comprehensive solutions for different industrial sectors. Our experience, technical capabilities and people enable us to develop reliable products and build long-term customer relationships",
-    mobileDescription: "Technical expertise, reliable products and long-term relationships",
+    description: "At Innova America, we develop and supply specialized solutions for demanding operations. We combine technical expertise, reliable products and close support to deliver sustainable results and build long-term relationships.",
+    mobileDescription: "Technical expertise, reliable solutions and long-term support.",
     attributes: [
-      { icon: BadgeCheck, title: "Guaranteed quality", text: "Controlled processes and continuous improvement" },
-      { icon: Lightbulb, title: "Constant innovation", text: "Efficient solutions for every operation" },
-      { icon: UsersRound, title: "Committed team", text: "Professionals focused on technical support" },
-      { icon: Leaf, title: "Sustainability", text: "Operations that respect the environment" }
+      { icon: BadgeCheck, title: "Guaranteed quality", text: "Rigorous process control and continuous improvement." },
+      { icon: Lightbulb, title: "Constant innovation", text: "Development of efficient solutions for every operation." },
+      { icon: UsersRound, title: "Committed team", text: "Specialists focused on technical guidance and response." },
+      { icon: Leaf, title: "Sustainability", text: "Responsible management focused on the environment and long term." }
     ]
   }
 } as const;
@@ -39,7 +39,7 @@ export function HomeAbout() {
   const copy = content[locale];
 
   return (
-    <section id="quienes-somos" className="bg-background py-20 sm:py-24 lg:py-28">
+    <section id="quienes-somos" className="bg-background pb-14 pt-16 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>

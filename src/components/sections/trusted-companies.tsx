@@ -41,7 +41,7 @@ export function TrustedCompanies() {
   const title = locale === "es" ? "Empresas que confían en nosotros" : "Companies that trust us";
 
   return (
-    <section className="overflow-hidden bg-background pb-40 pt-20 sm:pb-48 sm:pt-24 lg:pb-56 lg:pt-28" aria-labelledby="trusted-companies-title">
+    <section className="overflow-hidden bg-background pb-28 pt-12 sm:pb-32 sm:pt-16 lg:pb-36 lg:pt-20" aria-labelledby="trusted-companies-title">
       <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 id="trusted-companies-title" className="text-center font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-innova-black">{title}</h2>
       </Reveal>

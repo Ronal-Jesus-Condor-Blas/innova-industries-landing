@@ -14,16 +14,14 @@ import { cn } from "@/lib/utils";
 const categoryImages: Record<CommunicationCategory, string> = {
   "Política de calidad": "/assets/hero/operacion-industrial.avif",
   "Comunicados oficiales": "/assets/hero/operacion-industrial.avif",
-  Certificaciones: "/assets/hero/tuberias-polimeros.jpg",
+  Certificaciones: "/assets/hero/operacion-industrial.avif",
   "Seguridad, salud y medio ambiente": "/assets/hero/mineria-industrial.jpg",
   "Noticias institucionales": "/assets/hero/operacion-industrial.avif"
 };
 
 const storyImages = [
-  "/assets/hero/tuberias-polimeros.jpg",
-  "/assets/hero/operacion-industrial.avif",
   "/assets/hero/mineria-industrial.jpg",
-  "/assets/hero/tuberias-polimeros.jpg"
+  "/assets/hero/operacion-industrial.avif"
 ] as const;
 
 const categoryEnglish: Record<CommunicationCategory, string> = {

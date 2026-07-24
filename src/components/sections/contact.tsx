@@ -44,11 +44,11 @@ export function Contact() {
   const copy = locale === "es"
     ? {
         eyebrow: "Contacto", title: "Hablemos de tu", accent: "próximo proyecto",
-        intro: "Cuéntanos qué necesita tu operación y nuestro equipo revisará la consulta para brindarte una respuesta clara y oportuna",
-        channels: "Canales directos", channelsText: "Elige el medio que resulte más cómodo para tu consulta",
+        intro: "Compártenos los objetivos y requerimientos de tu operación. Nuestro equipo técnico evaluará cada necesidad para ofrecer una respuesta precisa, viable y alineada con tu proyecto.",
+        channels: "Canales directos", channelsText: "Conecta con nuestro equipo a través del canal que mejor se adapte a tu consulta.",
         email: "Correo", emailAria: "Enviar correo a INNOVA", whatsapp: "WhatsApp comercial",
         conversation: "Iniciar una conversación", location: "Ubicación", formTitle: "Cuéntanos qué necesitas",
-        requiredNote: "Los campos marcados con * son obligatorios", name: "Nombre *", company: "Empresa *",
+        requiredNote: "Los campos marcados con * son obligatorios.", name: "Nombre *", company: "Empresa *",
         emailField: "Correo *", phone: "Teléfono", subject: "Asunto *", message: "Mensaje *",
         namePlaceholder: "Tu nombre", companyPlaceholder: "Nombre de la empresa", subjectPlaceholder: "¿En qué podemos ayudarte?",
         messagePlaceholder: "Describe brevemente tu requerimiento", submitting: "Enviando...", submit: "Enviar consulta",
@@ -58,11 +58,11 @@ export function Contact() {
       }
     : {
         eyebrow: "Contact", title: "Let's discuss your", accent: "next project",
-        intro: "Tell us what your operation needs and our team will review your inquiry to provide a clear and timely response",
-        channels: "Direct channels", channelsText: "Choose the most convenient way to reach our team",
+        intro: "Share your operation's objectives and requirements. Our technical team will assess each need to provide a precise, viable response aligned with your project.",
+        channels: "Direct channels", channelsText: "Connect with our team through the channel that best suits your inquiry.",
         email: "Email", emailAria: "Email INNOVA", whatsapp: "Business WhatsApp",
         conversation: "Start a conversation", location: "Location", formTitle: "Tell us what you need",
-        requiredNote: "Fields marked with * are required", name: "Name *", company: "Company *",
+        requiredNote: "Fields marked with * are required.", name: "Name *", company: "Company *",
         emailField: "Email *", phone: "Phone", subject: "Subject *", message: "Message *",
         namePlaceholder: "Your name", companyPlaceholder: "Company name", subjectPlaceholder: "How can we help?",
         messagePlaceholder: "Briefly describe your requirements", submitting: "Sending...", submit: "Send inquiry",

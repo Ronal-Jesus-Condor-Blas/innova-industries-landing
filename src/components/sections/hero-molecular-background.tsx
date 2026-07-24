@@ -115,6 +115,7 @@ export function HeroMolecularBackground() {
         ref={lightRef}
         className="absolute inset-0 opacity-0 transition-opacity duration-700"
       />
+      <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_at_50%_56%,rgba(0,0,0,0.58)_0%,rgba(0,0,0,0.28)_42%,rgba(0,0,0,0.08)_76%)] dark:block md:hidden" />
       <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.015)_48%,rgba(255,255,255,0)_72%)] md:block dark:hidden" />
       <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.64)_0%,rgba(0,0,0,0.18)_58%,rgba(0,0,0,0.36)_100%)] dark:block" />
       <div

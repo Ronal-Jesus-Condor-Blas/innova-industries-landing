@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, Factory, Pickaxe } from "lucide-react";
+import { Building2, CarFront, Pickaxe } from "lucide-react";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import {
@@ -19,22 +19,22 @@ const industries = {
       number: "01",
       icon: Pickaxe,
       title: "Minería",
-      description: "Soluciones químicas, fibras y soporte técnico para operaciones que requieren seguridad, resistencia y continuidad",
-      applications: ["Sostenimiento", "Operación", "Soporte técnico"]
+      description: "Productos Químicos, Fibras de Refuerzo y Asistencia Técnica Especializada para operaciones que exigen seguridad, resistencia y continuidad operacional.",
+      applications: ["Sostenimiento", "Continuidad Operacional", "Asistencia Técnica"]
     },
     {
       number: "02",
       icon: Building2,
       title: "Construcción",
-      description: "Aditivos y soluciones poliméricas orientadas a mejorar el desempeño del concreto y la eficiencia en obra",
-      applications: ["Concreto", "Obra civil", "Desempeño"]
+      description: "Aditivos y Soluciones Poliméricas diseñados para optimizar el desempeño del concreto, la productividad y la durabilidad de cada proyecto.",
+      applications: ["Concreto", "Obras Civiles", "Eficiencia Constructiva"]
     },
     {
       number: "03",
-      icon: Factory,
-      title: "Manufactura",
-      description: "Productos industriales para procesos, mantenimiento y necesidades técnicas que exigen resultados consistentes",
-      applications: ["Procesos", "Mantenimiento", "Continuidad"]
+      icon: CarFront,
+      title: "Automotriz",
+      description: "Soluciones Químicas y Productos Técnicos para el mantenimiento, la protección y el rendimiento confiable de componentes y sistemas automotrices.",
+      applications: ["Mantenimiento Automotriz", "Protección", "Rendimiento"]
     }
   ],
   en: [
@@ -42,22 +42,22 @@ const industries = {
       number: "01",
       icon: Pickaxe,
       title: "Mining",
-      description: "Chemical solutions, fibers and technical support for operations that demand safety, strength and continuity",
-      applications: ["Ground support", "Operations", "Technical support"]
+      description: "Chemical products, reinforcement fibers and specialized technical support for operations that demand safety, strength and operational continuity.",
+      applications: ["Ground Support", "Operational Continuity", "Technical Assistance"]
     },
     {
       number: "02",
       icon: Building2,
       title: "Construction",
-      description: "Additives and polymeric solutions designed to improve concrete performance and on-site efficiency",
-      applications: ["Concrete", "Civil works", "Performance"]
+      description: "Additives and polymeric solutions designed to optimize concrete performance, productivity and long-term project durability.",
+      applications: ["Concrete", "Civil Works", "Construction Efficiency"]
     },
     {
       number: "03",
-      icon: Factory,
-      title: "Manufacturing",
-      description: "Industrial products for processes, maintenance and technical needs that require consistent results",
-      applications: ["Processes", "Maintenance", "Continuity"]
+      icon: CarFront,
+      title: "Automotive",
+      description: "Chemical solutions and technical products for the maintenance, protection and reliable performance of automotive components and systems.",
+      applications: ["Automotive Maintenance", "Protection", "Performance"]
     }
   ]
 } as const;
@@ -69,17 +69,17 @@ export function IndustrySolutions() {
         eyebrow: "Soluciones por industria",
         title: "Experiencia aplicada a",
         accent: "cada operación",
-        description: "Atendemos los retos técnicos de cada sector con soluciones confiables, acompañamiento cercano y una visión de largo plazo"
+        description: "Integramos conocimiento técnico, productos especializados y acompañamiento continuo para responder con precisión a las exigencias de cada industria."
       }
     : {
         eyebrow: "Solutions by industry",
         title: "Expertise applied to",
         accent: "every operation",
-        description: "We address each sector's technical challenges with reliable solutions, close support and a long-term vision"
+        description: "We combine technical knowledge, specialized products and continuous support to respond precisely to the demands of each industry."
       };
 
   return (
-    <section id="soluciones" className="bg-background py-20 sm:py-24 lg:py-28">
+    <section id="soluciones" className="bg-background py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
           <div>
@@ -89,7 +89,7 @@ export function IndustrySolutions() {
               <span className="block font-semibold text-primary">{copy.accent}</span>
             </h2>
           </div>
-          <p className="max-w-xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7 lg:justify-self-end lg:text-lg lg:leading-8">{copy.description}</p>
+          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end">{copy.description}</p>
         </Reveal>
 
         <Accordion type="single" collapsible defaultValue="industry-01" className="mt-9 border-t border-border/60 md:hidden">
@@ -107,7 +107,7 @@ export function IndustrySolutions() {
                 </span>
               </AccordionTrigger>
               <AccordionContent className="pb-5 pl-[3.25rem]">
-                <p className="text-sm leading-6 text-muted-foreground">{industry.description}</p>
+                <p className="text-base leading-7 text-muted-foreground">{industry.description}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {industry.applications.map((application) => (
                     <Badge key={application} variant="outline" className="rounded-full border-border/70 bg-background px-2.5 py-1 text-xs font-normal text-muted-foreground shadow-none">{application}</Badge>
@@ -133,7 +133,7 @@ export function IndustrySolutions() {
                 <CardTitle className="mt-8 text-2xl font-semibold tracking-[-0.02em] text-innova-black">{industry.title}</CardTitle>
               </CardHeader>
               <CardContent className="px-7 pb-7 pt-0 sm:px-8 sm:pb-8">
-                <p className="min-h-[5.25rem] text-sm leading-7 text-muted-foreground sm:text-base">{industry.description}</p>
+                <p className="min-h-[5.25rem] text-base leading-7 text-muted-foreground">{industry.description}</p>
                 <div className="mt-7 flex flex-wrap gap-2 border-t border-border/60 pt-6">
                   {industry.applications.map((application) => (
                     <Badge key={application} variant="outline" className="rounded-full border-border/70 bg-background px-3 py-1 font-normal text-muted-foreground shadow-none">{application}</Badge>

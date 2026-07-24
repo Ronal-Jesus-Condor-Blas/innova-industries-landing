@@ -9,8 +9,8 @@ import { NewsQuality } from "@/components/sections/news-quality";
 export default function ComunicadosPage() {
   const { locale } = useLanguage();
   const copy = locale === "es"
-    ? { eyebrow: "Sala de prensa", title: "Comunicados", accent: "institucionales", description: "Noticias, certificaciones y actualizaciones oficiales de Innova América, reunidas en un espacio claro y accesible" }
-    : { eyebrow: "Newsroom", title: "Company", accent: "announcements", description: "News, certifications and official updates from Innova America, brought together in a clear and accessible space" };
+    ? { eyebrow: "Sala de prensa", title: "Comunicados", accent: "institucionales", description: "Noticias, certificaciones y actualizaciones oficiales de Innova América, reunidas en un espacio claro y accesible." }
+    : { eyebrow: "Newsroom", title: "Company", accent: "announcements", description: "News, certifications and official updates from Innova America, brought together in a clear and accessible space." };
 
   return (
     <main className="min-h-screen bg-background">
