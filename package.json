@@ -2,6 +2,7 @@
   "name": "innova-industries-landing",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
@@ -22,7 +23,7 @@
     "clsx": "latest",
     "geist": "^1.7.2",
     "lucide-react": "latest",
-    "next": "latest",
+    "next": "16.2.11",
     "next-themes": "^0.4.6",
     "react": "latest",
     "react-dom": "latest",
@@ -36,9 +37,9 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
+    "eslint": "9.39.1",
+    "eslint-config-next": "16.2.11",
     "shadcn": "^4.7.0",
-    "typescript": "latest"
+    "typescript": "5.9.3"
   }
 }

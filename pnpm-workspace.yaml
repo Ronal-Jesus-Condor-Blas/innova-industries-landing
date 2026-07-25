@@ -1,0 +1,7 @@
+minimumReleaseAge: 1440
+blockExoticSubdeps: true
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver
+ignoredBuiltDependencies:
+  - msw

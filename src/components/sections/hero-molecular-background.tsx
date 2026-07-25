@@ -37,7 +37,7 @@ export function HeroMolecularBackground() {
       const transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(1.055)`;
       layer.style.transform = transform;
       detail.style.transform = transform;
-      light.style.background = `radial-gradient(circle 190px at ${event.clientX}px ${event.clientY}px, rgb(28 109 181 / 0.08), transparent 72%)`;
+      light.style.background = `radial-gradient(circle 190px at ${event.clientX}px ${event.clientY}px, rgb(28 109 181 / 0.1), transparent 72%)`;
       light.style.opacity = "1";
     };
 
@@ -77,7 +77,7 @@ export function HeroMolecularBackground() {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[62%_center] opacity-[0.57] dark:hidden md:hidden"
+        className="object-cover object-[62%_center] opacity-[0.62] dark:hidden md:hidden"
       />
       <Image
         src="/images/hero-molecular-3d.png"
@@ -85,7 +85,7 @@ export function HeroMolecularBackground() {
         fill
         priority
         sizes="100vw"
-        className="hidden object-cover object-[62%_center] opacity-[0.64] dark:block md:dark:hidden"
+        className="hidden object-cover object-[62%_center] opacity-[0.69] dark:block md:dark:hidden"
         style={{ filter: "url(#molecule-white)" }}
       />
 
@@ -99,7 +99,7 @@ export function HeroMolecularBackground() {
           fill
           priority
           sizes="100vw"
-          className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.44] brightness-[1.015] contrast-[1.24] saturate-[1.06] dark:hidden sm:opacity-55 lg:object-center lg:opacity-[0.72]"
+          className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.48] brightness-[1.015] contrast-[1.24] saturate-[1.06] dark:hidden sm:opacity-[0.59] lg:object-center lg:opacity-[0.76]"
         />
         <Image
           src="/images/hero-molecular-3d.png"
@@ -107,7 +107,7 @@ export function HeroMolecularBackground() {
           fill
           priority
           sizes="100vw"
-          className="hero-molecule-breathe hidden object-cover object-[62%_center] opacity-[0.42] dark:block sm:opacity-[0.68] lg:object-center lg:opacity-80"
+          className="hero-molecule-breathe hidden object-cover object-[62%_center] opacity-[0.47] dark:block sm:opacity-[0.72] lg:object-center lg:opacity-[0.84]"
           style={{ filter: "url(#molecule-white)" }}
         />
       </div>
@@ -128,7 +128,7 @@ export function HeroMolecularBackground() {
             alt=""
             fill
             sizes="100vw"
-            className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.26] brightness-[1.03] grayscale contrast-[2] mix-blend-multiply sm:opacity-[0.24] lg:object-center lg:opacity-[0.2]"
+            className="hero-molecule-breathe object-cover object-[62%_center] opacity-[0.29] brightness-[1.03] grayscale contrast-[2] mix-blend-multiply sm:opacity-[0.27] lg:object-center lg:opacity-[0.23]"
           />
         </div>
       </div>

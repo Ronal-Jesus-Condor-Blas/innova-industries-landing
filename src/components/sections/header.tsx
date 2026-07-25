@@ -95,7 +95,6 @@ export function Header() {
         communications: "Comunicados",
         careers: "Talento",
         contact: "Contacto",
-        contactCta: "Contacto",
         menu: "Abrir menú",
         homeAria: "Ir al inicio",
         navigation: "Navegación principal de Innova América",
@@ -108,7 +107,6 @@ export function Header() {
         communications: "Newsroom",
         careers: "Careers",
         contact: "Contact",
-        contactCta: "Contact",
         menu: "Open menu",
         homeAria: "Go to homepage",
         navigation: "Innova America main navigation",
@@ -218,12 +216,6 @@ export function Header() {
 
         <div className="hidden items-center justify-end gap-2 lg:flex">
           {controls}
-          <Button
-            asChild
-            className="ml-1 rounded-full bg-foreground px-5 text-background shadow-[0_8px_20px_rgba(29,29,27,0.16)] hover:bg-primary hover:text-primary-foreground"
-          >
-            <Link href="/contacto">{copy.contactCta}</Link>
-          </Button>
         </div>
 
         <div className="flex items-center justify-end gap-1.5 min-[390px]:gap-2 lg:hidden">
