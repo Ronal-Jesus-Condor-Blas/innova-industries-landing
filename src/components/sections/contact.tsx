@@ -145,7 +145,7 @@ export function Contact() {
         </div>
 
         <div className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
-          <Card className="animate-fade-up overflow-hidden rounded-2xl border-border/60 bg-card shadow-none">
+          <Card className="animate-fade-up overflow-hidden rounded-2xl border-border/60 bg-background shadow-none">
             <CardHeader className="p-5 pb-4 sm:p-8 sm:pb-5">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.channels}
@@ -210,7 +210,7 @@ export function Contact() {
             </CardContent>
           </Card>
 
-          <Card className="animate-fade-up stagger-1 rounded-2xl border-border/60 bg-card shadow-[0_22px_60px_rgba(29,29,27,0.08)]">
+          <Card className="surface-elevated surface-featured animate-fade-up stagger-1 rounded-2xl">
             <CardHeader className="p-5 pb-3 sm:p-8 sm:pb-3">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.formTitle}
@@ -229,7 +229,7 @@ export function Contact() {
                       name="name"
                       autoComplete="name"
                       placeholder={copy.namePlaceholder}
-                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
+                      className="surface-field h-11 rounded-xl sm:h-12"
                       required
                     />
                   </div>
@@ -240,7 +240,7 @@ export function Contact() {
                       name="company"
                       autoComplete="organization"
                       placeholder={copy.companyPlaceholder}
-                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
+                      className="surface-field h-11 rounded-xl sm:h-12"
                       required
                     />
                   </div>
@@ -254,7 +254,7 @@ export function Contact() {
                       type="email"
                       autoComplete="email"
                       placeholder="nombre@empresa.com"
-                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
+                      className="surface-field h-11 rounded-xl sm:h-12"
                       required
                     />
                   </div>
@@ -266,7 +266,7 @@ export function Contact() {
                       type="tel"
                       autoComplete="tel"
                       placeholder="+51 999 999 999"
-                      className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
+                      className="surface-field h-11 rounded-xl sm:h-12"
                     />
                   </div>
                 </div>
@@ -276,7 +276,7 @@ export function Contact() {
                     id="subject"
                     name="subject"
                     placeholder={copy.subjectPlaceholder}
-                    className="h-11 rounded-xl bg-muted/25 shadow-none sm:h-12"
+                    className="surface-field h-11 rounded-xl sm:h-12"
                     required
                   />
                 </div>
@@ -286,7 +286,7 @@ export function Contact() {
                     id="message"
                     name="message"
                     placeholder={copy.messagePlaceholder}
-                    className="min-h-28 resize-y rounded-xl bg-muted/25 shadow-none sm:min-h-36"
+                    className="surface-field min-h-28 resize-y rounded-xl sm:min-h-36"
                     required
                   />
                 </div>

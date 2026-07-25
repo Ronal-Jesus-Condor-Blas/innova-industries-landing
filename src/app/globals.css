@@ -28,6 +28,11 @@
   --innova-blue: #1C6DB5;
   --innova-gray: #878787;
   --innova-black: #1D1D1B;
+  --surface-raised: #ffffff;
+  --surface-raised-hover: #ffffff;
+  --surface-field: oklch(0.985 0.001 286.375);
+  --surface-border: oklch(0.89 0.006 286.32);
+  --surface-border-hover: color-mix(in srgb, var(--innova-blue) 30%, white);
 }
 
 .dark {
@@ -35,7 +40,7 @@
   background-color: oklch(0.105 0 0);
   --background: oklch(0.105 0 0);
   --foreground: oklch(1 0 0);
-  --card: oklch(0.105 0 0);
+  --card: oklch(0.145 0 0);
   --card-foreground: oklch(1 0 0);
   --popover: oklch(0.105 0 0);
   --popover-foreground: oklch(1 0 0);
@@ -52,6 +57,11 @@
   --ring: oklch(0.635 0.14 250.2);
   --innova-gray: #A1A1AA;
   --innova-black: #FFFFFF;
+  --surface-raised: oklch(0.145 0 0);
+  --surface-raised-hover: oklch(0.16 0 0);
+  --surface-field: oklch(0.122 0 0);
+  --surface-border: oklch(1 0 0 / 0.11);
+  --surface-border-hover: color-mix(in srgb, var(--innova-blue) 45%, white 12%);
 }
 
 @theme inline {
@@ -181,6 +191,80 @@ section {
   box-shadow: 0 16px 38px rgb(29 29 27 / 0.08);
 }
 
+.surface-elevated {
+  background: var(--surface-raised);
+  border-color: var(--surface-border);
+  box-shadow:
+    0 18px 48px rgb(29 29 27 / 0.075),
+    inset 0 1px 0 rgb(255 255 255 / 0.72);
+}
+
+.surface-featured {
+  box-shadow:
+    0 24px 64px rgb(29 29 27 / 0.11),
+    inset 0 1px 0 rgb(255 255 255 / 0.8);
+}
+
+.surface-interactive {
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.surface-field {
+  background: var(--surface-field);
+  border-color: var(--surface-border);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.38);
+}
+
+.surface-field:hover {
+  border-color: color-mix(in srgb, var(--foreground) 18%, var(--surface-border));
+}
+
+.surface-field:focus-visible {
+  border-color: color-mix(in srgb, var(--innova-blue) 72%, white);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--innova-blue) 16%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 0.42);
+}
+
+.dark .surface-elevated {
+  box-shadow:
+    0 24px 60px rgb(0 0 0 / 0.38),
+    inset 0 1px 0 rgb(255 255 255 / 0.075);
+}
+
+.dark .surface-featured {
+  box-shadow:
+    0 30px 78px rgb(0 0 0 / 0.52),
+    0 0 0 1px rgb(255 255 255 / 0.025),
+    inset 0 1px 0 rgb(255 255 255 / 0.1);
+}
+
+.dark .surface-field {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+@media (hover: hover) {
+  .surface-interactive:hover {
+    transform: translateY(-4px);
+    background: var(--surface-raised-hover);
+    border-color: var(--surface-border-hover);
+    box-shadow:
+      0 24px 56px rgb(29 29 27 / 0.13),
+      inset 0 1px 0 rgb(255 255 255 / 0.82);
+  }
+
+  .dark .surface-interactive:hover {
+    box-shadow:
+      0 30px 72px rgb(0 0 0 / 0.52),
+      0 0 0 1px rgb(255 255 255 / 0.035),
+      inset 0 1px 0 rgb(255 255 255 / 0.11);
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -295,5 +379,13 @@ section {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .surface-interactive {
+    transition: none;
+  }
+
+  .surface-interactive:hover {
+    transform: none;
   }
 }

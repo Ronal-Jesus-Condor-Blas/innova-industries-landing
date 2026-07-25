@@ -64,7 +64,7 @@ export function NewsQuality() {
     <section className="bg-background pb-20 sm:pb-24 lg:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {featuredPost ? (
-          <Card className="animate-fade-up grid overflow-hidden rounded-[1.75rem] border-border/60 bg-card shadow-[0_22px_60px_rgba(0,0,0,0.12)] md:grid-cols-[1.05fr_0.95fr]">
+          <Card className="surface-elevated surface-featured animate-fade-up grid overflow-hidden rounded-[1.75rem] md:grid-cols-[1.05fr_0.95fr]">
             <div className="relative min-h-52 overflow-hidden md:min-h-[430px]">
               <Image src={categoryImages[featuredPost.category]} alt="" fill priority sizes="(min-width: 768px) 52vw, 100vw" className="object-cover grayscale-[0.2] transition-transform duration-700 hover:scale-[1.025]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -94,7 +94,7 @@ export function NewsQuality() {
         {visiblePosts.length > 0 ? (
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {visiblePosts.map((post, index) => (
-              <Card key={post.id} id={post.id} className={cn("group flex h-full flex-col overflow-hidden rounded-2xl border-border/60 bg-card shadow-none transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_18px_42px_rgba(0,0,0,0.14)]", !showAll && index >= 2 && "hidden md:flex", index === 1 && "stagger-1", index >= 2 && "stagger-2")}>
+              <Card key={post.id} id={post.id} className={cn("surface-elevated surface-interactive group flex h-full flex-col overflow-hidden rounded-2xl", !showAll && index >= 2 && "hidden md:flex", index === 1 && "stagger-1", index >= 2 && "stagger-2")}>
                 <div className="relative aspect-[16/9] overflow-hidden bg-muted"><Image src={storyImages[index % storyImages.length]} alt="" fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover grayscale-[0.25] transition-transform duration-500 group-hover:scale-[1.035]" /></div>
                 <CardHeader className="space-y-0 px-5 pb-3 pt-5 sm:px-6 sm:pt-6">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-2"><span className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">{categoryLabel(post.category)}</span><span className="text-xs text-muted-foreground">{formatDate(post.date)}</span></div>
@@ -105,7 +105,7 @@ export function NewsQuality() {
               </Card>
             ))}
           </div>
-        ) : <Card className="mt-10 rounded-2xl border-border/60 shadow-none"><CardContent className="py-14 text-center text-sm text-muted-foreground">{copy.empty}</CardContent></Card>}
+        ) : <Card className="surface-elevated mt-10 rounded-2xl"><CardContent className="py-14 text-center text-sm text-muted-foreground">{copy.empty}</CardContent></Card>}
 
         {remainingPosts.length > 2 ? <div className="mt-9 flex justify-center md:hidden"><Button type="button" variant="outline" size="lg" onClick={() => setShowAll((current) => !current)} className="h-11 rounded-full border-border bg-background px-6 text-foreground shadow-none hover:bg-muted">{showAll ? copy.less : `${copy.more} (${remainingPosts.length - 2})`}</Button></div> : null}
         {remainingPosts.length > 6 ? <div className="mt-12 hidden justify-center md:flex"><Button type="button" variant="outline" size="lg" onClick={() => setShowAll((current) => !current)} className="h-12 rounded-full border-border bg-background px-7 text-foreground shadow-none hover:bg-muted">{showAll ? copy.less : `${copy.more} (${remainingPosts.length - 6})`}</Button></div> : null}
