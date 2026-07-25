@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { getWhatsappHref } from "@/lib/site";
 
@@ -155,7 +154,6 @@ export function Contact() {
               </CardDescription>
             </CardHeader>
             <CardContent className="px-5 pb-5 pt-0 sm:px-8 sm:pb-8">
-              <Separator className="mb-1 bg-border/60" />
               <a
                 href={localizedEmailHref}
                 target="_blank"
@@ -174,7 +172,6 @@ export function Contact() {
                   </span>
                 </span>
               </a>
-              <Separator className="bg-border/60" />
               <Link
                 href={whatsappHref}
                 target="_blank"
@@ -193,7 +190,6 @@ export function Contact() {
                   </span>
                 </span>
               </Link>
-              <Separator className="bg-border/60" />
               <div className="flex items-start gap-4 py-4 sm:py-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
                   <MapPin className="h-4 w-4" aria-hidden="true" />
