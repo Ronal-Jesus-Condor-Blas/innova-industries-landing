@@ -7,7 +7,10 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
 import { BrandLogo } from "@/components/brand-logo";
-import { useLanguage } from "@/components/providers/language-provider";
+import {
+  type Locale,
+  useLanguage
+} from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -24,15 +27,64 @@ import {
   SheetTrigger
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 import { navItems } from "@/lib/site";
 import { cn } from "@/lib/utils";
+
+type LanguageSelectProps = {
+  locale: Locale;
+  setLocale: (locale: Locale) => void;
+  ariaLabel: string;
+  compact?: boolean;
+};
+
+function LanguageSelect({
+  locale,
+  setLocale,
+  ariaLabel,
+  compact = false
+}: LanguageSelectProps) {
+  return (
+    <Select value={locale} onValueChange={(value) => setLocale(value as Locale)}>
+      <SelectTrigger
+        aria-label={ariaLabel}
+        title={ariaLabel}
+        className={cn(
+          "rounded-full border-border/70 bg-background/80 font-semibold shadow-none hover:bg-muted focus:ring-2 focus:ring-primary/25",
+          compact
+            ? "h-10 w-[58px] gap-1 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
+            : "h-10 w-[64px] gap-1.5 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
+        )}
+      >
+        <SelectValue>{locale.toUpperCase()}</SelectValue>
+      </SelectTrigger>
+      <SelectContent
+        align="end"
+        className="min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl"
+      >
+        <SelectItem value="es" className="rounded-lg py-2.5 font-medium">
+          Español
+        </SelectItem>
+        <SelectItem value="en" className="rounded-lg py-2.5 font-medium">
+          English
+        </SelectItem>
+      </SelectContent>
+    </Select>
+  );
+}
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
-  const { locale, toggleLocale } = useLanguage();
+  const { locale, setLocale } = useLanguage();
   const { resolvedTheme, setTheme } = useTheme();
   const isHome = pathname === "/";
   const isDark = isMounted && resolvedTheme === "dark";
@@ -49,7 +101,6 @@ export function Header() {
         navigation: "Navegación principal de Innova América",
         theme: isDark ? "Activar modo claro" : "Activar modo oscuro",
         themeSetting: isDark ? "Modo claro" : "Modo oscuro",
-        language: "Cambiar a inglés",
         languageSetting: "Idioma"
       }
     : {
@@ -63,7 +114,6 @@ export function Header() {
         navigation: "Innova America main navigation",
         theme: isDark ? "Switch to light mode" : "Switch to dark mode",
         themeSetting: isDark ? "Light mode" : "Dark mode",
-        language: "Switch to Spanish",
         languageSetting: "Language"
       };
 
@@ -97,17 +147,11 @@ export function Header() {
 
   const controls = (
     <>
-      <Button
-        type="button"
-        variant="outline"
-        size="icon"
-        onClick={toggleLocale}
-        className="h-10 w-10 rounded-full border-border/70 bg-background/80 text-xs font-semibold shadow-none hover:bg-muted"
-        aria-label={copy.language}
-        title={copy.language}
-      >
-        {locale.toUpperCase()}
-      </Button>
+      <LanguageSelect
+        locale={locale}
+        setLocale={setLocale}
+        ariaLabel={copy.languageSetting}
+      />
       <Button
         type="button"
         variant="outline"
@@ -183,34 +227,22 @@ export function Header() {
         </div>
 
         <div className="flex items-center justify-end gap-1.5 min-[390px]:gap-2 lg:hidden">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={toggleLocale}
-            className="h-9 w-9 rounded-full border-border/70 bg-background/80 text-[10px] font-semibold shadow-none hover:bg-muted min-[375px]:h-10 min-[375px]:w-10 min-[375px]:text-xs"
-            aria-label={copy.language}
-            title={copy.language}
-          >
-            {locale.toUpperCase()}
-          </Button>
-
-          <Button
-            asChild
-            className="h-9 rounded-full bg-foreground px-3 text-[11px] font-semibold text-background shadow-[0_8px_20px_rgba(29,29,27,0.14)] hover:bg-primary hover:text-primary-foreground min-[375px]:h-10 min-[375px]:px-4 min-[375px]:text-xs sm:px-5 sm:text-sm"
-          >
-            <Link href="/contacto">{copy.contactCta}</Link>
-          </Button>
+          <LanguageSelect
+            locale={locale}
+            setLocale={setLocale}
+            ariaLabel={copy.languageSetting}
+            compact
+          />
 
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-10 w-10 rounded-full text-foreground shadow-none hover:bg-muted"
+                className="h-11 w-11 rounded-full text-foreground shadow-none hover:bg-muted"
                 aria-label={copy.menu}
               >
-                <Menu className="h-6 w-6" strokeWidth={2.5} />
+                <Menu className="h-7 w-7" strokeWidth={3} />
               </Button>
             </SheetTrigger>
             <SheetContent
@@ -266,17 +298,11 @@ export function Header() {
 
                   <div className="flex min-h-20 items-center justify-between gap-5 py-5">
                     <p className="text-lg font-semibold text-muted-foreground">{copy.languageSetting}</p>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      onClick={toggleLocale}
-                      className="h-10 w-10 shrink-0 rounded-full border-border bg-transparent text-xs font-medium text-muted-foreground shadow-none hover:bg-muted hover:text-foreground"
-                      aria-label={copy.language}
-                      title={copy.language}
-                    >
-                      {locale.toUpperCase()}
-                    </Button>
+                    <LanguageSelect
+                      locale={locale}
+                      setLocale={setLocale}
+                      ariaLabel={copy.languageSetting}
+                    />
                   </div>
                 </div>
 
