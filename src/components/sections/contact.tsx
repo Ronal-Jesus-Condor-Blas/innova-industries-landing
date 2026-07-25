@@ -145,7 +145,7 @@ export function Contact() {
         </div>
 
         <div className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
-          <Card className="animate-fade-up overflow-hidden rounded-2xl border-border/60 bg-background shadow-none">
+          <div className="animate-fade-up">
             <CardHeader className="p-5 pb-4 sm:p-8 sm:pb-5">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.channels}
@@ -208,7 +208,7 @@ export function Contact() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </div>
 
           <Card className="surface-elevated surface-featured animate-fade-up stagger-1 rounded-2xl">
             <CardHeader className="p-5 pb-3 sm:p-8 sm:pb-3">
