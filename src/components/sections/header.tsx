@@ -239,10 +239,10 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-11 w-11 rounded-full text-foreground shadow-none hover:bg-muted"
+                className="h-11 w-11 rounded-full text-foreground shadow-none hover:bg-muted [&_svg]:!size-7"
                 aria-label={copy.menu}
               >
-                <Menu className="h-7 w-7" strokeWidth={3} />
+                <Menu strokeWidth={2.5} />
               </Button>
             </SheetTrigger>
             <SheetContent
