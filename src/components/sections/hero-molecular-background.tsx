@@ -76,6 +76,7 @@ export function HeroMolecularBackground() {
         alt=""
         fill
         priority
+        unoptimized
         sizes="100vw"
         className="object-cover object-[62%_center] opacity-[0.62] dark:hidden md:hidden"
       />
@@ -84,6 +85,7 @@ export function HeroMolecularBackground() {
         alt=""
         fill
         priority
+        unoptimized
         sizes="100vw"
         className="hidden object-cover object-[62%_center] opacity-[0.69] dark:block md:dark:hidden"
         style={{ filter: "url(#molecule-white)" }}
