@@ -17,11 +17,9 @@ export function RotatingPhrase() {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (mediaQuery.matches) return;
-
     const interval = window.setInterval(() => {
       setActiveIndex((currentIndex) => {
-        setPreviousIndex(currentIndex);
+        setPreviousIndex(mediaQuery.matches ? null : currentIndex);
         return (currentIndex + 1) % phrases[locale].length;
       });
     }, 3200);
