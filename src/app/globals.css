@@ -37,12 +37,12 @@
 
 .dark {
   color-scheme: dark;
-  background-color: oklch(0.105 0 0);
-  --background: oklch(0.105 0 0);
+  background-color: #000000;
+  --background: #000000;
   --foreground: oklch(1 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.105 0 0);
+  --popover: #000000;
   --popover-foreground: oklch(1 0 0);
   --primary: oklch(0.635 0.14 250.2);
   --primary-foreground: oklch(0.99 0 0);
