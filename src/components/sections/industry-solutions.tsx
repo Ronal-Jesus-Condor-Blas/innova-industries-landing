@@ -1,6 +1,7 @@
 "use client";
 
 import { Building2, CarFront, Pickaxe } from "lucide-react";
+import type { MouseEvent } from "react";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import {
@@ -78,6 +79,23 @@ export function IndustrySolutions() {
         description: "We combine technical knowledge, specialized products and continuous support to respond precisely to the demands of each industry."
       };
 
+  const handleCardPointer = (event: MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia("(hover: none), (prefers-reduced-motion: reduce)").matches) return;
+
+    const card = event.currentTarget;
+    const bounds = card.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    card.style.setProperty("--card-rotate-x", `${y * -7}deg`);
+    card.style.setProperty("--card-rotate-y", `${x * 7}deg`);
+  };
+
+  const resetCardPointer = (event: MouseEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--card-rotate-x", "0deg");
+    event.currentTarget.style.setProperty("--card-rotate-y", "0deg");
+  };
+
   return (
     <section id="soluciones" className="bg-background py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -121,7 +139,11 @@ export function IndustrySolutions() {
         <div className="mt-12 hidden gap-5 md:grid md:grid-cols-3 lg:mt-16">
           {industries[locale].map((industry, index) => (
             <Reveal key={industry.title} delay={index * 80}>
-            <Card className="carbon-card interactive-card group relative h-full overflow-hidden rounded-2xl border-border/60 bg-card shadow-none hover:border-primary/20">
+            <Card
+              className="carbon-card tummy-tilt-card group relative h-full cursor-pointer overflow-hidden rounded-xl shadow-none"
+              onMouseMove={handleCardPointer}
+              onMouseLeave={resetCardPointer}
+            >
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <CardHeader className="space-y-0 p-7 pb-5 sm:p-8 sm:pb-5">
                 <div className="flex items-start justify-between gap-6">
