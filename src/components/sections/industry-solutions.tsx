@@ -121,7 +121,7 @@ export function IndustrySolutions() {
         <div className="mt-12 hidden gap-5 md:grid md:grid-cols-3 lg:mt-16">
           {industries[locale].map((industry, index) => (
             <Reveal key={industry.title} delay={index * 80}>
-            <Card className="interactive-card group relative h-full overflow-hidden rounded-2xl border-border/60 bg-card shadow-none hover:border-primary/20">
+            <Card className="carbon-card interactive-card group relative h-full overflow-hidden rounded-2xl border-border/60 bg-card shadow-none hover:border-primary/20">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <CardHeader className="space-y-0 p-7 pb-5 sm:p-8 sm:pb-5">
                 <div className="flex items-start justify-between gap-6">
