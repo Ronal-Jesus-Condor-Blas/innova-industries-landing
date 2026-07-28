@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 
@@ -18,14 +18,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import {
   Select,
@@ -42,13 +34,15 @@ type LanguageSelectProps = {
   setLocale: (locale: Locale) => void;
   ariaLabel: string;
   compact?: boolean;
+  darkSurface?: boolean;
 };
 
 function LanguageSelect({
   locale,
   setLocale,
   ariaLabel,
-  compact = false
+  compact = false,
+  darkSurface = false
 }: LanguageSelectProps) {
   return (
     <Select value={locale} onValueChange={(value) => setLocale(value as Locale)}>
@@ -57,6 +51,8 @@ function LanguageSelect({
         title={ariaLabel}
         className={cn(
           "rounded-full border-border/70 bg-background/80 font-semibold shadow-none hover:bg-muted focus:ring-2 focus:ring-primary/25",
+          darkSurface &&
+            "border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/25",
           compact
             ? "h-10 w-[58px] gap-1 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
             : "h-10 w-[64px] gap-1.5 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
@@ -66,12 +62,27 @@ function LanguageSelect({
       </SelectTrigger>
       <SelectContent
         align="end"
-        className="min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl"
+        className={cn(
+          "min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl",
+          darkSurface && "border-white/10 bg-[#111111] text-white"
+        )}
       >
-        <SelectItem value="es" className="rounded-lg py-2.5 font-medium">
+        <SelectItem
+          value="es"
+          className={cn(
+            "rounded-lg py-2.5 font-medium",
+            darkSurface && "focus:bg-white/10 focus:text-white"
+          )}
+        >
           Español
         </SelectItem>
-        <SelectItem value="en" className="rounded-lg py-2.5 font-medium">
+        <SelectItem
+          value="en"
+          className={cn(
+            "rounded-lg py-2.5 font-medium",
+            darkSurface && "focus:bg-white/10 focus:text-white"
+          )}
+        >
           English
         </SelectItem>
       </SelectContent>
@@ -139,8 +150,42 @@ export function Header() {
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
 
+  useEffect(() => {
+    const closeDesktopMenu = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", closeDesktopMenu);
+    return () => window.removeEventListener("resize", closeDesktopMenu);
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isMenuOpen]);
+
   function handleMobileNavigation() {
     setIsMenuOpen(false);
+  }
+
+  function handleMenuOpenChange(open: boolean) {
+    setIsMenuOpen(open);
   }
 
   const controls = (
@@ -226,29 +271,47 @@ export function Header() {
             compact
           />
 
-          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-11 w-11 rounded-full text-foreground shadow-none hover:bg-muted [&_svg]:!size-7"
-                aria-label={copy.menu}
-              >
-                <Menu strokeWidth={2.5} />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-full max-w-none overflow-y-auto border-0 bg-background p-0 [&>button]:right-6 [&>button]:top-7 [&>button]:border-0 [&>button]:bg-transparent [&>button]:text-foreground [&>button]:shadow-none [&>button]:hover:bg-transparent [&>button]:hover:text-foreground [&>button]:focus:ring-0 [&>button]:focus-visible:ring-0 [&>button_svg]:size-6 sm:w-[min(92vw,420px)] sm:max-w-[420px] sm:border-l sm:border-border"
-            >
-              <SheetHeader className="sr-only">
-                <SheetTitle className="sr-only">INNOVA AMERICA</SheetTitle>
-                <SheetDescription className="sr-only">{copy.navigation}</SheetDescription>
-              </SheetHeader>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => handleMenuOpenChange(true)}
+            className="h-11 w-11 rounded-full text-foreground shadow-none hover:bg-muted [&_svg]:!size-7"
+            aria-label={copy.menu}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+          >
+            <Menu strokeWidth={2.5} />
+          </Button>
 
-              <nav className="flex min-h-dvh flex-col px-7 pb-10 pt-28 sm:px-8">
-                <div className="grid gap-1">
-                  {localizedNavItems.map((item) => {
+          <div
+            id="mobile-navigation"
+            className={cn(
+              "fixed inset-0 z-[100] overflow-y-auto bg-black/80 text-white backdrop-blur-xl transition-all duration-300 lg:hidden",
+              isMenuOpen
+                ? "visible pointer-events-auto opacity-100"
+                : "invisible pointer-events-none opacity-0"
+            )}
+            aria-hidden={!isMenuOpen}
+          >
+            <button
+              type="button"
+              onClick={() => handleMenuOpenChange(false)}
+              className="absolute right-7 top-7 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}
+            >
+              <X className="h-7 w-7" />
+            </button>
+
+            <div
+              className={cn(
+                "min-h-dvh transition-transform duration-300",
+                isMenuOpen ? "translate-x-0" : "-translate-x-full"
+              )}
+            >
+              <nav className="flex min-h-dvh flex-col px-8 pb-10 pt-28">
+                <div className="flex flex-col gap-6">
+                  {localizedNavItems.map((item, index) => {
                     const isActive = pathname === item.href;
 
                     return (
@@ -257,11 +320,15 @@ export function Header() {
                         href={item.href}
                         onClick={handleMobileNavigation}
                         className={cn(
-                          "rounded-lg py-3 text-2xl font-semibold tracking-[-0.025em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30",
+                          "rounded-lg text-2xl font-semibold tracking-[-0.025em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+                          isMenuOpen
+                            ? "translate-x-0 opacity-100"
+                            : "-translate-x-8 opacity-0",
                           isActive
-                            ? "text-foreground"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? "text-white"
+                            : "text-white/60 hover:text-white"
                         )}
+                        style={{ transitionDelay: `${index * 75}ms` }}
                         aria-current={isActive ? "page" : undefined}
                       >
                         {item.label}
@@ -270,17 +337,25 @@ export function Header() {
                   })}
                 </div>
 
-                <Separator className="my-8" />
+                <Separator className="my-8 bg-white/10" />
 
-                <div className="divide-y divide-border">
-                  <div className="flex min-h-20 items-center justify-between gap-5 py-5">
-                    <p className="text-lg font-semibold text-muted-foreground">{copy.themeSetting}</p>
+                <div className="divide-y divide-white/10">
+                  <div
+                    className={cn(
+                      "flex min-h-20 items-center justify-between gap-5 py-5 transition-all duration-300",
+                      isMenuOpen
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-8 opacity-0"
+                    )}
+                    style={{ transitionDelay: `${localizedNavItems.length * 75}ms` }}
+                  >
+                    <p className="text-lg font-semibold text-white/60">{copy.themeSetting}</p>
                     <Button
                       type="button"
                       variant="outline"
                       size="icon"
                       onClick={() => setTheme(isDark ? "light" : "dark")}
-                      className="h-10 w-10 shrink-0 rounded-full border-border bg-transparent text-muted-foreground shadow-none hover:bg-muted hover:text-foreground"
+                      className="h-10 w-10 shrink-0 rounded-full border-white/15 bg-white/5 text-white/60 shadow-none hover:bg-white/10 hover:text-white"
                       aria-label={copy.theme}
                       title={copy.theme}
                     >
@@ -288,19 +363,28 @@ export function Header() {
                     </Button>
                   </div>
 
-                  <div className="flex min-h-20 items-center justify-between gap-5 py-5">
-                    <p className="text-lg font-semibold text-muted-foreground">{copy.languageSetting}</p>
+                  <div
+                    className={cn(
+                      "flex min-h-20 items-center justify-between gap-5 py-5 transition-all duration-300",
+                      isMenuOpen
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-8 opacity-0"
+                    )}
+                    style={{ transitionDelay: `${(localizedNavItems.length + 1) * 75}ms` }}
+                  >
+                    <p className="text-lg font-semibold text-white/60">{copy.languageSetting}</p>
                     <LanguageSelect
                       locale={locale}
                       setLocale={setLocale}
                       ariaLabel={copy.languageSetting}
+                      darkSurface
                     />
                   </div>
                 </div>
 
               </nav>
-            </SheetContent>
-          </Sheet>
+            </div>
+          </div>
         </div>
       </div>
     </header>

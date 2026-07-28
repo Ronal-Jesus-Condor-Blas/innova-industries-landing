@@ -73,7 +73,7 @@ export function Footer() {
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="break-all underline decoration-primary/50 underline-offset-2 outline-none transition hover:text-primary hover:decoration-2 focus:text-primary sm:break-normal"
+                className="break-all outline-none transition-colors hover:text-primary focus:text-primary sm:break-normal"
                 title={copy.emailTitle}
                 aria-label={copy.emailTitle}
               >

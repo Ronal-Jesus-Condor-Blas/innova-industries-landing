@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type MouseEvent } from "react";
 import { ArrowRight, CalendarDays } from "lucide-react";
 
 import { useLanguage } from "@/components/providers/language-provider";
@@ -60,11 +60,28 @@ export function NewsQuality() {
     setShowAll(false);
   }
 
+  const handleCardPointer = (event: MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia("(hover: none), (prefers-reduced-motion: reduce)").matches) return;
+
+    const card = event.currentTarget;
+    const bounds = card.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    card.style.setProperty("--card-rotate-x", `${y * -5}deg`);
+    card.style.setProperty("--card-rotate-y", `${x * 5}deg`);
+  };
+
+  const resetCardPointer = (event: MouseEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--card-rotate-x", "0deg");
+    event.currentTarget.style.setProperty("--card-rotate-y", "0deg");
+  };
+
   return (
     <section className="bg-background pb-20 sm:pb-24 lg:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {featuredPost ? (
-          <Card className="surface-elevated surface-featured animate-fade-up grid overflow-hidden rounded-[1.75rem] md:grid-cols-[1.05fr_0.95fr]">
+          <Card className="carbon-card surface-featured animate-fade-up grid overflow-hidden rounded-[1.75rem] md:grid-cols-[1.05fr_0.95fr]">
             <div className="relative min-h-52 overflow-hidden md:min-h-[430px]">
               <Image src={categoryImages[featuredPost.category]} alt="" fill priority sizes="(min-width: 768px) 52vw, 100vw" className="object-cover grayscale-[0.2] transition-transform duration-700 hover:scale-[1.025]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -94,7 +111,19 @@ export function NewsQuality() {
         {visiblePosts.length > 0 ? (
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {visiblePosts.map((post, index) => (
-              <Card key={post.id} id={post.id} className={cn("surface-elevated surface-interactive group flex h-full flex-col overflow-hidden rounded-2xl", !showAll && index >= 2 && "hidden md:flex", index === 1 && "stagger-1", index >= 2 && "stagger-2")}>
+              <Card
+                key={post.id}
+                id={post.id}
+                className={cn(
+                  "carbon-card communication-card tummy-tilt-card group relative flex h-full flex-col overflow-hidden rounded-xl",
+                  !showAll && index >= 2 && "hidden md:flex",
+                  index === 1 && "stagger-1",
+                  index >= 2 && "stagger-2"
+                )}
+                onMouseMove={handleCardPointer}
+                onMouseLeave={resetCardPointer}
+              >
+                <div className="absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative aspect-[16/9] overflow-hidden bg-muted"><Image src={storyImages[index % storyImages.length]} alt="" fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover grayscale-[0.25] transition-transform duration-500 group-hover:scale-[1.035]" /></div>
                 <CardHeader className="space-y-0 px-5 pb-3 pt-5 sm:px-6 sm:pt-6">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-2"><span className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">{categoryLabel(post.category)}</span><span className="text-xs text-muted-foreground">{formatDate(post.date)}</span></div>
