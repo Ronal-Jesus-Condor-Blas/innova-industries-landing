@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -200,11 +201,16 @@ export function Header() {
         variant="outline"
         size="icon"
         onClick={() => setTheme(isDark ? "light" : "dark")}
-        className="h-10 w-10 rounded-full border-border/70 bg-background/80 shadow-none hover:bg-muted"
+        className={cn(
+          "h-10 w-10 rounded-full shadow-none transition-colors [&_svg]:size-4 [&_svg]:stroke-[2.35]",
+          isDark
+            ? "border-white/15 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+            : "border-black/[0.06] bg-[#f2f3f3] text-[#3f4447] hover:bg-[#e9ebeb] hover:text-[#24282a]"
+        )}
         aria-label={copy.theme}
         title={copy.theme}
       >
-        {isMounted && isDark ? <Sun /> : <Moon />}
+        {isMounted && isDark ? <Sun /> : <Moon className="fill-current" />}
       </Button>
     </>
   );
@@ -284,107 +290,122 @@ export function Header() {
             <Menu strokeWidth={2.5} />
           </Button>
 
-          <div
-            id="mobile-navigation"
-            className={cn(
-              "fixed inset-0 z-[100] overflow-y-auto bg-black/80 text-white backdrop-blur-xl transition-all duration-300 lg:hidden",
-              isMenuOpen
-                ? "visible pointer-events-auto opacity-100"
-                : "invisible pointer-events-none opacity-0"
-            )}
-            aria-hidden={!isMenuOpen}
-          >
-            <button
-              type="button"
-              onClick={() => handleMenuOpenChange(false)}
-              className="absolute right-7 top-7 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-              aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}
-            >
-              <X className="h-7 w-7" />
-            </button>
+          {isMounted &&
+            createPortal(
+              <div
+                id="mobile-navigation"
+                role="dialog"
+                aria-modal="true"
+                className={cn(
+                  "fixed inset-0 z-[1000] overflow-y-auto overscroll-contain bg-black/80 text-white backdrop-blur-xl transition-all duration-300 lg:hidden",
+                  isMenuOpen
+                    ? "visible pointer-events-auto opacity-100"
+                    : "invisible pointer-events-none opacity-0"
+                )}
+                aria-hidden={!isMenuOpen}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleMenuOpenChange(false)}
+                  className="absolute right-7 top-7 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}
+                >
+                  <X className="h-7 w-7" />
+                </button>
 
-            <div
-              className={cn(
-                "min-h-dvh transition-transform duration-300",
-                isMenuOpen ? "translate-x-0" : "-translate-x-full"
-              )}
-            >
-              <nav className="flex min-h-dvh flex-col px-8 pb-10 pt-28">
-                <div className="flex flex-col gap-6">
-                  {localizedNavItems.map((item, index) => {
-                    const isActive = pathname === item.href;
+                <div
+                  className={cn(
+                    "relative z-20 min-h-dvh transition-transform duration-300",
+                    isMenuOpen ? "translate-x-0" : "-translate-x-full"
+                  )}
+                >
+                  <nav className="flex min-h-dvh flex-col px-8 pb-10 pt-28">
+                    <div className="flex flex-col gap-6">
+                      {localizedNavItems.map((item, index) => {
+                        const isActive = pathname === item.href;
 
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={handleMobileNavigation}
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={handleMobileNavigation}
+                            className={cn(
+                              "rounded-lg text-2xl font-semibold tracking-[-0.025em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+                              isMenuOpen
+                                ? "translate-x-0 opacity-100"
+                                : "-translate-x-8 opacity-0",
+                              isActive
+                                ? "text-white"
+                                : "text-white/60 hover:text-white"
+                            )}
+                            style={{ transitionDelay: `${index * 75}ms` }}
+                            aria-current={isActive ? "page" : undefined}
+                          >
+                            {item.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    <Separator className="my-8 bg-white/10" />
+
+                    <div className="divide-y divide-white/10">
+                      <div
                         className={cn(
-                          "rounded-lg text-2xl font-semibold tracking-[-0.025em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+                          "flex min-h-20 items-center justify-between gap-5 py-5 transition-all duration-300",
                           isMenuOpen
                             ? "translate-x-0 opacity-100"
-                            : "-translate-x-8 opacity-0",
-                          isActive
-                            ? "text-white"
-                            : "text-white/60 hover:text-white"
+                            : "-translate-x-8 opacity-0"
                         )}
-                        style={{ transitionDelay: `${index * 75}ms` }}
-                        aria-current={isActive ? "page" : undefined}
+                        style={{ transitionDelay: `${localizedNavItems.length * 75}ms` }}
                       >
-                        {item.label}
-                      </Link>
-                    );
-                  })}
+                        <p className="text-lg font-semibold text-white/60">
+                          {copy.themeSetting}
+                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={() => setTheme(isDark ? "light" : "dark")}
+                          className="h-10 w-10 shrink-0 rounded-full border-white/15 bg-white/5 text-white/60 shadow-none hover:bg-white/10 hover:text-white"
+                          aria-label={copy.theme}
+                          title={copy.theme}
+                        >
+                          {isMounted && isDark ? (
+                            <Sun />
+                          ) : (
+                            <Moon className="fill-current" />
+                          )}
+                        </Button>
+                      </div>
+
+                      <div
+                        className={cn(
+                          "flex min-h-20 items-center justify-between gap-5 py-5 transition-all duration-300",
+                          isMenuOpen
+                            ? "translate-x-0 opacity-100"
+                            : "-translate-x-8 opacity-0"
+                        )}
+                        style={{
+                          transitionDelay: `${(localizedNavItems.length + 1) * 75}ms`,
+                        }}
+                      >
+                        <p className="text-lg font-semibold text-white/60">
+                          {copy.languageSetting}
+                        </p>
+                        <LanguageSelect
+                          locale={locale}
+                          setLocale={setLocale}
+                          ariaLabel={copy.languageSetting}
+                          darkSurface
+                        />
+                      </div>
+                    </div>
+                  </nav>
                 </div>
-
-                <Separator className="my-8 bg-white/10" />
-
-                <div className="divide-y divide-white/10">
-                  <div
-                    className={cn(
-                      "flex min-h-20 items-center justify-between gap-5 py-5 transition-all duration-300",
-                      isMenuOpen
-                        ? "translate-x-0 opacity-100"
-                        : "-translate-x-8 opacity-0"
-                    )}
-                    style={{ transitionDelay: `${localizedNavItems.length * 75}ms` }}
-                  >
-                    <p className="text-lg font-semibold text-white/60">{copy.themeSetting}</p>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      onClick={() => setTheme(isDark ? "light" : "dark")}
-                      className="h-10 w-10 shrink-0 rounded-full border-white/15 bg-white/5 text-white/60 shadow-none hover:bg-white/10 hover:text-white"
-                      aria-label={copy.theme}
-                      title={copy.theme}
-                    >
-                      {isMounted && isDark ? <Sun /> : <Moon />}
-                    </Button>
-                  </div>
-
-                  <div
-                    className={cn(
-                      "flex min-h-20 items-center justify-between gap-5 py-5 transition-all duration-300",
-                      isMenuOpen
-                        ? "translate-x-0 opacity-100"
-                        : "-translate-x-8 opacity-0"
-                    )}
-                    style={{ transitionDelay: `${(localizedNavItems.length + 1) * 75}ms` }}
-                  >
-                    <p className="text-lg font-semibold text-white/60">{copy.languageSetting}</p>
-                    <LanguageSelect
-                      locale={locale}
-                      setLocale={setLocale}
-                      ariaLabel={copy.languageSetting}
-                      darkSurface
-                    />
-                  </div>
-                </div>
-
-              </nav>
-            </div>
-          </div>
+              </div>,
+              document.body
+            )}
         </div>
       </div>
     </header>
