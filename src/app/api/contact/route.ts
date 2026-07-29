@@ -1,117 +1,116 @@
-import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import {
+  assertContentType,
+  assertSameOrigin,
+  cleanText,
+  consumeRateLimit,
+  isValidEmail,
+  jsonNoStore,
+  readJsonBody,
+  securityErrorResponse
+} from "@/lib/server/request-security";
+
+export const runtime = "nodejs";
+
 type ContactPayload = {
-  name?: string;
-  company?: string;
-  email?: string;
-  phone?: string;
-  subject?: string;
-  message?: string;
+  name?: unknown;
+  company?: unknown;
+  email?: unknown;
+  phone?: unknown;
+  subject?: unknown;
+  message?: unknown;
+  website?: unknown;
 };
 
-const requiredFields: Array<keyof ContactPayload> = [
-  "name",
-  "company",
-  "email",
-  "subject",
-  "message"
-];
-
-function sanitize(value: unknown) {
-  return typeof value === "string" ? value.trim() : "";
-}
-
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
+const maxJsonBytes = 32 * 1024;
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload;
+    assertSameOrigin(request);
+    assertContentType(request, "application/json");
+    consumeRateLimit(request, "contact", {
+      limit: 5,
+      windowMs: 10 * 60 * 1000
+    });
+
+    const body = await readJsonBody<ContactPayload>(request, maxJsonBytes);
+    const honeypot = cleanText(body.website, 200);
+
+    if (honeypot) {
+      return jsonNoStore({ success: true });
+    }
+
     const payload = {
-      name: sanitize(body.name),
-      company: sanitize(body.company),
-      email: sanitize(body.email),
-      phone: sanitize(body.phone),
-      subject: sanitize(body.subject),
-      message: sanitize(body.message)
+      name: cleanText(body.name, 120),
+      company: cleanText(body.company, 160),
+      email: cleanText(body.email, 254),
+      phone: cleanText(body.phone, 40),
+      subject: cleanText(body.subject, 160),
+      message: cleanText(body.message, 4000)
     };
 
-    const hasMissingFields = requiredFields.some((field) => !payload[field]);
-
-    if (hasMissingFields || !isValidEmail(payload.email)) {
-      return NextResponse.json(
-        { success: false, error: "Datos incompletos o correo inválido." },
+    if (
+      !payload.name ||
+      !payload.company ||
+      !payload.email ||
+      !payload.subject ||
+      !payload.message ||
+      !isValidEmail(payload.email)
+    ) {
+      return jsonNoStore(
+        { success: false, error: "Revisa los datos ingresados e inténtalo nuevamente." },
         { status: 400 }
       );
     }
 
     const apiKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.CONTACT_TO_EMAIL ?? "a.rios@innovaindustriesperu.com";
-    const fromEmail = process.env.RESEND_FROM_EMAIL ?? "INNOVA Landing <onboarding@resend.dev>";
-
     if (!apiKey) {
-      return NextResponse.json(
+      return jsonNoStore(
         {
           success: false,
-          error:
-            "No se ha configurado la clave de Resend. Establezca RESEND_API_KEY en el entorno."
+          error: "El servicio de contacto no está disponible temporalmente."
         },
-        { status: 500 }
+        { status: 503 }
       );
     }
 
     const resend = new Resend(apiKey);
-    const text = [
-      "Nueva consulta desde landing page INNOVA",
-      "",
-      `Nombre: ${payload.name}`,
-      `Empresa: ${payload.company}`,
-      `Correo: ${payload.email}`,
-      `Teléfono: ${payload.phone || "No indicado"}`,
-      `Asunto: ${payload.subject}`,
-      "",
-      "Mensaje:",
-      payload.message
-    ].join("\n");
-
-    const sendResponse = await resend.emails.send({
-      from: fromEmail,
-      to: toEmail,
+    const response = await resend.emails.send({
+      from:
+        process.env.RESEND_FROM_EMAIL ??
+        "INNOVA Landing <onboarding@resend.dev>",
+      to:
+        process.env.CONTACT_TO_EMAIL ??
+        "a.rios@innovaindustriesperu.com",
       replyTo: payload.email,
-      subject: "Nueva consulta desde landing page INNOVA",
-      text
+      subject: "Nueva consulta desde la web de INNOVA",
+      text: [
+        "Nueva consulta desde la web de INNOVA",
+        "",
+        `Nombre: ${payload.name}`,
+        `Empresa: ${payload.company}`,
+        `Correo: ${payload.email}`,
+        `Teléfono: ${payload.phone || "No indicado"}`,
+        `Asunto: ${payload.subject}`,
+        "",
+        "Mensaje:",
+        payload.message
+      ].join("\n")
     });
 
-    console.log("Resend response:", sendResponse);
-
-    if (sendResponse.error) {
-      return NextResponse.json(
+    if (response.error) {
+      return jsonNoStore(
         {
           success: false,
-          error: `Resend error: ${sendResponse.error.message}`
+          error: "No se pudo enviar la consulta. Inténtalo nuevamente."
         },
-        { status: 500 }
+        { status: 502 }
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      sendId: sendResponse.data?.id ?? null
-    });
+    return jsonNoStore({ success: true });
   } catch (error) {
-    console.error("Error en /api/contact:", error);
-
-    return NextResponse.json(
-      {
-        success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "No se pudo enviar la consulta."
-      },
-      { status: 500 }
-    );
+    return securityErrorResponse(error);
   }
 }

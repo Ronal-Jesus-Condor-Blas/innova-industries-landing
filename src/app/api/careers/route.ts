@@ -1,5 +1,16 @@
-import { NextResponse } from "next/server";
 import { Resend } from "resend";
+
+import {
+  assertContentLength,
+  assertContentType,
+  assertSameOrigin,
+  cleanText,
+  consumeRateLimit,
+  isSafeHttpUrl,
+  isValidEmail,
+  jsonNoStore,
+  securityErrorResponse
+} from "@/lib/server/request-security";
 
 export const runtime = "nodejs";
 
@@ -8,9 +19,9 @@ const allowedTypes = new Set([
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ]);
-
 const allowedExtensions = new Set(["pdf", "doc", "docx"]);
 const maxFileSize = 3 * 1024 * 1024;
+const maxRequestSize = 4 * 1024 * 1024;
 
 const areaLabels: Record<string, string> = {
   operations: "Operaciones",
@@ -29,40 +40,72 @@ const experienceLabels: Record<string, string> = {
   senior: "Más de 5 años"
 };
 
-function clean(value: FormDataEntryValue | null, maxLength: number) {
-  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+function getText(formData: FormData, name: string, maxLength: number) {
+  return cleanText(formData.get(name), maxLength);
 }
 
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+function hasValidSignature(bytes: Buffer, extension: string) {
+  if (extension === "pdf") {
+    return bytes.subarray(0, 5).toString("ascii") === "%PDF-";
+  }
+
+  if (extension === "doc") {
+    const oleHeader = Buffer.from([0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1]);
+    return bytes.subarray(0, oleHeader.length).equals(oleHeader);
+  }
+
+  if (extension === "docx") {
+    return (
+      bytes[0] === 0x50 &&
+      bytes[1] === 0x4b &&
+      [0x03, 0x05, 0x07].includes(bytes[2]) &&
+      [0x04, 0x06, 0x08].includes(bytes[3])
+    );
+  }
+
+  return false;
 }
 
 export async function POST(request: Request) {
   try {
-    const contentType = request.headers.get("content-type") ?? "";
-    if (!contentType.includes("multipart/form-data")) {
-      return NextResponse.json({ success: false }, { status: 415 });
-    }
+    assertSameOrigin(request);
+    assertContentType(request, "multipart/form-data");
+    assertContentLength(request, maxRequestSize);
+    consumeRateLimit(request, "careers", {
+      limit: 3,
+      windowMs: 60 * 60 * 1000
+    });
 
     const formData = await request.formData();
+    const honeypot = getText(formData, "website", 200);
+
+    if (honeypot) {
+      return jsonNoStore({ success: true });
+    }
+
     const payload = {
-      name: clean(formData.get("name"), 120),
-      email: clean(formData.get("email"), 160),
-      phone: clean(formData.get("phone"), 30),
-      location: clean(formData.get("location"), 100),
-      area: clean(formData.get("area"), 40),
-      experience: clean(formData.get("experience"), 40),
-      linkedin: clean(formData.get("linkedin"), 240),
-      profile: clean(formData.get("profile"), 1200),
+      name: getText(formData, "name", 120),
+      email: getText(formData, "email", 254),
+      phone: getText(formData, "phone", 40),
+      location: getText(formData, "location", 120),
+      area: getText(formData, "area", 40),
+      experience: getText(formData, "experience", 40),
+      linkedin: getText(formData, "linkedin", 240),
+      profile: getText(formData, "profile", 1200),
       consent: formData.get("consent") === "on"
     };
+
     const cv = formData.get("cv");
-    const cvExtension =
-      cv instanceof File ? cv.name.split(".").pop()?.toLowerCase() ?? "" : "";
-    const validFileType =
-      cv instanceof File &&
-      allowedExtensions.has(cvExtension) &&
-      (allowedTypes.has(cv.type) || cv.type === "");
+    if (!(cv instanceof File)) {
+      return jsonNoStore({ success: false }, { status: 400 });
+    }
+
+    const extension = cv.name.split(".").pop()?.toLowerCase() ?? "";
+    const validFileMetadata =
+      allowedExtensions.has(extension) &&
+      (allowedTypes.has(cv.type) || cv.type === "") &&
+      cv.size > 0 &&
+      cv.size <= maxFileSize;
 
     const invalid =
       !payload.name ||
@@ -74,30 +117,48 @@ export async function POST(request: Request) {
       !payload.profile ||
       !payload.consent ||
       !isValidEmail(payload.email) ||
-      !(cv instanceof File) ||
-      !cv.size ||
-      cv.size > maxFileSize ||
-      !validFileType;
+      !isSafeHttpUrl(payload.linkedin) ||
+      !validFileMetadata;
 
-    if (invalid || !(cv instanceof File)) {
-      return NextResponse.json({ success: false }, { status: 400 });
+    if (invalid) {
+      return jsonNoStore(
+        { success: false, error: "Revisa los datos y el archivo adjunto." },
+        { status: 400 }
+      );
+    }
+
+    const cvContent = Buffer.from(await cv.arrayBuffer());
+    if (cvContent.byteLength > maxFileSize || !hasValidSignature(cvContent, extension)) {
+      return jsonNoStore(
+        { success: false, error: "El archivo adjunto no es válido." },
+        { status: 400 }
+      );
     }
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ success: false }, { status: 503 });
+      return jsonNoStore(
+        {
+          success: false,
+          error: "El servicio de postulaciones no está disponible temporalmente."
+        },
+        { status: 503 }
+      );
     }
 
     const resend = new Resend(apiKey);
-    const cvContent = Buffer.from(await cv.arrayBuffer());
     const response = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL ?? "INNOVA Landing <onboarding@resend.dev>",
-      to: process.env.CONTACT_TO_EMAIL ?? "a.rios@innovaindustriesperu.com",
+      from:
+        process.env.RESEND_FROM_EMAIL ??
+        "INNOVA Landing <onboarding@resend.dev>",
+      to:
+        process.env.CONTACT_TO_EMAIL ??
+        "a.rios@innovaindustriesperu.com",
       replyTo: payload.email,
       subject: `Nueva postulación laboral: ${payload.name}`,
       attachments: [
         {
-          filename: cv.name.replace(/[^\w.\- ]/g, "_"),
+          filename: `candidate-cv.${extension}`,
           content: cvContent
         }
       ],
@@ -115,18 +176,24 @@ export async function POST(request: Request) {
         "Perfil profesional:",
         payload.profile,
         "",
-        `CV adjunto: ${cv.name}`,
+        `CV adjunto: candidate-cv.${extension}`,
         "",
         "La persona autorizó el uso de su información para procesos de selección."
       ].join("\n")
     });
 
     if (response.error) {
-      return NextResponse.json({ success: false }, { status: 502 });
+      return jsonNoStore(
+        {
+          success: false,
+          error: "No se pudo enviar la postulación. Inténtalo nuevamente."
+        },
+        { status: 502 }
+      );
     }
 
-    return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ success: false }, { status: 500 });
+    return jsonNoStore({ success: true });
+  } catch (error) {
+    return securityErrorResponse(error);
   }
 }

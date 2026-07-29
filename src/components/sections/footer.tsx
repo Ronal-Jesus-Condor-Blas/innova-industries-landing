@@ -10,8 +10,8 @@ export function Footer() {
   const { locale } = useLanguage();
   const copy = locale === "es"
     ? {
-        description: "Soluciones especializadas para minería, construcción y el sector automotriz, respaldadas por experiencia técnica y atención cercana.",
-        mobileDescription: "Soluciones especializadas para minería, construcción y el sector automotriz.",
+        description: "Soluciones especializadas para minería, construcción e industria, respaldadas por experiencia técnica y atención cercana.",
+        mobileDescription: "Soluciones especializadas para minería, construcción e industria, respaldadas por experiencia técnica y atención cercana.",
         company: "Empresa",
         contact: "Contacto",
         location: ["San Antonio, Huarochirí", "Lima, Perú"],
@@ -20,8 +20,8 @@ export function Footer() {
         nav: ["Inicio", "Comunicados", "Talento", "Contacto"]
       }
     : {
-        description: "Specialized solutions for mining, construction and automotive operations, backed by technical expertise and close support.",
-        mobileDescription: "Specialized solutions for mining, construction and automotive operations.",
+        description: "Specialized solutions for mining, construction and industry, backed by technical expertise and close support.",
+        mobileDescription: "Specialized solutions for mining, construction and industry, backed by technical expertise and close support.",
         company: "Company",
         contact: "Contact",
         location: ["San Antonio, Huarochirí", "Lima, Peru"],

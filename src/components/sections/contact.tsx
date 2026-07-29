@@ -217,6 +217,19 @@ export function Contact() {
             </CardHeader>
             <CardContent className="p-5 pt-4 sm:p-8 sm:pt-5">
               <form className="grid gap-4 sm:gap-5" onSubmit={handleSubmit} noValidate>
+                <div
+                  className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
+                  aria-hidden="true"
+                >
+                  <Label htmlFor="contact-website">Website</Label>
+                  <Input
+                    id="contact-website"
+                    name="website"
+                    type="text"
+                    autoComplete="off"
+                    tabIndex={-1}
+                  />
+                </div>
                 <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                   <div className="grid gap-2">
                     <Label htmlFor="name">{copy.name}</Label>
@@ -224,6 +237,7 @@ export function Contact() {
                       id="name"
                       name="name"
                       autoComplete="name"
+                      maxLength={120}
                       placeholder={copy.namePlaceholder}
                       className="surface-field h-11 rounded-xl sm:h-12"
                       required
@@ -235,6 +249,7 @@ export function Contact() {
                       id="company"
                       name="company"
                       autoComplete="organization"
+                      maxLength={160}
                       placeholder={copy.companyPlaceholder}
                       className="surface-field h-11 rounded-xl sm:h-12"
                       required
@@ -249,6 +264,7 @@ export function Contact() {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      maxLength={254}
                       placeholder="nombre@empresa.com"
                       className="surface-field h-11 rounded-xl sm:h-12"
                       required
@@ -261,6 +277,7 @@ export function Contact() {
                       name="phone"
                       type="tel"
                       autoComplete="tel"
+                      maxLength={40}
                       placeholder="+51 999 999 999"
                       className="surface-field h-11 rounded-xl sm:h-12"
                     />
@@ -271,6 +288,7 @@ export function Contact() {
                   <Input
                     id="subject"
                     name="subject"
+                    maxLength={160}
                     placeholder={copy.subjectPlaceholder}
                     className="surface-field h-11 rounded-xl sm:h-12"
                     required
@@ -281,6 +299,7 @@ export function Contact() {
                   <Textarea
                     id="message"
                     name="message"
+                    maxLength={4000}
                     placeholder={copy.messagePlaceholder}
                     className="surface-field min-h-28 resize-y rounded-xl sm:min-h-36"
                     required

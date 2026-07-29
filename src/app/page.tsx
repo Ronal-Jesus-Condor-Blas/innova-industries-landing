@@ -1,4 +1,5 @@
 import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
+import { BusinessLines } from "@/components/sections/business-lines";
 import { FinalCta } from "@/components/sections/final-cta";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main className="min-h-screen bg-background">
         <Hero />
+        <BusinessLines />
         <IndustrySolutions />
         <HomeAbout />
         <TrustedCompanies />

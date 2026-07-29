@@ -313,6 +313,19 @@ export function Careers() {
           <Card className="rounded-2xl border-border/60 bg-card shadow-[0_20px_55px_rgba(29,29,27,0.07)] dark:shadow-none">
             <CardContent className="p-5 sm:p-8">
               <form onSubmit={handleSubmit} className="grid gap-5" encType="multipart/form-data" noValidate>
+                <div
+                  className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
+                  aria-hidden="true"
+                >
+                  <Label htmlFor="career-website">Website</Label>
+                  <Input
+                    id="career-website"
+                    name="website"
+                    type="text"
+                    autoComplete="off"
+                    tabIndex={-1}
+                  />
+                </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="grid gap-2">
                     <Label htmlFor="career-name">{copy.name} *</Label>
@@ -320,7 +333,7 @@ export function Careers() {
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="career-email">{copy.email} *</Label>
-                    <Input id="career-email" name="email" type="email" autoComplete="email" maxLength={160} placeholder="nombre@correo.com" className="h-12 rounded-xl bg-muted/25 shadow-none" required />
+                    <Input id="career-email" name="email" type="email" autoComplete="email" maxLength={254} placeholder="nombre@correo.com" className="h-12 rounded-xl bg-muted/25 shadow-none" required />
                   </div>
                 </div>
 

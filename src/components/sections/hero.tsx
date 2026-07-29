@@ -13,14 +13,14 @@ export function Hero() {
     ? {
         title: "Soluciones que construyen",
         description:
-          "Soluciones especializadas para minería, construcción y el sector automotriz.",
+          "Soluciones especializadas para minería, construcción e industria.",
         about: "Conócenos",
         contact: "Contáctanos"
       }
     : {
         title: "Solutions that build",
         description:
-          "Specialized solutions for mining, construction and automotive operations.",
+          "Specialized solutions for mining, construction and industry.",
         about: "About us",
         contact: "Contact us"
       };
