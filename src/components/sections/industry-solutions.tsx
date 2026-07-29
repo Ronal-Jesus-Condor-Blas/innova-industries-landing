@@ -81,19 +81,19 @@ export function IndustrySolutions() {
         };
 
   return (
-    <section id="soluciones" className="bg-background pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="soluciones" className="bg-background pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20 xl:pb-[4.5rem] xl:pt-14">
+      <div className="mx-auto max-w-[68rem] px-4 sm:px-6 lg:px-8">
         <Reveal className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
           <div>
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-primary">
               {copy.eyebrow}
             </p>
-            <h2 className="mt-5 max-w-3xl text-4xl font-normal leading-[1.05] tracking-[-0.035em] text-innova-black sm:text-5xl lg:text-6xl">
+            <h2 className="mt-5 max-w-3xl text-4xl font-normal leading-[1.05] tracking-[-0.035em] text-innova-black sm:text-5xl lg:text-6xl xl:text-[3.15rem]">
               {copy.title}
               <span className="block font-semibold text-primary">{copy.accent}</span>
             </h2>
           </div>
-          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end">
+          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 lg:justify-self-end xl:text-base xl:leading-7">
             {copy.description}
           </p>
         </Reveal>

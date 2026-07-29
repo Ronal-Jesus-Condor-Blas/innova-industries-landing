@@ -56,7 +56,7 @@ function LanguageSelect({
             "border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/25",
           compact
             ? "h-10 w-[58px] gap-1 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
-            : "h-10 w-[64px] gap-1.5 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
+            : "h-10 w-[64px] gap-1.5 px-3 text-xs xl:h-9 xl:w-14 xl:gap-1 xl:px-2.5 xl:text-[0.7rem] [&>svg]:h-3.5 [&>svg]:w-3.5 xl:[&>svg]:h-3 xl:[&>svg]:w-3"
         )}
       >
         <SelectValue>{locale.toUpperCase()}</SelectValue>
@@ -202,7 +202,7 @@ export function Header() {
         size="icon"
         onClick={() => setTheme(isDark ? "light" : "dark")}
         className={cn(
-          "h-10 w-10 rounded-full shadow-none transition-colors [&_svg]:size-4 [&_svg]:stroke-[2.35]",
+          "h-10 w-10 rounded-full shadow-none transition-colors xl:h-9 xl:w-9 [&_svg]:size-4 [&_svg]:stroke-[2.35] xl:[&_svg]:size-3.5",
           isDark
             ? "border-white/15 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             : "border-black/[0.06] bg-[#f2f3f3] text-[#3f4447] hover:bg-[#e9ebeb] hover:text-[#24282a]"
@@ -224,10 +224,10 @@ export function Header() {
     >
       <div
         className={cn(
-          "mx-auto grid h-[68px] max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6",
+          "mx-auto grid h-[68px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
           isHome && !isScrolled
             ? "border-transparent bg-transparent shadow-none"
-            : "border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)]"
+            : "border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)] xl:border-border/45 xl:bg-background/75 xl:shadow-[0_12px_34px_rgba(29,29,27,0.07)] xl:backdrop-blur-2xl dark:xl:border-white/10 dark:xl:bg-black/75 dark:xl:shadow-[0_12px_34px_rgba(0,0,0,0.20)]"
         )}
       >
         <Link
@@ -235,11 +235,11 @@ export function Header() {
           className="flex min-w-0 items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-4"
           aria-label={copy.homeAria}
         >
-          <BrandLogo className="h-8 w-[112px] min-[375px]:h-9 min-[375px]:w-[126px] sm:h-[46px] sm:w-[184px]" />
+          <BrandLogo className="h-8 w-[112px] min-[375px]:h-9 min-[375px]:w-[126px] sm:h-[46px] sm:w-[184px] xl:h-9 xl:w-36" />
         </Link>
 
         <NavigationMenu className="hidden justify-self-center lg:flex">
-          <NavigationMenuList className="flex gap-1 rounded-full border border-border/60 bg-muted/65 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]">
+          <NavigationMenuList className="flex gap-1 rounded-full border border-border/60 bg-muted/65 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] xl:p-0.5">
             {localizedNavItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -249,7 +249,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-[color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 xl:px-6",
+                        "flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-[color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 xl:px-[1.125rem] xl:py-1.5 xl:text-xs",
                         isActive
                           ? "bg-background text-foreground shadow-[0_5px_16px_rgba(29,29,27,0.09)]"
                           : "text-muted-foreground hover:bg-background/60 hover:text-foreground"

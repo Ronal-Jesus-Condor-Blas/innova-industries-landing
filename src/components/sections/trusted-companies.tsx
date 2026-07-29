@@ -41,8 +41,8 @@ export function TrustedCompanies() {
   const title = locale === "es" ? "Empresas que confían en nosotros" : "Companies that trust us";
 
   return (
-    <section className="overflow-hidden bg-background pb-28 pt-12 sm:pb-32 sm:pt-16 lg:pb-36 lg:pt-20" aria-labelledby="trusted-companies-title">
-      <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="overflow-hidden bg-background pb-24 pt-12 sm:pb-28 sm:pt-16 lg:pb-32 lg:pt-20 xl:pb-24 xl:pt-14" aria-labelledby="trusted-companies-title">
+      <Reveal className="mx-auto max-w-[68rem] px-4 sm:px-6 lg:px-8">
         <h2 id="trusted-companies-title" className="text-center font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-innova-black">{title}</h2>
       </Reveal>
       <Reveal delay={80} className="trusted-marquee mt-10 overflow-hidden bg-background sm:mt-12" tabIndex={0} aria-label={`${title}: ${companies.map((company) => company.name).join(", ")}`}>

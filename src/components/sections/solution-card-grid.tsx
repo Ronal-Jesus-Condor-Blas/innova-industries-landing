@@ -97,7 +97,7 @@ export function SolutionCardGrid({
 
       <div
         className={cn(
-          "mt-12 hidden gap-5 md:grid lg:mt-16",
+          "mt-12 hidden gap-5 md:grid lg:mt-16 xl:mt-14 xl:gap-4",
           columns === 4 ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-3"
         )}
       >
@@ -109,7 +109,7 @@ export function SolutionCardGrid({
               onMouseLeave={resetCardPointer}
             >
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <CardHeader className="space-y-0 p-7 pb-5 sm:p-8 sm:pb-5">
+              <CardHeader className="space-y-0 p-7 pb-5 sm:p-8 sm:pb-5 xl:p-6 xl:pb-5">
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                     <item.icon className="h-5 w-5" aria-hidden="true" />
@@ -118,12 +118,14 @@ export function SolutionCardGrid({
                     [{item.number}]
                   </span>
                 </div>
-                <CardTitle className="mt-8 text-2xl font-semibold tracking-[-0.02em] text-innova-black">
+                <CardTitle className="mt-8 text-2xl font-semibold tracking-[-0.02em] text-innova-black xl:mt-6 xl:text-xl">
                   {item.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex flex-1 flex-col px-7 pb-7 pt-0 sm:px-8 sm:pb-8">
-                <p className="text-base leading-7 text-muted-foreground">{item.description}</p>
+              <CardContent className="flex flex-1 flex-col px-7 pb-7 pt-0 sm:px-8 sm:pb-8 xl:px-6 xl:pb-6">
+                <p className="text-base leading-7 text-muted-foreground xl:text-[0.9rem] xl:leading-[1.65]">
+                  {item.description}
+                </p>
                 <div className="mt-auto pt-7">
                   <div className="flex flex-wrap gap-2 border-t border-border/60 pt-6">
                     {item.applications.map((application) => (

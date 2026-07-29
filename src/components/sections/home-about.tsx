@@ -39,22 +39,22 @@ export function HomeAbout() {
   const copy = content[locale];
 
   return (
-    <section id="quienes-somos" className="bg-background pb-14 pt-16 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="quienes-somos" className="bg-background pb-14 pt-16 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24 xl:pb-14 xl:pt-[4.5rem]">
+      <div className="mx-auto max-w-[68rem] px-4 sm:px-6 lg:px-8">
         <Reveal className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
-            <h2 className="mt-4 max-w-xl text-3xl font-normal leading-tight tracking-[-0.025em] text-innova-black sm:text-4xl lg:text-[2.75rem]">
+            <h2 className="mt-4 max-w-xl text-3xl font-normal leading-tight tracking-[-0.025em] text-innova-black sm:text-4xl lg:text-[2.75rem] xl:text-[2.35rem]">
               {copy.title}{" "}<span className="font-semibold text-primary">{copy.accent}</span>
             </h2>
           </div>
           <p className="max-w-xl self-end text-sm leading-6 text-muted-foreground md:hidden">{copy.mobileDescription}</p>
-          <p className="hidden max-w-2xl self-end text-base leading-7 text-muted-foreground md:block md:text-lg md:leading-8">{copy.description}</p>
+          <p className="hidden max-w-2xl self-end text-base leading-7 text-muted-foreground md:block md:text-lg md:leading-8 xl:text-base xl:leading-7">{copy.description}</p>
         </Reveal>
 
         <div className="mt-10 grid grid-cols-2 border-y border-border/50 lg:mt-14 lg:grid-cols-4">
           {copy.attributes.map((attribute, index) => (
-            <Reveal key={attribute.title} delay={index * 70} className={`flex min-h-36 flex-col justify-center px-3 py-5 sm:min-h-44 sm:px-6 sm:py-7 lg:min-h-48 lg:px-8 lg:py-8 ${index % 2 === 1 ? "border-l border-border/50" : ""} ${index >= 2 ? "border-t border-border/50 lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-border/50" : ""}`}>
+            <Reveal key={attribute.title} delay={index * 70} className={`flex min-h-36 flex-col justify-center px-3 py-5 sm:min-h-44 sm:px-6 sm:py-7 lg:min-h-48 lg:px-8 lg:py-8 xl:min-h-40 xl:px-6 xl:py-6 ${index % 2 === 1 ? "border-l border-border/50" : ""} ${index >= 2 ? "border-t border-border/50 lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-border/50" : ""}`}>
               <attribute.icon className="h-5 w-5 text-primary" aria-hidden="true" />
               <h3 className="mt-3 text-sm font-semibold leading-5 text-innova-black sm:mt-4 sm:text-base">{attribute.title}</h3>
               <p className="mt-1.5 text-xs leading-5 text-muted-foreground sm:mt-2 sm:text-sm sm:leading-6">{attribute.text}</p>

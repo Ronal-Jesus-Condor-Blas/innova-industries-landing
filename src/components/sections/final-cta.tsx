@@ -25,13 +25,13 @@ export function FinalCta() {
       };
 
   return (
-    <section className="bg-background px-4 pb-24 pt-4 sm:px-6 sm:pb-28 lg:px-8 lg:pb-32" aria-labelledby="final-cta-title">
-      <Reveal className="mx-auto max-w-7xl">
+    <section className="bg-background px-4 pb-24 pt-4 sm:px-6 sm:pb-28 lg:px-8 lg:pb-32 xl:pb-24" aria-labelledby="final-cta-title">
+      <Reveal className="mx-auto max-w-[68rem]">
         <Card className="carbon-card overflow-hidden rounded-[1.75rem] border-border/60 bg-card shadow-none">
           <CardContent className="flex flex-col items-start gap-8 p-7 sm:p-10 md:flex-row md:items-center md:justify-between lg:p-12">
             <div className="max-w-3xl">
               <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
-              <h2 id="final-cta-title" className="mt-4 text-3xl font-normal leading-tight tracking-[-0.035em] text-innova-black sm:text-4xl lg:text-5xl">
+              <h2 id="final-cta-title" className="mt-4 text-3xl font-normal leading-tight tracking-[-0.035em] text-innova-black sm:text-4xl lg:text-5xl xl:text-[2.55rem]">
                 {copy.title}
               </h2>
               <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">{copy.description}</p>
