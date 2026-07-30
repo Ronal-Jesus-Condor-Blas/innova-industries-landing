@@ -28,7 +28,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-background pt-[92px] sm:pt-[96px]"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-background pt-[84px] sm:pt-[96px]"
     >
       <HeroMolecularBackground />
 
@@ -38,7 +38,7 @@ export function Hero() {
             <span className="block text-balance font-normal">{copy.title}</span>
             <RotatingPhrase />
           </h1>
-          <p className="mt-7 max-w-[19rem] text-[0.98rem] leading-6 text-foreground/70 dark:text-white/78 sm:mt-10 sm:max-w-3xl sm:text-lg sm:leading-8 xl:mt-7 xl:leading-7">
+          <p className="mt-10 max-w-[18rem] text-[0.95rem] leading-6 text-foreground/72 [text-shadow:0_1px_12px_rgba(255,255,255,0.62)] dark:text-white/80 dark:[text-shadow:0_1px_10px_rgba(0,0,0,0.78)] sm:max-w-3xl sm:text-lg sm:leading-8 sm:[text-shadow:none] xl:mt-7 xl:leading-7">
             {copy.description}
           </p>
           <div className="mt-8 flex w-full max-w-[22rem] flex-row justify-center gap-3 sm:mt-10 sm:w-auto sm:max-w-none">

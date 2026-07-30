@@ -224,7 +224,7 @@ export function Header() {
     >
       <div
         className={cn(
-          "mx-auto grid h-[68px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
+          "mx-auto grid h-[60px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
           isHome && !isScrolled
             ? "border-transparent bg-transparent shadow-none"
             : "border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)] xl:border-border/45 xl:bg-background/75 xl:shadow-[0_12px_34px_rgba(29,29,27,0.07)] xl:backdrop-blur-2xl dark:xl:border-white/10 dark:xl:bg-background/75 dark:xl:shadow-[0_12px_34px_rgba(0,0,0,0.20)]"
