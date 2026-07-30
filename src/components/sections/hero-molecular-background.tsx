@@ -90,9 +90,10 @@ export function HeroMolecularBackground() {
         />
       </div>
 
-      {/* One ambient layer creates depth without retracing or blurring the render. */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0.22)_18%,transparent_40%)] md:bg-[linear-gradient(90deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.48)_12%,rgba(255,255,255,0.14)_24%,transparent_38%)] dark:bg-[linear-gradient(90deg,#0a0a0a_0%,rgba(10,10,10,0.98)_31%,rgba(10,10,10,0.78)_38%,rgba(10,10,10,0.22)_46%,transparent_53%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_58%_65%_at_69%_48%,transparent_0%,transparent_58%,rgba(255,255,255,0.16)_100%)] dark:bg-[radial-gradient(ellipse_58%_65%_at_69%_48%,transparent_0%,transparent_62%,rgba(10,10,10,0.22)_100%)]" />
+      {/* Light mode keeps its soft wash; dark mode preserves the original molecular render. */}
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0.22)_18%,transparent_40%)] md:bg-[linear-gradient(90deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.48)_12%,rgba(255,255,255,0.14)_24%,transparent_38%)] dark:hidden" />
+      {/* Keep the light-theme edge wash; hiding it in dark mode removes the visible oval. */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_58%_65%_at_69%_48%,transparent_0%,transparent_58%,rgba(255,255,255,0.16)_100%)] dark:hidden" />
     </div>
   );
 }
