@@ -5,8 +5,12 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   Check,
+  Factory,
   FileText,
+  GraduationCap,
   Send,
+  ShieldCheck,
+  UploadCloud,
   UsersRound
 } from "lucide-react";
 
@@ -51,6 +55,7 @@ type SubmitState = {
 export function Careers() {
   const { locale } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState("");
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
     message: ""
@@ -68,7 +73,12 @@ export function Careers() {
         cardLabel: "Forma parte del equipo",
         cardTitle: "Tu talento puede impulsar nuestra próxima etapa",
         cardDescription:
-          "Recibimos perfiles de distintas especialidades. Evaluaremos tu experiencia y nos comunicaremos contigo cuando exista una oportunidad alineada.",
+          "Un entorno industrial donde el aprendizaje, la seguridad y el impacto real forman parte del trabajo diario.",
+        benefits: [
+          ["Crecimiento profesional", "Aprendizaje continuo junto a especialistas."],
+          ["Proyectos con impacto", "Retos reales para minería, construcción e industria."],
+          ["Trabajo responsable", "Seguridad, colaboración y criterio técnico."]
+        ],
         processEyebrow: "Proceso de selección",
         processTitle: "Una postulación clara y confidencial",
         steps: [
@@ -103,8 +113,12 @@ export function Careers() {
           "Resume tu experiencia, principales fortalezas y el tipo de oportunidad que buscas",
         cv: "Currículum vitae",
         cvHelp: "PDF, DOC o DOCX · máximo 3 MB",
-        consent:
-          "Confirmo que la información es correcta y autorizo a Innova América a utilizarla en procesos de selección.",
+        contactSection: "Datos de contacto",
+        profileSection: "Perfil profesional",
+        documentsSection: "CV y autorización",
+        selectFile: "Seleccionar CV",
+        noFile: "Ningún archivo seleccionado",
+        consent: "Autorizo el uso de mis datos para procesos de selección de Innova América.",
         submit: "Enviar postulación",
         submitting: "Enviando...",
         incomplete: "Completa los campos requeridos, adjunta tu CV y acepta la autorización",
@@ -123,7 +137,12 @@ export function Careers() {
         cardLabel: "Join our team",
         cardTitle: "Your talent can drive our next stage",
         cardDescription:
-          "We welcome profiles from different specialties. We will assess your experience and contact you when a suitable opportunity becomes available.",
+          "An industrial environment where learning, safety and meaningful impact are part of the daily work.",
+        benefits: [
+          ["Professional growth", "Continuous learning alongside specialists."],
+          ["Meaningful projects", "Real challenges for mining, construction and industry."],
+          ["Responsible work", "Safety, collaboration and sound technical judgment."]
+        ],
         processEyebrow: "Selection process",
         processTitle: "A clear and confidential application",
         steps: [
@@ -158,8 +177,12 @@ export function Careers() {
           "Summarize your experience, main strengths and the type of opportunity you are seeking",
         cv: "Résumé",
         cvHelp: "PDF, DOC or DOCX · maximum 3 MB",
-        consent:
-          "I confirm the information is accurate and authorize Innova America to use it in selection processes.",
+        contactSection: "Contact details",
+        profileSection: "Professional profile",
+        documentsSection: "Résumé and authorization",
+        selectFile: "Select résumé",
+        noFile: "No file selected",
+        consent: "I authorize Innova America to use my data for recruitment processes.",
         submit: "Submit application",
         submitting: "Submitting...",
         incomplete: "Complete the required fields, attach your résumé and accept the authorization",
@@ -195,6 +218,7 @@ export function Careers() {
       if (!response.ok) throw new Error("Request failed");
 
       form.reset();
+      setSelectedFileName("");
       setSubmitState({ type: "success", message: copy.success });
     } catch {
       setSubmitState({ type: "error", message: copy.error });
@@ -206,7 +230,7 @@ export function Careers() {
   return (
     <>
       <section className="bg-background pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
-        <div className="mx-auto grid max-w-7xl items-end gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:px-8">
           <div className="animate-fade-up max-w-4xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
               {copy.eyebrow}
@@ -231,22 +255,41 @@ export function Careers() {
             </div>
           </div>
 
-          <Card className="animate-fade-up stagger-1 rounded-2xl border-border/60 bg-card shadow-none">
-            <CardHeader className="p-6 pb-4 sm:p-8 sm:pb-5">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
-                <UsersRound className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <p className="pt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-                {copy.cardLabel}
-              </p>
-              <CardTitle className="pt-2 text-2xl leading-tight tracking-[-0.025em] text-innova-black sm:text-3xl">
+          <Card className="carbon-card surface-featured animate-fade-up stagger-1 rounded-2xl lg:w-full lg:max-w-[31rem] lg:justify-self-end">
+            <CardHeader className="p-6 pb-3 sm:p-7 sm:pb-3">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-primary/15 bg-primary/[0.06] text-primary">
+                  <UsersRound className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                  {copy.cardLabel}
+                </p>
+              </div>
+              <CardTitle className="pt-3 text-2xl leading-tight tracking-[-0.025em] text-innova-black sm:text-[1.7rem]">
                 {copy.cardTitle}
               </CardTitle>
             </CardHeader>
-            <CardContent className="px-6 pb-6 sm:px-8 sm:pb-8">
+            <CardContent className="px-6 pb-6 sm:px-7 sm:pb-7">
               <p className="text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
                 {copy.cardDescription}
               </p>
+              <div className="mt-4 grid border-t border-border/60 pt-3">
+                {copy.benefits.map(([title, description], index) => {
+                  const Icon = index === 0 ? GraduationCap : index === 1 ? Factory : ShieldCheck;
+
+                  return (
+                    <div key={title} className="flex gap-3 rounded-xl px-1 py-2">
+                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/[0.07] text-primary">
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-innova-black">{title}</p>
+                        <p className="mt-0.5 text-sm leading-5 text-muted-foreground">{description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -310,9 +353,9 @@ export function Careers() {
             </div>
           </div>
 
-          <Card className="rounded-2xl border-border/60 bg-card shadow-[0_20px_55px_rgba(29,29,27,0.07)] dark:shadow-none">
+          <Card className="carbon-card rounded-2xl">
             <CardContent className="p-5 sm:p-8">
-              <form onSubmit={handleSubmit} className="grid gap-5" encType="multipart/form-data" noValidate>
+              <form onSubmit={handleSubmit} className="grid gap-6" encType="multipart/form-data" noValidate>
                 <div
                   className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
                   aria-hidden="true"
@@ -326,33 +369,44 @@ export function Careers() {
                     tabIndex={-1}
                   />
                 </div>
+                <fieldset className="grid gap-5">
+                  <legend className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                    01 · {copy.contactSection}
+                  </legend>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="grid gap-2">
                     <Label htmlFor="career-name">{copy.name} *</Label>
-                    <Input id="career-name" name="name" autoComplete="name" maxLength={120} placeholder={copy.namePlaceholder} className="h-12 rounded-xl bg-muted/25 shadow-none" required />
+                    <Input id="career-name" name="name" autoComplete="name" maxLength={120} placeholder={copy.namePlaceholder} className="h-12 rounded-xl bg-background/60 shadow-none" required />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="career-email">{copy.email} *</Label>
-                    <Input id="career-email" name="email" type="email" autoComplete="email" maxLength={254} placeholder="nombre@correo.com" className="h-12 rounded-xl bg-muted/25 shadow-none" required />
+                    <Input id="career-email" name="email" type="email" autoComplete="email" maxLength={254} placeholder="nombre@correo.com" className="h-12 rounded-xl bg-background/60 shadow-none" required />
                   </div>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="grid gap-2">
                     <Label htmlFor="career-phone">{copy.phone} *</Label>
-                    <Input id="career-phone" name="phone" type="tel" autoComplete="tel" maxLength={30} placeholder="+51 999 999 999" className="h-12 rounded-xl bg-muted/25 shadow-none" required />
+                    <Input id="career-phone" name="phone" type="tel" autoComplete="tel" maxLength={30} placeholder="+51 999 999 999" className="h-12 rounded-xl bg-background/60 shadow-none" required />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="career-location">{copy.location} *</Label>
-                    <Input id="career-location" name="location" autoComplete="address-level2" maxLength={100} placeholder={copy.locationPlaceholder} className="h-12 rounded-xl bg-muted/25 shadow-none" required />
+                    <Input id="career-location" name="location" autoComplete="address-level2" maxLength={100} placeholder={copy.locationPlaceholder} className="h-12 rounded-xl bg-background/60 shadow-none" required />
                   </div>
                 </div>
+                </fieldset>
 
+                <Separator />
+
+                <fieldset className="grid gap-5">
+                  <legend className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                    02 · {copy.profileSection}
+                  </legend>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="grid gap-2">
                     <Label htmlFor="career-area">{copy.area} *</Label>
                     <Select name="area" required>
-                      <SelectTrigger id="career-area" className="h-12 w-full rounded-xl bg-muted/25 shadow-none">
+                      <SelectTrigger id="career-area" className="h-12 w-full rounded-xl bg-background/60 shadow-none">
                         <SelectValue placeholder={copy.areaPlaceholder} />
                       </SelectTrigger>
                       <SelectContent>
@@ -367,7 +421,7 @@ export function Careers() {
                   <div className="grid gap-2">
                     <Label htmlFor="career-experience">{copy.experience} *</Label>
                     <Select name="experience" required>
-                      <SelectTrigger id="career-experience" className="h-12 w-full rounded-xl bg-muted/25 shadow-none">
+                      <SelectTrigger id="career-experience" className="h-12 w-full rounded-xl bg-background/60 shadow-none">
                         <SelectValue placeholder={copy.experiencePlaceholder} />
                       </SelectTrigger>
                       <SelectContent>
@@ -383,28 +437,57 @@ export function Careers() {
 
                 <div className="grid gap-2">
                   <Label htmlFor="career-linkedin">{copy.linkedin}</Label>
-                  <Input id="career-linkedin" name="linkedin" type="url" maxLength={240} placeholder="https://linkedin.com/in/..." className="h-12 rounded-xl bg-muted/25 shadow-none" />
+                  <Input id="career-linkedin" name="linkedin" type="url" maxLength={240} placeholder="https://linkedin.com/in/..." className="h-12 rounded-xl bg-background/60 shadow-none" />
                 </div>
 
                 <div className="grid gap-2">
                   <Label htmlFor="career-profile">{copy.profile} *</Label>
-                  <Textarea id="career-profile" name="profile" maxLength={1200} placeholder={copy.profilePlaceholder} className="min-h-32 resize-y rounded-xl bg-muted/25 shadow-none" required />
+                  <Textarea id="career-profile" name="profile" maxLength={1200} placeholder={copy.profilePlaceholder} className="min-h-32 resize-y rounded-xl bg-background/60 shadow-none" required />
                 </div>
+                </fieldset>
 
+                <Separator />
+
+                <fieldset className="grid gap-5">
+                  <legend className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                    03 · {copy.documentsSection}
+                  </legend>
                 <div className="grid gap-2">
                   <Label htmlFor="career-cv">{copy.cv} *</Label>
-                  <Input id="career-cv" name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className="h-auto min-h-12 cursor-pointer rounded-xl bg-muted/25 py-2.5 shadow-none file:mr-4 file:rounded-full file:border-0 file:bg-foreground file:px-4 file:py-1.5 file:text-sm file:font-medium file:text-background" required />
-                  <p className="text-xs text-muted-foreground">{copy.cvHelp}</p>
+                    <label
+                      htmlFor="career-cv"
+                      className="group relative flex min-h-24 cursor-pointer items-center gap-4 overflow-hidden rounded-xl border border-dashed border-border bg-background/45 px-4 py-4 transition-colors hover:border-primary/50 hover:bg-primary/[0.025] focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/[0.08] text-primary">
+                      <UploadCloud className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-semibold text-innova-black">
+                        {selectedFileName || copy.selectFile}
+                      </span>
+                      <span className="mt-1 block text-xs text-muted-foreground">
+                        {selectedFileName ? copy.cvHelp : `${copy.noFile} · ${copy.cvHelp}`}
+                      </span>
+                    </span>
+                    <Input
+                      id="career-cv"
+                      name="cv"
+                      type="file"
+                      accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                      onChange={(event) => setSelectedFileName(event.target.files?.[0]?.name ?? "")}
+                      required
+                    />
+                  </label>
                 </div>
 
-                <Separator className="my-1" />
-
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/35 p-4">
                   <Checkbox id="career-consent" name="consent" className="mt-0.5" required />
                   <Label htmlFor="career-consent" className="font-normal leading-6 text-muted-foreground">
                     {copy.consent} *
                   </Label>
                 </div>
+                </fieldset>
 
                 {submitState.message ? (
                   <p role="status" aria-live="polite" className={submitState.type === "success"

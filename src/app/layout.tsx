@@ -14,14 +14,14 @@ export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: "INNOVA INDUSTRIES AMERICA SAC | Soluciones industriales",
   description:
-    "Soluciones químicas e industriales, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
+    "Soluciones químicas e industriales, productos especializados y soporte técnico para minería, construcción e industria.",
   alternates: {
     canonical: "/"
   },
   openGraph: {
     title: "INNOVA INDUSTRIES AMERICA SAC",
     description:
-      "Ingeniería, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
+      "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
     url: "/",
     siteName: "Innova America",
     locale: "es_PE",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "INNOVA INDUSTRIES AMERICA SAC",
     description:
-      "Ingeniería, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
+      "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
     images: ["/opengraph-image.png"]
   }
 };

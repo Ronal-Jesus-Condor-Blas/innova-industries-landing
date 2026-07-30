@@ -38,7 +38,7 @@ export function Hero() {
             <span className="block font-normal">{copy.title}</span>
             <RotatingPhrase />
           </h1>
-          <p className="mt-8 max-w-[22rem] text-base leading-7 text-foreground/65 dark:text-white/72 sm:mt-10 sm:max-w-3xl sm:text-lg sm:leading-8 xl:mt-7 xl:text-[0.94rem] xl:leading-7">
+          <p className="mt-8 max-w-[22rem] text-base leading-7 text-foreground/65 dark:text-white/80 sm:mt-10 sm:max-w-3xl sm:text-lg sm:leading-8 xl:mt-7 xl:leading-7">
             {copy.description}
           </p>
           <div className="mt-9 flex w-full max-w-[26rem] flex-row justify-center gap-2.5 sm:mt-10 sm:w-auto sm:max-w-none sm:gap-3">
@@ -53,7 +53,7 @@ export function Hero() {
               asChild
               variant="outline"
               size="lg"
-              className="h-[52px] min-w-0 flex-1 rounded-full border-border bg-background px-3 text-sm font-semibold shadow-none min-[375px]:text-base sm:min-w-40 sm:flex-none sm:px-8 xl:h-[46px] xl:min-w-32 xl:text-sm"
+              className="hero-secondary-button carbon-card group h-[52px] min-w-0 flex-1 rounded-full px-3 text-sm font-semibold text-foreground transition-[transform,border-color,background-color,box-shadow] active:scale-[0.98] min-[375px]:text-base sm:min-w-40 sm:flex-none sm:px-7 xl:h-[46px] xl:min-w-32 xl:text-sm"
             >
               <Link href="#quienes-somos">{copy.about}</Link>
             </Button>

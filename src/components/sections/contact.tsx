@@ -143,7 +143,7 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:mt-14 sm:gap-6 lg:mt-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:gap-6 lg:mt-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-8">
           <div className="animate-fade-up">
             <CardHeader className="p-5 pb-4 sm:p-8 sm:pb-5">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
@@ -153,7 +153,7 @@ export function Contact() {
                 {copy.channelsText}
               </CardDescription>
             </CardHeader>
-            <CardContent className="px-5 pb-5 pt-0 sm:px-8 sm:pb-8">
+            <CardContent className="divide-y divide-border/60 px-5 pb-5 pt-0 sm:px-8 sm:pb-8">
               <a
                 href={localizedEmailHref}
                 target="_blank"
@@ -166,8 +166,8 @@ export function Contact() {
                   <Mail className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <span className="min-w-0 pt-0.5">
-                  <span className="block text-sm font-semibold text-innova-black">{copy.email}</span>
-                  <span className="mt-1 block break-all text-sm text-muted-foreground transition-colors group-hover:text-primary">
+                  <span className="block text-base font-semibold text-innova-black">{copy.email}</span>
+                  <span className="mt-1 block break-all text-[0.9375rem] text-muted-foreground transition-colors group-hover:text-primary">
                     a.rios@innovaindustriesperu.com
                   </span>
                 </span>
@@ -182,10 +182,10 @@ export function Contact() {
                   <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <span className="pt-0.5">
-                  <span className="block text-sm font-semibold text-innova-black">
+                  <span className="block text-base font-semibold text-innova-black">
                     {copy.whatsapp}
                   </span>
-                  <span className="mt-1 block text-sm text-muted-foreground transition-colors group-hover:text-primary">
+                  <span className="mt-1 block text-[0.9375rem] text-muted-foreground transition-colors group-hover:text-primary">
                     {copy.conversation}
                   </span>
                 </span>
@@ -195,8 +195,8 @@ export function Contact() {
                   <MapPin className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <div className="pt-0.5">
-                  <p className="text-sm font-semibold text-innova-black">{copy.location}</p>
-                  <address className="mt-1 text-sm not-italic leading-6 text-muted-foreground">
+                  <p className="text-base font-semibold text-innova-black">{copy.location}</p>
+                  <address className="mt-1 max-w-[20rem] text-[0.9375rem] not-italic leading-6 text-muted-foreground">
                     Mza. B1 Lote. 3b Z.I. Lotización Industrial Hua (Alt. Petramas)<br />
                     San Antonio, Huarochirí<br />
                     Lima, Perú
@@ -206,8 +206,8 @@ export function Contact() {
             </CardContent>
           </div>
 
-          <Card className="surface-elevated surface-featured animate-fade-up stagger-1 rounded-2xl">
-            <CardHeader className="p-5 pb-3 sm:p-8 sm:pb-3">
+          <Card className="carbon-card animate-fade-up stagger-1 rounded-2xl">
+            <CardHeader className="p-5 pb-3 sm:p-7 sm:pb-2">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.formTitle}
               </CardTitle>
@@ -215,8 +215,8 @@ export function Contact() {
                 {copy.requiredNote}
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-5 pt-4 sm:p-8 sm:pt-5">
-              <form className="grid gap-4 sm:gap-5" onSubmit={handleSubmit} noValidate>
+            <CardContent className="p-5 pt-4 sm:p-7 sm:pt-4">
+              <form className="grid gap-4" onSubmit={handleSubmit} noValidate>
                 <div
                   className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
                   aria-hidden="true"
@@ -230,7 +230,7 @@ export function Contact() {
                     tabIndex={-1}
                   />
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div className="grid gap-2">
                     <Label htmlFor="name">{copy.name}</Label>
                     <Input
@@ -239,7 +239,7 @@ export function Contact() {
                       autoComplete="name"
                       maxLength={120}
                       placeholder={copy.namePlaceholder}
-                      className="surface-field h-11 rounded-xl sm:h-12"
+                      className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                       required
                     />
                   </div>
@@ -251,12 +251,12 @@ export function Contact() {
                       autoComplete="organization"
                       maxLength={160}
                       placeholder={copy.companyPlaceholder}
-                      className="surface-field h-11 rounded-xl sm:h-12"
+                      className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                       required
                     />
                   </div>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div className="grid gap-2">
                     <Label htmlFor="email">{copy.emailField}</Label>
                     <Input
@@ -266,7 +266,7 @@ export function Contact() {
                       autoComplete="email"
                       maxLength={254}
                       placeholder="nombre@empresa.com"
-                      className="surface-field h-11 rounded-xl sm:h-12"
+                      className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                       required
                     />
                   </div>
@@ -279,7 +279,7 @@ export function Contact() {
                       autoComplete="tel"
                       maxLength={40}
                       placeholder="+51 999 999 999"
-                      className="surface-field h-11 rounded-xl sm:h-12"
+                      className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                     />
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export function Contact() {
                     name="subject"
                     maxLength={160}
                     placeholder={copy.subjectPlaceholder}
-                    className="surface-field h-11 rounded-xl sm:h-12"
+                    className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                     required
                   />
                 </div>
@@ -301,7 +301,7 @@ export function Contact() {
                     name="message"
                     maxLength={4000}
                     placeholder={copy.messagePlaceholder}
-                    className="surface-field min-h-28 resize-y rounded-xl sm:min-h-36"
+                    className="surface-field min-h-28 resize-y rounded-xl md:text-[0.9375rem]"
                     required
                   />
                 </div>

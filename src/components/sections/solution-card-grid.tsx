@@ -14,6 +14,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
+const CARD_TILT_STRENGTH = 3;
+
 export type SolutionCardItem = {
   number: string;
   icon: LucideIcon;
@@ -41,8 +43,8 @@ export function SolutionCardGrid({
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;
 
-    card.style.setProperty("--card-rotate-x", `${y * -7}deg`);
-    card.style.setProperty("--card-rotate-y", `${x * 7}deg`);
+    card.style.setProperty("--card-rotate-x", `${y * -CARD_TILT_STRENGTH}deg`);
+    card.style.setProperty("--card-rotate-y", `${x * CARD_TILT_STRENGTH}deg`);
   };
 
   const resetCardPointer = (event: MouseEvent<HTMLDivElement>) => {
@@ -84,7 +86,7 @@ export function SolutionCardGrid({
                   <Badge
                     key={application}
                     variant="outline"
-                    className="rounded-full border-border/70 bg-background px-2.5 py-1 text-xs font-normal text-muted-foreground shadow-none"
+                    className="rounded-full border-border/80 bg-background/55 px-2.5 py-1 text-xs font-medium text-foreground/70 shadow-none dark:text-[#b8b8b8]"
                   >
                     {application}
                   </Badge>
@@ -104,7 +106,7 @@ export function SolutionCardGrid({
         {items.map((item, index) => (
           <Reveal key={item.title} delay={index * 80}>
             <Card
-              className="carbon-card tummy-tilt-card group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl shadow-none"
+              className="carbon-card surface-featured tummy-tilt-card group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl"
               onMouseMove={handleCardPointer}
               onMouseLeave={resetCardPointer}
             >
@@ -132,7 +134,7 @@ export function SolutionCardGrid({
                       <Badge
                         key={application}
                         variant="outline"
-                        className="rounded-full border-border/70 bg-background px-3 py-1 font-normal text-muted-foreground shadow-none"
+                        className="rounded-full border-border/80 bg-background/55 px-3 py-1 font-medium text-foreground/70 shadow-none transition-colors group-hover:border-border group-hover:bg-muted/35 dark:text-[#b8b8b8]"
                       >
                         {application}
                       </Badge>
