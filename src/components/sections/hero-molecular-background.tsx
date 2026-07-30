@@ -48,6 +48,7 @@ export function HeroMolecularBackground() {
       className="hero-molecule-bottom-fade pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
       {/* Mobile remains static so Safari renders both theme assets consistently. */}
+      <div className="absolute inset-0 bg-white dark:bg-[#0a0a0a] md:hidden" />
       <Image
         src="/images/hero-molecular-3d.png"
         alt=""
@@ -55,7 +56,7 @@ export function HeroMolecularBackground() {
         priority
         unoptimized
         sizes="100vw"
-        className="object-cover object-[62%_center] opacity-100 dark:hidden md:hidden"
+        className="object-cover object-[60%_center] contrast-[1.06] saturate-[0.8] dark:hidden md:hidden"
       />
       <Image
         src="/images/hero-molecular-3d-0a-transparent.png"
@@ -64,7 +65,7 @@ export function HeroMolecularBackground() {
         priority
         unoptimized
         sizes="100vw"
-        className="hidden object-cover object-[62%_center] opacity-[0.94] dark:block md:dark:hidden"
+        className="hidden object-cover object-[59%_center] opacity-[0.82] dark:block md:dark:hidden"
       />
 
       <div
@@ -91,9 +92,9 @@ export function HeroMolecularBackground() {
       </div>
 
       {/* Light mode keeps its soft wash; dark mode preserves the original molecular render. */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0.22)_18%,transparent_40%)] md:bg-[linear-gradient(90deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.48)_12%,rgba(255,255,255,0.14)_24%,transparent_38%)] dark:hidden" />
+      <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.48)_12%,rgba(255,255,255,0.14)_24%,transparent_38%)] md:block dark:hidden" />
       {/* Keep the light-theme edge wash; hiding it in dark mode removes the visible oval. */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_58%_65%_at_69%_48%,transparent_0%,transparent_58%,rgba(255,255,255,0.16)_100%)] dark:hidden" />
+      <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_58%_65%_at_69%_48%,transparent_0%,transparent_58%,rgba(255,255,255,0.16)_100%)] md:block dark:hidden" />
     </div>
   );
 }

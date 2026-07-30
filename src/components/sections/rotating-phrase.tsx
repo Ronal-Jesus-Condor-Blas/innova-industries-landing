@@ -13,6 +13,8 @@ export function RotatingPhrase() {
   const { locale } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [phase, setPhase] = useState<"visible" | "exit" | "enter">("visible");
+  const activePhrase = phrases[locale][activeIndex];
+  const isLongPhrase = activePhrase.length > 18;
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -50,11 +52,13 @@ export function RotatingPhrase() {
     >
       <span
         key={`${locale}-${activeIndex}`}
-        className={`col-start-1 row-start-1 flex items-start justify-center ${
+        className={`col-start-1 row-start-1 flex items-start justify-center text-center ${
+          isLongPhrase ? "text-[0.78em] sm:text-[0.9em] lg:text-[1em]" : ""
+        } ${
           phase === "exit" ? "phrase-exit" : phase === "enter" ? "phrase-enter" : ""
         }`}
       >
-        {phrases[locale][activeIndex]}
+        {activePhrase}
       </span>
     </span>
   );
