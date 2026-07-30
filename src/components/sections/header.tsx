@@ -51,7 +51,7 @@ function LanguageSelect({
         aria-label={ariaLabel}
         title={ariaLabel}
         className={cn(
-          "rounded-full border-border/70 bg-background/80 font-semibold shadow-none hover:bg-muted focus:ring-2 focus:ring-primary/25",
+          "touch-manipulation select-none rounded-full border-border/70 bg-background/80 font-semibold shadow-none hover:bg-muted focus:ring-2 focus:ring-primary/25",
           darkSurface &&
             "border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/25",
           compact
@@ -64,7 +64,7 @@ function LanguageSelect({
       <SelectContent
         align="end"
         className={cn(
-          "min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl",
+          "z-[1100] min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl",
           darkSurface && "border-white/10 bg-[#111111] text-white"
         )}
       >

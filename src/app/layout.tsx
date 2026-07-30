@@ -4,19 +4,43 @@ import { GeistMono } from "geist/font/mono";
 import { AppProviders } from "@/components/providers/app-providers";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? new URL(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
+    : new URL("https://www.innovaindustriesperu.com");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.innovaindustriesperu.com"),
+  metadataBase: siteUrl,
   title: "INNOVA INDUSTRIES AMERICA SAC | Soluciones industriales",
   description:
     "Soluciones químicas e industriales, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
     title: "INNOVA INDUSTRIES AMERICA SAC",
     description:
       "Ingeniería, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
-    url: "https://www.innovaindustriesperu.com",
+    url: "/",
     siteName: "Innova America",
     locale: "es_PE",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "INNOVA INDUSTRIES AMERICA SAC — Soluciones industriales"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "INNOVA INDUSTRIES AMERICA SAC",
+    description:
+      "Ingeniería, productos especializados y soporte técnico para minería, construcción y el sector automotriz.",
+    images: ["/opengraph-image.png"]
   }
 };
 
