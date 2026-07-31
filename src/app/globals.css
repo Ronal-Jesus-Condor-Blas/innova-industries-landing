@@ -163,7 +163,8 @@ section {
   }
 
   .hero-molecule-breathe {
-    animation: hero-molecule-breathe 14s ease-in-out infinite;
+    animation: hero-molecule-breathe 6s ease-in-out infinite;
+    will-change: transform;
   }
 }
 
@@ -493,12 +494,14 @@ section {
 }
 
 @keyframes hero-molecule-breathe {
-  0%,
-  100% {
-    transform: scale(1);
+  0% {
+    transform: translate3d(-5px, 3px, 0) scale(1.02);
   }
   50% {
-    transform: scale(1.018);
+    transform: translate3d(10px, -8px, 0) scale(1.14);
+  }
+  100% {
+    transform: translate3d(-5px, 3px, 0) scale(1.02);
   }
 }
 

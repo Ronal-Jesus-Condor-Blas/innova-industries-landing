@@ -1,47 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-
-const PARALLAX_X = 10;
-const PARALLAX_Y = 7;
 
 export function HeroMolecularBackground() {
-  const layerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const layer = layerRef.current;
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktopQuery = window.matchMedia("(min-width: 768px) and (pointer: fine)");
-
-    if (!layer || motionQuery.matches || !desktopQuery.matches) {
-      return;
-    }
-
-    const reset = () => {
-      layer.style.transform = "translate3d(0, 0, 0) scale(1.025)";
-    };
-
-    const handlePointerMove = (event: PointerEvent) => {
-      const normalizedX = event.clientX / window.innerWidth - 0.5;
-      const normalizedY = event.clientY / window.innerHeight - 0.5;
-      const offsetX = normalizedX * -PARALLAX_X;
-      const offsetY = normalizedY * -PARALLAX_Y;
-
-      layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(1.035)`;
-    };
-
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    document.documentElement.addEventListener("mouseleave", reset);
-    window.addEventListener("blur", reset);
-
-    return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      document.documentElement.removeEventListener("mouseleave", reset);
-      window.removeEventListener("blur", reset);
-    };
-  }, []);
-
   return (
     <div
       aria-hidden="true"
@@ -49,36 +8,15 @@ export function HeroMolecularBackground() {
     >
       {/* Mobile remains static so Safari renders both theme assets consistently. */}
       <div className="absolute inset-0 bg-white dark:bg-[#0a0a0a] md:hidden" />
-      <Image
-        src="/images/hero-molecular-3d.png"
-        alt=""
-        fill
-        priority
-        unoptimized
-        sizes="100vw"
-        className="object-cover object-[54%_center] opacity-[0.92] contrast-[1.06] saturate-[0.8] dark:hidden md:hidden"
-      />
-      <Image
-        src="/images/hero-molecular-3d-0a-transparent.png"
-        alt=""
-        fill
-        priority
-        unoptimized
-        sizes="100vw"
-        className="hidden object-cover object-[55%_center] opacity-[0.82] dark:block md:dark:hidden"
-      />
-
-      <div
-        ref={layerRef}
-        className="absolute -inset-3 hidden scale-[1.025] will-change-transform transition-transform duration-700 ease-out md:block"
-      >
+      <div className="hero-molecule-breathe absolute inset-0 origin-[55%_50%] md:hidden">
         <Image
           src="/images/hero-molecular-3d.png"
           alt=""
           fill
           priority
+          unoptimized
           sizes="100vw"
-          className="object-cover object-[62%_center] opacity-100 dark:hidden lg:object-center"
+          className="object-cover object-[54%_center] opacity-[0.92] contrast-[1.06] saturate-[0.8] dark:hidden"
         />
         <Image
           src="/images/hero-molecular-3d-0a-transparent.png"
@@ -87,8 +25,30 @@ export function HeroMolecularBackground() {
           priority
           unoptimized
           sizes="100vw"
-          className="hidden object-cover object-[62%_center] opacity-[0.94] dark:block lg:object-center"
+          className="hidden object-cover object-[55%_center] opacity-[0.82] dark:block"
         />
+      </div>
+
+      <div className="hero-molecule-breathe absolute -inset-3 hidden origin-[62%_50%] md:block">
+        <div className="absolute inset-0 scale-[1.025]">
+          <Image
+            src="/images/hero-molecular-3d.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[62%_center] opacity-100 dark:hidden lg:object-center"
+          />
+          <Image
+            src="/images/hero-molecular-3d-0a-transparent.png"
+            alt=""
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="hidden object-cover object-[62%_center] opacity-[0.94] dark:block lg:object-center"
+          />
+        </div>
       </div>
 
       {/* Light mode keeps its soft wash; dark mode preserves the original molecular render. */}
