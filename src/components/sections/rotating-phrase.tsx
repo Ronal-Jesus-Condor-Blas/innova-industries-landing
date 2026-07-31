@@ -12,10 +12,18 @@ const phrases = {
 export function RotatingPhrase() {
   const { locale } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [phase, setPhase] = useState<"idle" | "exiting" | "entering">("idle");
+  const activePhrase = phrases[locale][activeIndex];
+  const isLongPhrase = activePhrase.length > 18;
 
   useEffect(() => {
     const interval = window.setInterval(() => {
-      setActiveIndex((currentIndex) => (currentIndex + 1) % phrases[locale].length);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setActiveIndex((currentIndex) => (currentIndex + 1) % phrases[locale].length);
+        return;
+      }
+
+      setPhase("exiting");
     }, 2500);
 
     return () => {
@@ -23,31 +31,40 @@ export function RotatingPhrase() {
     };
   }, [locale]);
 
+  const handleAnimationEnd = () => {
+    if (phase === "exiting") {
+      setActiveIndex((currentIndex) => (currentIndex + 1) % phrases[locale].length);
+      setPhase("entering");
+      return;
+    }
+
+    if (phase === "entering") {
+      setPhase("idle");
+    }
+  };
+
   return (
     <span
-      className="relative mt-3 grid h-[1.2em] overflow-hidden py-[0.04em] font-bold leading-[1.08] text-primary sm:mt-5"
+      className="relative mt-3 grid h-[1.2em] w-full overflow-hidden py-[0.04em] font-bold leading-[1.08] text-primary sm:mt-5"
       aria-live="off"
     >
-      {phrases[locale].map((phrase, index) => {
-        const isActive = index === activeIndex;
-        const isLongPhrase = phrase.length > 18;
-
-        return (
-          <span
-            key={`${locale}-${phrase}`}
-            aria-hidden={!isActive}
-            className={`col-start-1 row-start-1 flex items-start justify-center text-center transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
-              isLongPhrase ? "text-[0.82em] tracking-[-0.035em] sm:text-[0.9em] lg:text-[1em]" : ""
-            } ${
-              isActive
-                ? "translate-y-0 opacity-100"
-                : "pointer-events-none translate-y-[0.12em] opacity-0"
-            }`}
-          >
-            {phrase}
-          </span>
-        );
-      })}
+      <span
+        key={`${locale}-${activePhrase}`}
+        onAnimationEnd={handleAnimationEnd}
+        className={`col-start-1 row-start-1 flex whitespace-nowrap items-start justify-center text-center ${
+          isLongPhrase
+            ? "text-[0.68em] tracking-[-0.04em] min-[390px]:text-[0.72em] sm:text-[0.9em] lg:text-[1em]"
+            : ""
+        } ${
+          phase === "exiting"
+            ? "phrase-slide-exit"
+            : phase === "entering"
+              ? "phrase-slide-enter"
+              : ""
+        }`}
+      >
+        {activePhrase}
+      </span>
     </span>
   );
 }
