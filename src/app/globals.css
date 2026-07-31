@@ -145,14 +145,6 @@ section {
     animation-delay: 220ms;
   }
 
-  .phrase-enter {
-    animation: phrase-enter 250ms ease-out both;
-  }
-
-  .phrase-exit {
-    animation: phrase-exit 250ms ease-out both;
-  }
-
   .trusted-marquee-track {
     animation: trusted-marquee 36s linear infinite;
   }
@@ -461,28 +453,6 @@ section {
 
   .reveal-on-scroll.is-visible {
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes phrase-enter {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes phrase-exit {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(50px);
   }
 }
 

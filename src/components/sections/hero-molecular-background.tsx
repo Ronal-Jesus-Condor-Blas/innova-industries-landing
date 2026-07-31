@@ -56,7 +56,7 @@ export function HeroMolecularBackground() {
         priority
         unoptimized
         sizes="100vw"
-        className="object-cover object-[54%_center] opacity-[0.86] contrast-[0.96] saturate-[0.72] dark:hidden md:hidden"
+        className="object-cover object-[54%_center] opacity-[0.92] contrast-[1.06] saturate-[0.8] dark:hidden md:hidden"
       />
       <Image
         src="/images/hero-molecular-3d-0a-transparent.png"
