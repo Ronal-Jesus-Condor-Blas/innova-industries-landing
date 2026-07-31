@@ -51,11 +51,7 @@ export function RotatingPhrase() {
       <span
         key={`${locale}-${activePhrase}`}
         onAnimationEnd={handleAnimationEnd}
-        className={`col-start-1 row-start-1 flex whitespace-nowrap items-start justify-center text-center ${
-          isLongPhrase
-            ? "text-[0.68em] tracking-[-0.04em] min-[390px]:text-[0.72em] sm:text-[0.9em] lg:text-[1em]"
-            : ""
-        } ${
+        className={`col-start-1 row-start-1 flex whitespace-nowrap items-start justify-center text-center tracking-[-0.04em] sm:tracking-[inherit] ${
           phase === "exiting"
             ? "phrase-slide-exit"
             : phase === "entering"
@@ -63,7 +59,15 @@ export function RotatingPhrase() {
               : ""
         }`}
       >
-        {activePhrase}
+        <span
+          className={
+            isLongPhrase
+              ? "inline-block origin-center scale-x-[0.88] sm:scale-x-100"
+              : undefined
+          }
+        >
+          {activePhrase}
+        </span>
       </span>
     </span>
   );

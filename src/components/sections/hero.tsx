@@ -34,8 +34,8 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-[860px] -translate-y-6 flex-col items-center px-5 py-14 text-center sm:translate-y-0 sm:px-6 sm:py-20 lg:px-8 xl:py-14">
         <div className="animate-fade-up flex w-full flex-col items-center">
-          <h1 className="max-w-[20rem] text-[clamp(2.15rem,9.4vw,2.5rem)] leading-[1.03] tracking-[-0.045em] text-innova-black sm:max-w-5xl sm:text-[clamp(2.6rem,6.2vw,4.85rem)] sm:leading-[1.02] sm:tracking-[-0.045em] xl:text-[clamp(2.5rem,5.1vw,4.15rem)]">
-            <span className="block text-balance font-normal">{copy.title}</span>
+          <h1 className="w-[calc(100vw-1rem)] max-w-[28rem] text-[clamp(2.15rem,9.4vw,2.5rem)] leading-[1.03] tracking-[-0.045em] text-innova-black sm:w-auto sm:max-w-5xl sm:text-[clamp(2.6rem,6.2vw,4.85rem)] sm:leading-[1.02] sm:tracking-[-0.045em] xl:text-[clamp(2.5rem,5.1vw,4.15rem)]">
+            <span className="mx-auto block max-w-[20rem] text-balance font-normal sm:max-w-none">{copy.title}</span>
             <RotatingPhrase />
           </h1>
           <p className="mt-7 max-w-[19rem] text-[0.95rem] leading-6 text-foreground/76 [text-shadow:0_1px_12px_rgba(255,255,255,0.7)] dark:text-white/82 dark:[text-shadow:0_1px_10px_rgba(0,0,0,0.82)] sm:max-w-3xl sm:text-lg sm:leading-8 sm:[text-shadow:none] xl:mt-7 xl:leading-7">
