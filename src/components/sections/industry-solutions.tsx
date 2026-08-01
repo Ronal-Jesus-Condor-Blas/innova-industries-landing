@@ -32,7 +32,7 @@ const industries = {
       number: "04",
       icon: CarFront,
       title: "Automotriz",
-      image: "/assets/industries/automotive-fleet-highway.png"
+      image: "/assets/industries/mining-truck-fleet.png"
     }
   ],
   en: [
@@ -58,7 +58,7 @@ const industries = {
       number: "04",
       icon: CarFront,
       title: "Automotive",
-      image: "/assets/industries/automotive-fleet-highway.png"
+      image: "/assets/industries/mining-truck-fleet.png"
     }
   ]
 } as const;
