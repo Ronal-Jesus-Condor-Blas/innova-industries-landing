@@ -81,8 +81,8 @@ export async function POST(request: Request) {
         process.env.RESEND_FROM_EMAIL ??
         "INNOVA Landing <onboarding@resend.dev>",
       to:
-        process.env.CONTACT_TO_EMAIL ??
-        "a.rios@innovaindustriesperu.com",
+        process.env.INNOVA_CONTACT_TO_EMAIL ??
+        "info@innovaindustriesperu.com",
       replyTo: payload.email,
       subject: "Nueva consulta desde la web de INNOVA",
       text: [

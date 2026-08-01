@@ -105,7 +105,6 @@ export function Header() {
     ? {
         home: "Inicio",
         communications: "Comunicados",
-        careers: "Talento",
         contact: "Contacto",
         menu: "Abrir menú",
         homeAria: "Ir al inicio",
@@ -117,7 +116,6 @@ export function Header() {
     : {
         home: "Home",
         communications: "Newsroom",
-        careers: "Careers",
         contact: "Contact",
         menu: "Open menu",
         homeAria: "Go to homepage",
@@ -134,9 +132,7 @@ export function Header() {
         ? copy.home
         : item.href === "/comunicados"
           ? copy.communications
-          : item.href === "/trabaja-con-nosotros"
-            ? copy.careers
-            : copy.contact
+          : copy.contact
   }));
 
   useEffect(() => {

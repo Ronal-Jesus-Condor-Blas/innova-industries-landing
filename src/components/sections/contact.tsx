@@ -22,7 +22,7 @@ import { getWhatsappHref } from "@/lib/site";
 const requiredFields = ["name", "company", "email", "subject", "message"] as const;
 
 const emailHref =
-  "https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Consulta%20desde%20la%20landing%20page%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20landing%20page%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A";
+  "mailto:info@innovaindustriesperu.com?subject=Consulta%20desde%20la%20web%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20web%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A";
 
 type SubmitState = {
   type: "idle" | "success" | "error";
@@ -34,7 +34,7 @@ export function Contact() {
   const whatsappHref = getWhatsappHref(locale);
   const localizedEmailHref = locale === "es"
     ? emailHref
-    : "https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com&su=Inquiry%20from%20the%20INNOVA%20website&body=Hello%20INNOVA%20team%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AMessage%3A";
+    : "mailto:info@innovaindustriesperu.com?subject=Inquiry%20from%20the%20INNOVA%20website&body=Hello%20INNOVA%20team%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AMessage%3A";
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
@@ -168,7 +168,7 @@ export function Contact() {
                 <span className="min-w-0 pt-0.5">
                   <span className="block text-base font-semibold text-innova-black">{copy.email}</span>
                   <span className="mt-1 block break-all text-[0.9375rem] text-muted-foreground transition-colors group-hover:text-primary">
-                    a.rios@innovaindustriesperu.com
+                    info@innovaindustriesperu.com
                   </span>
                 </span>
               </a>

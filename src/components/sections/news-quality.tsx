@@ -13,10 +13,7 @@ import { cn } from "@/lib/utils";
 
 const categoryImages: Record<CommunicationCategory, string> = {
   "Política de calidad": "/assets/hero/operacion-industrial.avif",
-  "Comunicados oficiales": "/assets/hero/operacion-industrial.avif",
-  Certificaciones: "/assets/hero/operacion-industrial.avif",
-  "Seguridad, salud y medio ambiente": "/assets/hero/mineria-industrial.jpg",
-  "Noticias institucionales": "/assets/hero/operacion-industrial.avif"
+  "Comunicados oficiales": "/assets/hero/mineria-industrial.jpg"
 };
 
 const storyImages = [
@@ -26,10 +23,7 @@ const storyImages = [
 
 const categoryEnglish: Record<CommunicationCategory, string> = {
   "Política de calidad": "Quality policy",
-  "Comunicados oficiales": "Official announcements",
-  Certificaciones: "Certifications",
-  "Seguridad, salud y medio ambiente": "Safety, health and environment",
-  "Noticias institucionales": "Company news"
+  "Comunicados oficiales": "Official announcements"
 };
 
 export function NewsQuality() {

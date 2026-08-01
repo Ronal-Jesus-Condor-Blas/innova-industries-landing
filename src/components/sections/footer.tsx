@@ -17,7 +17,8 @@ export function Footer() {
         location: ["San Antonio, Huarochirí", "Lima, Perú"],
         rights: "Todos los derechos reservados",
         emailTitle: "Enviar correo a INNOVA",
-        nav: ["Inicio", "Comunicados", "Talento", "Contacto"]
+        cookies: "Política de cookies",
+        nav: ["Inicio", "Comunicados", "Contacto"]
       }
     : {
         description: "Specialized solutions for mining, construction and industry, backed by technical expertise and close support.",
@@ -27,7 +28,8 @@ export function Footer() {
         location: ["San Antonio, Huarochirí", "Lima, Peru"],
         rights: "All rights reserved",
         emailTitle: "Email INNOVA",
-        nav: ["Home", "Newsroom", "Careers", "Contact"]
+        cookies: "Cookie policy",
+        nav: ["Home", "Newsroom", "Contact"]
       };
 
   return (
@@ -70,14 +72,14 @@ export function Footer() {
             </h3>
             <div className="mt-5 grid justify-items-center gap-3 text-sm leading-6 text-muted-foreground md:justify-items-start">
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=a.rios@innovaindustriesperu.com"
+                href={`mailto:${brand.email}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="break-all outline-none transition-colors hover:text-primary focus:text-primary sm:break-normal"
                 title={copy.emailTitle}
                 aria-label={copy.emailTitle}
               >
-                a.rios@innovaindustriesperu.com
+                {brand.email}
               </a>
               <span>{brand.domain}</span>
               <address className="mt-1 grid not-italic">
@@ -92,6 +94,12 @@ export function Footer() {
         <p className="mx-auto max-w-md text-xs leading-5 text-muted-foreground">
           © 2026 {brand.name}. {copy.rights}
         </p>
+        <Link
+          href="/politica-de-cookies"
+          className="mt-2 inline-block text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline focus:text-primary focus:outline-none"
+        >
+          {copy.cookies}
+        </Link>
       </div>
     </footer>
   );

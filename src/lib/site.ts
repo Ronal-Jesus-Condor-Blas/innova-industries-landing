@@ -1,9 +1,9 @@
 export const brand = {
   name: "INNOVA INDUSTRIES AMERICA SAC",
   shortName: "Innova America",
-  email: "a.rios@innovaindustriesperu.com",
+  email: "info@innovaindustriesperu.com",
   domain: "www.innovaindustriesperu.com",
-  whatsappNumber: "51986023382",
+  whatsappNumber: "51981524461",
   colors: {
     blue: "#1C6DB5",
     gray: "#878787",
@@ -15,7 +15,6 @@ export const brand = {
 export const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Comunicados", href: "/comunicados" },
-  { label: "Talento", href: "/trabaja-con-nosotros" },
   { label: "Contacto", href: "/contacto" }
 ] as const;
 

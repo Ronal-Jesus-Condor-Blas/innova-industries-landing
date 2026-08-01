@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { AppProviders } from "@/components/providers/app-providers";
+import { CookieBanner } from "@/components/cookie-banner";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -9,6 +10,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   : process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? new URL(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
     : new URL("https://www.innovaindustriesperu.com");
+const socialImageUrl = new URL("/opengraph-image.png", siteUrl).toString();
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -22,13 +24,13 @@ export const metadata: Metadata = {
     title: "INNOVA INDUSTRIES AMERICA SAC",
     description:
       "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
-    url: "/",
+    url: siteUrl.toString(),
     siteName: "Innova America",
     locale: "es_PE",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: socialImageUrl,
         width: 1200,
         height: 630,
         alt: "INNOVA INDUSTRIES AMERICA SAC — Soluciones industriales"
@@ -40,8 +42,14 @@ export const metadata: Metadata = {
     title: "INNOVA INDUSTRIES AMERICA SAC",
     description:
       "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
-    images: ["/opengraph-image.png"]
-  }
+    images: [socialImageUrl]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" }
+  },
+  formatDetection: { telephone: false }
 };
 
 export default function RootLayout({
@@ -70,7 +78,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${GeistSans.className} antialiased`}>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          {children}
+          <CookieBanner />
+        </AppProviders>
       </body>
     </html>
   );

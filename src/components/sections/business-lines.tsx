@@ -11,68 +11,76 @@ const businessLines = {
     {
       number: "01",
       icon: FlaskConical,
-      title: "Aditivos para concreto y shotcrete",
+      title: "Sostenimiento y tunelería",
       description:
-        "Soluciones químicas para mejorar la trabajabilidad, el bombeo, el fraguado y el desempeño del concreto en proyectos de minería, infraestructura y construcción.",
-      applications: ["Trabajabilidad", "Bombeo", "Fraguado"]
+        "Aditivos y fibras de refuerzo desarrollados para mejorar el desempeño en operaciones subterráneas y proyectos de alta exigencia.",
+      applications: ["Refuerzo", "Control", "Desempeño"],
+      image: "/assets/industries/infrastructure-tunnel.png"
     },
     {
       number: "02",
       icon: Layers3,
-      title: "Fibras para concreto y shotcrete",
+      title: "Sistemas poliméricos y conducción",
       description:
-        "Fibras sintéticas de refuerzo desarrolladas para mejorar el control de fisuras, la tenacidad y el comportamiento del concreto en aplicaciones de alta exigencia.",
-      applications: ["Control de Fisuras", "Tenacidad", "Refuerzo"]
+        "Tuberías, acoples y componentes diseñados para brindar conexiones seguras, alta durabilidad y continuidad operativa.",
+      applications: ["Conducción", "Conexión", "Durabilidad"],
+      image: "/assets/industries/polymer-piping.png"
     },
     {
       number: "03",
       icon: Factory,
-      title: "Polímeros industriales",
+      title: "Química para movilidad e industria",
       description:
-        "Materiales y productos poliméricos para procesos industriales que requieren consistencia, durabilidad, trazabilidad y capacidad de respuesta local.",
-      applications: ["Durabilidad", "Trazabilidad", "Respuesta Local"]
+        "Soluciones especializadas orientadas a proteger equipos, optimizar procesos y contribuir a operaciones más eficientes.",
+      applications: ["Protección", "Eficiencia", "Sostenibilidad"],
+      image: "/assets/industries/industrial-chemistry-natural.png"
     },
     {
       number: "04",
       icon: Beaker,
-      title: "Soluciones químicas industriales",
+      title: "Concreto para proyectos",
       description:
-        "Desarrollo y suministro de productos químicos para manufactura, mantenimiento, tratamiento de materiales y operaciones industriales especializadas.",
-      applications: ["Manufactura", "Mantenimiento", "Tratamiento"]
+        "Diseños adaptados a distintas aplicaciones de obra, con enfoque en consistencia, desempeño y respuesta técnica.",
+      applications: ["Adaptabilidad", "Consistencia", "Confiabilidad"],
+      image: "/assets/industries/concrete-additive.png"
     }
   ],
   en: [
     {
       number: "01",
       icon: FlaskConical,
-      title: "Concrete and shotcrete admixtures",
+      title: "Ground support and tunneling",
       description:
-        "Chemical solutions that improve workability, pumping, setting and concrete performance in mining, infrastructure and construction projects.",
-      applications: ["Workability", "Pumping", "Setting"]
+        "Admixtures and reinforcement fibers developed to improve performance in underground operations and high-demand projects.",
+      applications: ["Reinforcement", "Control", "Performance"],
+      image: "/assets/industries/infrastructure-tunnel.png"
     },
     {
       number: "02",
       icon: Layers3,
-      title: "Concrete and shotcrete fibers",
+      title: "Polymer systems and conveyance",
       description:
-        "Synthetic reinforcement fibers developed to improve crack control, toughness and concrete behavior in high-demand applications.",
-      applications: ["Crack Control", "Toughness", "Reinforcement"]
+        "Pipes, couplings and components designed to provide secure connections, high durability and operational continuity.",
+      applications: ["Conveyance", "Connection", "Durability"],
+      image: "/assets/industries/polymer-piping.png"
     },
     {
       number: "03",
       icon: Factory,
-      title: "Industrial polymers",
+      title: "Chemistry for mobility and industry",
       description:
-        "Polymeric materials and products for industrial processes that require consistency, durability, traceability and responsive local support.",
-      applications: ["Durability", "Traceability", "Local Response"]
+        "Specialized solutions focused on protecting equipment, optimizing processes and contributing to more efficient operations.",
+      applications: ["Protection", "Efficiency", "Sustainability"],
+      image: "/assets/industries/industrial-chemistry-natural.png"
     },
     {
       number: "04",
       icon: Beaker,
-      title: "Industrial chemical solutions",
+      title: "Concrete for projects",
       description:
-        "Development and supply of chemical products for manufacturing, maintenance, material treatment and specialized industrial operations.",
-      applications: ["Manufacturing", "Maintenance", "Treatment"]
+        "Designs adapted to different project applications, with a focus on consistency, performance and technical response.",
+      applications: ["Adaptability", "Consistency", "Reliability"],
+      image: "/assets/industries/concrete-additive.png"
     }
   ]
 } as const;
@@ -118,6 +126,7 @@ export function BusinessLines() {
           items={businessLines[locale]}
           valuePrefix="business-line"
           columns={4}
+          variant="image"
         />
       </div>
     </section>

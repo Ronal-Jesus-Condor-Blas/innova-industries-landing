@@ -8,15 +8,15 @@ import { Reveal } from "@/components/ui/reveal";
 const content = {
   es: {
     eyebrow: "¿Quiénes somos?",
-    title: "Comprometidos con la excelencia y el",
+    title: "Comprometidos con la excelencia operativa y el",
     accent: "desarrollo sostenible",
-    description: "En Innova América desarrollamos y suministramos soluciones especializadas para operaciones exigentes. Integramos experiencia técnica, productos confiables y atención cercana para generar resultados sostenibles y relaciones de largo plazo.",
-    mobileDescription: "Experiencia técnica, soluciones confiables y acompañamiento orientado al largo plazo.",
+    description: "En Innova América desarrollamos, fabricamos y suministramos soluciones para minería, infraestructura e industria. Integramos conocimiento técnico, manufactura local y atención cercana para responder con agilidad, aportar valor en cada operación y construir relaciones de largo plazo.",
+    mobileDescription: "Conocimiento técnico, manufactura local y atención cercana para aportar valor en cada operación.",
     attributes: [
-      { icon: BadgeCheck, title: "Calidad garantizada", text: "Control riguroso de procesos y mejora continua." },
-      { icon: Lightbulb, title: "Innovación constante", text: "Desarrollo de soluciones eficientes para cada operación." },
-      { icon: UsersRound, title: "Equipo comprometido", text: "Especialistas enfocados en acompañamiento y respuesta técnica." },
-      { icon: Leaf, title: "Sostenibilidad", text: "Gestión responsable orientada al entorno y al largo plazo." }
+      { icon: BadgeCheck, title: "Calidad comprobada", text: "Procesos controlados y mejora continua para ofrecer soluciones confiables." },
+      { icon: Lightbulb, title: "Innovación aplicada", text: "Desarrollamos soluciones orientadas a mejorar el desempeño y la eficiencia operativa." },
+      { icon: UsersRound, title: "Equipo especializado", text: "Acompañamiento técnico cercano, respuesta oportuna y enfoque en resultados." },
+      { icon: Leaf, title: "Sostenibilidad responsable", text: "Gestión consciente orientada al entorno, la continuidad y el largo plazo." }
     ]
   },
   en: {

@@ -16,8 +16,7 @@ const contentSecurityPolicy = [
   "connect-src 'self'",
   "manifest-src 'self'",
   "media-src 'self'",
-  "worker-src 'self' blob:",
-  "upgrade-insecure-requests"
+  "worker-src 'self' blob:"
 ].join("; ");
 
 const securityHeaders = [
