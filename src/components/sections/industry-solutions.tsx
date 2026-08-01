@@ -80,7 +80,7 @@ export function IndustrySolutions() {
 
   return (
     <section id="soluciones" className="bg-background pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20 xl:pb-[4.5rem] xl:pt-14">
-      <div className="mx-auto max-w-[68rem] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[76rem] px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div>
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-primary">
@@ -93,7 +93,7 @@ export function IndustrySolutions() {
           </div>
         </Reveal>
 
-        <ol className="industry-route relative mx-auto mt-12 max-w-6xl sm:mt-14 lg:mt-16">
+        <ol className="industry-route relative mx-auto mt-12 max-w-[72rem] sm:mt-14 lg:mt-16">
           <span
             aria-hidden="true"
             className="absolute bottom-7 left-6 top-7 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-border to-transparent md:left-1/2"
@@ -106,7 +106,7 @@ export function IndustrySolutions() {
             return (
               <li
                 key={industry.number}
-                className="industry-route-item group relative grid min-h-56 grid-cols-[3rem_1fr] items-center gap-5 py-5 md:min-h-64 md:grid-cols-[1fr_4rem_1fr] md:gap-8"
+                className="industry-route-item group relative grid min-h-64 grid-cols-[3.5rem_1fr] items-center gap-5 py-5 md:min-h-72 md:grid-cols-[1fr_5rem_1fr] md:gap-9 md:py-2"
               >
                 <Reveal
                   delay={index * 0.06}
@@ -129,7 +129,7 @@ export function IndustrySolutions() {
                     />
                     <div
                       className={cn(
-                        "w-full max-w-80 shrink-0 md:w-72",
+                        "w-full max-w-96 shrink-0 md:w-[22rem]",
                         isLeft && "md:flex md:flex-col md:items-end"
                       )}
                     >
@@ -139,15 +139,15 @@ export function IndustrySolutions() {
                       >
                         {industry.number}
                       </Badge>
-                      <h3 className="mt-3 text-xl font-semibold tracking-[-0.025em] text-innova-black sm:text-2xl">
+                      <h3 className="mt-3 text-2xl font-semibold tracking-[-0.025em] text-innova-black md:text-[1.65rem]">
                         {industry.title}
                       </h3>
-                      <div className="relative mt-4 aspect-[2/1] w-full overflow-hidden rounded-xl border border-border/70 bg-muted shadow-[0_12px_34px_rgba(0,0,0,0.08)] transition-[box-shadow,border-color] duration-500 group-hover:border-foreground/20 group-hover:shadow-[0_22px_50px_rgba(0,0,0,0.16)]">
+                      <div className="relative mt-5 aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/70 bg-muted shadow-[0_14px_38px_rgba(0,0,0,0.1)] transition-[box-shadow,border-color] duration-500 group-hover:border-foreground/20 group-hover:shadow-[0_24px_54px_rgba(0,0,0,0.18)]">
                         <Image
                           src={industry.image}
                           alt=""
                           fill
-                          sizes="(min-width: 768px) 288px, 80vw"
+                          sizes="(min-width: 768px) 352px, 90vw"
                           className="object-cover grayscale-[0.2] brightness-[0.7] contrast-[1.08] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.07] group-hover:grayscale-0 group-hover:brightness-[0.82]"
                         />
                         <span
@@ -163,8 +163,8 @@ export function IndustrySolutions() {
                   delay={index * 0.06 + 0.04}
                   className="relative z-10 col-start-1 row-start-1 flex justify-center md:col-start-2"
                 >
-                  <span className="flex size-14 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-[transform,border-color,box-shadow] duration-300 group-hover:scale-110 group-hover:border-foreground/25 group-hover:shadow-[0_16px_36px_rgba(0,0,0,0.14)]">
-                    <Icon className="size-6" strokeWidth={1.7} aria-hidden="true" />
+                  <span className="flex size-16 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-[transform,border-color,box-shadow] duration-300 group-hover:scale-110 group-hover:border-foreground/25 group-hover:shadow-[0_16px_36px_rgba(0,0,0,0.14)]">
+                    <Icon className="size-7" strokeWidth={1.7} aria-hidden="true" />
                   </span>
                 </Reveal>
               </li>
