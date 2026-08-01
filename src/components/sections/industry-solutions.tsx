@@ -14,7 +14,7 @@ const industries = {
       number: "01",
       icon: Pickaxe,
       title: "Minería",
-      image: "/assets/industries/mining.png"
+      image: "/assets/industries/mining-vehicle.png"
     },
     {
       number: "02",
@@ -32,7 +32,7 @@ const industries = {
       number: "04",
       icon: CarFront,
       title: "Automotriz",
-      image: "/assets/industries/mining-vehicle.png"
+      image: "/assets/industries/automotive-fleet-highway.png"
     }
   ],
   en: [
@@ -40,7 +40,7 @@ const industries = {
       number: "01",
       icon: Pickaxe,
       title: "Mining",
-      image: "/assets/industries/mining.png"
+      image: "/assets/industries/mining-vehicle.png"
     },
     {
       number: "02",
@@ -58,7 +58,7 @@ const industries = {
       number: "04",
       icon: CarFront,
       title: "Automotive",
-      image: "/assets/industries/mining-vehicle.png"
+      image: "/assets/industries/automotive-fleet-highway.png"
     }
   ]
 } as const;
