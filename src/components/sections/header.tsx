@@ -36,6 +36,7 @@ type LanguageSelectProps = {
   ariaLabel: string;
   compact?: boolean;
   darkSurface?: boolean;
+  transparentSurface?: boolean;
 };
 
 function LanguageSelect({
@@ -43,7 +44,8 @@ function LanguageSelect({
   setLocale,
   ariaLabel,
   compact = false,
-  darkSurface = false
+  darkSurface = false,
+  transparentSurface = false
 }: LanguageSelectProps) {
   return (
     <Select value={locale} onValueChange={(value) => setLocale(value as Locale)}>
@@ -54,6 +56,8 @@ function LanguageSelect({
           "touch-manipulation select-none rounded-full border-border/70 bg-background/80 font-semibold shadow-none hover:bg-muted focus:ring-2 focus:ring-primary/25",
           darkSurface &&
             "border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/25",
+          transparentSurface &&
+            "border-transparent bg-transparent hover:border-white/10 hover:bg-white/[0.06]",
           compact
             ? "h-10 w-[58px] gap-1 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
             : "h-10 w-[64px] gap-1.5 px-3 text-xs xl:h-9 xl:w-14 xl:gap-1 xl:px-2.5 xl:text-[0.7rem] [&>svg]:h-3.5 [&>svg]:w-3.5 xl:[&>svg]:h-3 xl:[&>svg]:w-3"
@@ -99,6 +103,7 @@ export function Header() {
   const { locale, setLocale } = useLanguage();
   const { resolvedTheme, setTheme } = useTheme();
   const isHome = pathname === "/";
+  const isHeroTop = isHome && !isScrolled;
   const isDark = isMounted && resolvedTheme === "dark";
 
   const copy = locale === "es"
@@ -136,7 +141,7 @@ export function Header() {
   }));
 
   useEffect(() => {
-    const updateHeader = () => setIsScrolled(window.scrollY > 32);
+    const updateHeader = () => setIsScrolled(window.scrollY > 120);
 
     queueMicrotask(() => {
       setIsMounted(true);
@@ -191,6 +196,7 @@ export function Header() {
         locale={locale}
         setLocale={setLocale}
         ariaLabel={copy.languageSetting}
+        transparentSurface={isHeroTop}
       />
       <Button
         type="button"
@@ -201,7 +207,9 @@ export function Header() {
           "h-10 w-10 rounded-full shadow-none transition-colors xl:h-9 xl:w-9 [&_svg]:size-4 [&_svg]:stroke-[2.35] xl:[&_svg]:size-3.5",
           isDark
             ? "border-white/15 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-            : "border-black/[0.06] bg-[#f2f3f3] text-[#3f4447] hover:bg-[#e9ebeb] hover:text-[#24282a]"
+            : "border-black/[0.06] bg-[#f2f3f3] text-[#3f4447] hover:bg-[#e9ebeb] hover:text-[#24282a]",
+          isHeroTop &&
+            "border-transparent bg-transparent hover:border-white/10 hover:bg-white/[0.06]"
         )}
         aria-label={copy.theme}
         title={copy.theme}
@@ -221,7 +229,7 @@ export function Header() {
       <div
         className={cn(
           "mx-auto grid h-[60px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
-          isHome && !isScrolled
+          isHeroTop
             ? "border-transparent bg-transparent shadow-none"
             : "border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)] xl:border-border/45 xl:bg-background/75 xl:shadow-[0_12px_34px_rgba(29,29,27,0.07)] xl:backdrop-blur-2xl dark:xl:border-white/10 dark:xl:bg-background/75 dark:xl:shadow-[0_12px_34px_rgba(0,0,0,0.20)]"
         )}
@@ -235,7 +243,14 @@ export function Header() {
         </Link>
 
         <NavigationMenu className="hidden justify-self-center lg:flex">
-          <NavigationMenuList className="flex gap-1 rounded-full border border-border/60 bg-muted/65 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] xl:p-0.5">
+          <NavigationMenuList
+            className={cn(
+              "flex gap-1 rounded-full border p-1 transition-[background-color,border-color,box-shadow] duration-300 xl:p-0.5",
+              isHeroTop
+                ? "border-transparent bg-transparent shadow-none"
+                : "border-border/60 bg-muted/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]"
+            )}
+          >
             {localizedNavItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -247,7 +262,9 @@ export function Header() {
                       className={cn(
                         "flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-[color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 xl:px-[1.125rem] xl:py-1.5 xl:text-xs",
                         isActive
-                          ? "bg-background text-foreground shadow-[0_5px_16px_rgba(29,29,27,0.09)]"
+                          ? isHeroTop
+                            ? "bg-transparent text-white shadow-none"
+                            : "bg-background text-foreground shadow-[0_5px_16px_rgba(29,29,27,0.09)]"
                           : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                       )}
                       aria-current={isActive ? "page" : undefined}
@@ -271,6 +288,7 @@ export function Header() {
             setLocale={setLocale}
             ariaLabel={copy.languageSetting}
             compact
+            transparentSurface={isHeroTop}
           />
 
           <Button
