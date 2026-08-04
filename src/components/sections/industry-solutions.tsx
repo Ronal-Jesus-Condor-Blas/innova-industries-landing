@@ -96,7 +96,7 @@ export function IndustrySolutions() {
         <ol className="industry-route relative mx-auto mt-12 max-w-[72rem] sm:mt-14 lg:mt-16">
           <span
             aria-hidden="true"
-            className="absolute bottom-7 left-6 top-7 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-border to-transparent md:left-1/2"
+            className="absolute bottom-7 left-6 top-7 w-px -translate-x-1/2 bg-foreground/35 [mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)] dark:bg-white/20 md:left-1/2"
           />
 
           {industries[locale].map((industry, index) => {
@@ -125,7 +125,7 @@ export function IndustrySolutions() {
                   >
                     <span
                       aria-hidden="true"
-                      className="hidden h-px w-10 bg-border transition-all duration-300 group-hover:w-14 group-hover:bg-foreground/35 md:block"
+                      className="hidden h-px w-12 bg-foreground/35 transition-all duration-300 group-hover:w-16 group-hover:bg-foreground/55 dark:bg-white/20 dark:group-hover:bg-white/40 md:block"
                     />
                     <div
                       className={cn(
@@ -135,7 +135,7 @@ export function IndustrySolutions() {
                     >
                       <Badge
                         variant="outline"
-                        className="h-6 rounded-full border-border/80 bg-background px-2.5 font-mono text-[10px] font-medium tracking-[0.18em] text-muted-foreground shadow-none"
+                        className="h-6 rounded-full border-foreground/25 bg-background px-2.5 font-mono text-[10px] font-medium tracking-[0.18em] text-muted-foreground shadow-none dark:border-white/15"
                       >
                         {industry.number}
                       </Badge>
@@ -163,7 +163,7 @@ export function IndustrySolutions() {
                   delay={index * 0.06 + 0.04}
                   className="relative z-10 col-start-1 row-start-1 flex justify-center md:col-start-2"
                 >
-                  <span className="flex size-16 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-[transform,border-color,box-shadow] duration-300 group-hover:scale-110 group-hover:border-foreground/25 group-hover:shadow-[0_16px_36px_rgba(0,0,0,0.14)]">
+                  <span className="flex size-16 items-center justify-center rounded-full border border-foreground/30 bg-background text-foreground shadow-[0_0_0_5px_var(--background),0_10px_30px_rgba(0,0,0,0.08)] transition-[transform,border-color,box-shadow] duration-300 group-hover:scale-110 group-hover:border-foreground/50 group-hover:shadow-[0_0_0_5px_var(--background),0_16px_36px_rgba(0,0,0,0.16)] dark:border-white/20 dark:group-hover:border-white/40">
                     <Icon className="size-7" strokeWidth={1.7} aria-hidden="true" />
                   </span>
                 </Reveal>

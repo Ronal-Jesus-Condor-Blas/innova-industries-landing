@@ -68,14 +68,14 @@ function LanguageSelect({
       <SelectContent
         align="end"
         className={cn(
-          "z-[1100] min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl",
+          "z-[1100] min-w-[9.5rem] rounded-xl border-border/70 bg-popover p-1 shadow-xl dark:border-white/15 dark:bg-[#151515] dark:shadow-[0_18px_45px_rgba(0,0,0,0.5)]",
           darkSurface && "border-white/10 bg-[#111111] text-white"
         )}
       >
         <SelectItem
           value="es"
           className={cn(
-            "rounded-lg py-2.5 font-medium",
+            "rounded-lg py-2.5 font-medium data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground dark:data-[state=checked]:bg-white/12 dark:data-[state=checked]:text-white dark:data-[state=checked]:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] dark:focus:bg-white/10 dark:focus:text-white",
             darkSurface && "focus:bg-white/10 focus:text-white"
           )}
         >
@@ -84,7 +84,7 @@ function LanguageSelect({
         <SelectItem
           value="en"
           className={cn(
-            "rounded-lg py-2.5 font-medium",
+            "rounded-lg py-2.5 font-medium data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground dark:data-[state=checked]:bg-white/12 dark:data-[state=checked]:text-white dark:data-[state=checked]:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] dark:focus:bg-white/10 dark:focus:text-white",
             darkSurface && "focus:bg-white/10 focus:text-white"
           )}
         >
@@ -263,7 +263,7 @@ export function Header() {
                         "flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-[color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 xl:px-[1.125rem] xl:py-1.5 xl:text-xs",
                         isActive
                           ? isHeroTop
-                            ? "bg-transparent text-white shadow-none"
+                            ? "bg-transparent text-foreground shadow-none"
                             : "bg-background text-foreground shadow-[0_5px_16px_rgba(29,29,27,0.09)]"
                           : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
                       )}
