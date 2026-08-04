@@ -103,7 +103,7 @@ export function Header() {
   const { locale, setLocale } = useLanguage();
   const { resolvedTheme, setTheme } = useTheme();
   const isHome = pathname === "/";
-  const isHeroTop = isHome && !isScrolled;
+  const isHeaderAtTop = !isScrolled;
   const isDark = isMounted && resolvedTheme === "dark";
 
   const copy = locale === "es"
@@ -196,7 +196,7 @@ export function Header() {
         locale={locale}
         setLocale={setLocale}
         ariaLabel={copy.languageSetting}
-        transparentSurface={isHeroTop}
+        transparentSurface={isHeaderAtTop}
       />
       <Button
         type="button"
@@ -208,7 +208,7 @@ export function Header() {
           isDark
             ? "border-white/15 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             : "border-black/[0.06] bg-[#f2f3f3] text-[#3f4447] hover:bg-[#e9ebeb] hover:text-[#24282a]",
-          isHeroTop &&
+          isHeaderAtTop &&
             "!border-transparent bg-transparent hover:!border-white/10 hover:bg-white/[0.06]"
         )}
         aria-label={copy.theme}
@@ -229,7 +229,7 @@ export function Header() {
       <div
         className={cn(
           "mx-auto grid h-[60px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
-          isHeroTop
+          isHeaderAtTop
             ? "border-0 bg-transparent shadow-none"
             : "border border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)] xl:border-border/45 xl:bg-background/75 xl:shadow-[0_12px_34px_rgba(29,29,27,0.07)] xl:backdrop-blur-2xl dark:xl:border-white/10 dark:xl:bg-background/75 dark:xl:shadow-[0_12px_34px_rgba(0,0,0,0.20)]"
         )}
@@ -246,7 +246,7 @@ export function Header() {
           <NavigationMenuList
             className={cn(
               "flex gap-1 rounded-full p-1 transition-[background-color,border-color,box-shadow] duration-300 xl:p-0.5",
-              isHeroTop
+              isHeaderAtTop
                 ? "border-0 bg-transparent shadow-none"
                 : "border border-border/60 bg-muted/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]"
             )}
@@ -262,7 +262,7 @@ export function Header() {
                       className={cn(
                         "flex items-center justify-center whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition-[color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 xl:px-[1.125rem] xl:py-1.5 xl:text-xs",
                         isActive
-                          ? isHeroTop
+                          ? isHeaderAtTop
                             ? "bg-transparent text-foreground shadow-none"
                             : "bg-background text-foreground shadow-[0_5px_16px_rgba(29,29,27,0.09)]"
                           : "text-muted-foreground hover:bg-background/60 hover:text-foreground"
@@ -288,7 +288,7 @@ export function Header() {
             setLocale={setLocale}
             ariaLabel={copy.languageSetting}
             compact
-            transparentSurface={isHeroTop}
+            transparentSurface={isHeaderAtTop}
           />
 
           <Button
