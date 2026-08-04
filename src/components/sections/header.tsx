@@ -57,7 +57,7 @@ function LanguageSelect({
           darkSurface &&
             "border-white/15 bg-white/5 text-white hover:bg-white/10 focus:ring-white/25",
           transparentSurface &&
-            "border-transparent bg-transparent hover:border-white/10 hover:bg-white/[0.06]",
+            "!border-transparent bg-transparent hover:!border-white/10 hover:bg-white/[0.06]",
           compact
             ? "h-10 w-[58px] gap-1 px-3 text-xs [&>svg]:h-3.5 [&>svg]:w-3.5"
             : "h-10 w-[64px] gap-1.5 px-3 text-xs xl:h-9 xl:w-14 xl:gap-1 xl:px-2.5 xl:text-[0.7rem] [&>svg]:h-3.5 [&>svg]:w-3.5 xl:[&>svg]:h-3 xl:[&>svg]:w-3"
@@ -209,7 +209,7 @@ export function Header() {
             ? "border-white/15 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             : "border-black/[0.06] bg-[#f2f3f3] text-[#3f4447] hover:bg-[#e9ebeb] hover:text-[#24282a]",
           isHeroTop &&
-            "border-transparent bg-transparent hover:border-white/10 hover:bg-white/[0.06]"
+            "!border-transparent bg-transparent hover:!border-white/10 hover:bg-white/[0.06]"
         )}
         aria-label={copy.theme}
         title={copy.theme}
@@ -228,10 +228,10 @@ export function Header() {
     >
       <div
         className={cn(
-          "mx-auto grid h-[60px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
+          "mx-auto grid h-[60px] max-w-[68rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-[1.65rem] px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:h-[72px] sm:gap-4 sm:px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6 xl:h-14 xl:max-w-[64rem] xl:px-5",
           isHeroTop
-            ? "border-transparent bg-transparent shadow-none"
-            : "border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)] xl:border-border/45 xl:bg-background/75 xl:shadow-[0_12px_34px_rgba(29,29,27,0.07)] xl:backdrop-blur-2xl dark:xl:border-white/10 dark:xl:bg-background/75 dark:xl:shadow-[0_12px_34px_rgba(0,0,0,0.20)]"
+            ? "border-0 bg-transparent shadow-none"
+            : "border border-border/60 bg-background/90 shadow-[0_16px_44px_rgba(29,29,27,0.10)] backdrop-blur-xl dark:shadow-[0_16px_44px_rgba(0,0,0,0.28)] xl:border-border/45 xl:bg-background/75 xl:shadow-[0_12px_34px_rgba(29,29,27,0.07)] xl:backdrop-blur-2xl dark:xl:border-white/10 dark:xl:bg-background/75 dark:xl:shadow-[0_12px_34px_rgba(0,0,0,0.20)]"
         )}
       >
         <Link
@@ -245,10 +245,10 @@ export function Header() {
         <NavigationMenu className="hidden justify-self-center lg:flex">
           <NavigationMenuList
             className={cn(
-              "flex gap-1 rounded-full border p-1 transition-[background-color,border-color,box-shadow] duration-300 xl:p-0.5",
+              "flex gap-1 rounded-full p-1 transition-[background-color,border-color,box-shadow] duration-300 xl:p-0.5",
               isHeroTop
-                ? "border-transparent bg-transparent shadow-none"
-                : "border-border/60 bg-muted/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]"
+                ? "border-0 bg-transparent shadow-none"
+                : "border border-border/60 bg-muted/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]"
             )}
           >
             {localizedNavItems.map((item) => {
