@@ -34,7 +34,7 @@ function emailShell(content: string, preview: string) {
         <td align="center" style="padding:32px 16px;">
           <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:640px;background:#ffffff;border:1px solid #e3e7eb;border-radius:18px;overflow:hidden;box-shadow:0 10px 32px rgba(13,22,33,.08);">
             <tr>
-              <td style="background:#080a0c;padding:27px 36px;border-bottom:3px solid #2584d8;">
+              <td style="background:#080a0c;padding:27px 36px;">
                 <a href="${siteUrl}" style="text-decoration:none;">
                   <img src="${logoUrl}" width="194" alt="Innova Industries America" style="display:block;width:194px;max-width:100%;height:auto;border:0;">
                 </a>
