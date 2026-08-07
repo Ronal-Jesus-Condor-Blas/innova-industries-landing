@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey);
     const from =
       process.env.RESEND_FROM_EMAIL ??
-      "INNOVA Industries America <contacto@mail.innovaindustriesperu.com>";
+      "Innova Industries America <contacto@mail.innovaindustriesperu.com>";
     const internalEmail = internalContactEmail(payload);
     const confirmationEmail = visitorConfirmationEmail(payload);
     const response = await resend.batch.send([

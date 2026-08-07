@@ -43,7 +43,7 @@ function emailShell(content: string, preview: string) {
             ${content}
             <tr>
               <td style="padding:24px 36px;background:#0d1115;color:#aeb7c0;font-size:12px;line-height:19px;">
-                <div style="color:#ffffff;font-size:13px;font-weight:700;margin-bottom:4px;">INNOVA Industries America</div>
+                <div style="color:#ffffff;font-size:13px;font-weight:700;margin-bottom:4px;">Innova Industries America</div>
                 Soluciones especializadas para minería, construcción e industria.<br>
                 <a href="${siteUrl}" style="color:#69b7ff;text-decoration:none;">www.innovaindustriesperu.com</a>
               </td>
