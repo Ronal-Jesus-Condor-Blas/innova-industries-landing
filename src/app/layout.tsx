@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   openGraph: {
-    title: "INNOVA INDUSTRIES AMERICA SAC",
+    title: "\u200B",
     description:
       "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
     url: siteUrl.toString(),
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "INNOVA INDUSTRIES AMERICA SAC",
+    title: "\u200B",
     description:
       "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
     images: [socialImageUrl]
