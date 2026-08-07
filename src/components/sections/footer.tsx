@@ -16,7 +16,6 @@ export function Footer() {
         contact: "Contacto",
         location: ["San Antonio, Huarochirí", "Lima, Perú"],
         rights: "Todos los derechos reservados",
-        emailTitle: "Enviar correo a INNOVA",
         cookies: "Política de cookies",
         nav: ["Inicio", "Comunicados", "Contacto"]
       }
@@ -27,7 +26,6 @@ export function Footer() {
         contact: "Contact",
         location: ["San Antonio, Huarochirí", "Lima, Peru"],
         rights: "All rights reserved",
-        emailTitle: "Email INNOVA",
         cookies: "Cookie policy",
         nav: ["Home", "Newsroom", "Contact"]
       };
@@ -71,16 +69,6 @@ export function Footer() {
               {copy.contact}
             </h3>
             <div className="mt-5 grid justify-items-center gap-3 text-sm leading-6 text-muted-foreground md:justify-items-start">
-              <a
-                href={`mailto:${brand.email}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="break-all outline-none transition-colors hover:text-primary focus:text-primary sm:break-normal"
-                title={copy.emailTitle}
-                aria-label={copy.emailTitle}
-              >
-                {brand.email}
-              </a>
               <span>{brand.domain}</span>
               <address className="mt-1 grid not-italic">
                 {copy.location.map((line) => <span key={line}>{line}</span>)}

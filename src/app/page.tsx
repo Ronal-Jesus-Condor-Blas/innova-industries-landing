@@ -1,4 +1,3 @@
-import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
 import { BusinessLines } from "@/components/sections/business-lines";
 import { FinalCta } from "@/components/sections/final-cta";
 import { Footer } from "@/components/sections/footer";
@@ -21,7 +20,6 @@ export default function Home() {
         <FinalCta />
       </main>
       <Footer />
-      <FloatingWhatsApp />
     </>
   );
 }

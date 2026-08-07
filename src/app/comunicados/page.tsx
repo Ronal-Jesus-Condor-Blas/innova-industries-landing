@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "@/components/providers/language-provider";
-import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
 import { NewsQuality } from "@/components/sections/news-quality";
@@ -26,7 +25,6 @@ export default function ComunicadosPage() {
       </section>
       <NewsQuality />
       <Footer />
-      <FloatingWhatsApp />
     </main>
   );
 }

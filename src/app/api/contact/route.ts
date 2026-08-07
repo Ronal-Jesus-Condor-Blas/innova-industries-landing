@@ -17,7 +17,6 @@ type ContactPayload = {
   name?: unknown;
   company?: unknown;
   email?: unknown;
-  phone?: unknown;
   subject?: unknown;
   message?: unknown;
   website?: unknown;
@@ -45,7 +44,6 @@ export async function POST(request: Request) {
       name: cleanText(body.name, 120),
       company: cleanText(body.company, 160),
       email: cleanText(body.email, 254),
-      phone: cleanText(body.phone, 40),
       subject: cleanText(body.subject, 160),
       message: cleanText(body.message, 4000)
     };
@@ -82,7 +80,7 @@ export async function POST(request: Request) {
         "INNOVA Landing <onboarding@resend.dev>",
       to:
         process.env.INNOVA_CONTACT_TO_EMAIL ??
-        "info@innovaindustriesperu.com",
+        "a.rios@innovaindustriesperu.com",
       replyTo: payload.email,
       subject: "Nueva consulta desde la web de INNOVA",
       text: [
@@ -91,7 +89,6 @@ export async function POST(request: Request) {
         `Nombre: ${payload.name}`,
         `Empresa: ${payload.company}`,
         `Correo: ${payload.email}`,
-        `Teléfono: ${payload.phone || "No indicado"}`,
         `Asunto: ${payload.subject}`,
         "",
         "Mensaje:",

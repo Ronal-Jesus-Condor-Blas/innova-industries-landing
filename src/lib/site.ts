@@ -1,9 +1,7 @@
 export const brand = {
   name: "INNOVA INDUSTRIES AMERICA SAC",
   shortName: "Innova America",
-  email: "info@innovaindustriesperu.com",
   domain: "www.innovaindustriesperu.com",
-  whatsappNumber: "51981524461",
   colors: {
     blue: "#1C6DB5",
     gray: "#878787",
@@ -17,13 +15,3 @@ export const navItems = [
   { label: "Comunicados", href: "/comunicados" },
   { label: "Contacto", href: "/contacto" }
 ] as const;
-
-export function getWhatsappHref(locale: "es" | "en" = "es") {
-  const message = locale === "es"
-    ? "Hola, quiero contactar con INNOVA INDUSTRIES AMERICA SAC."
-    : "Hello, I would like to contact INNOVA INDUSTRIES AMERICA SAC.";
-
-  return `https://wa.me/${brand.whatsappNumber}?text=${encodeURIComponent(message)}`;
-}
-
-export const whatsappHref = getWhatsappHref();

@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { Mail, MapPin, Send } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { MapPin, Send } from "lucide-react";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
@@ -17,12 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { getWhatsappHref } from "@/lib/site";
 
 const requiredFields = ["name", "company", "email", "subject", "message"] as const;
-
-const emailHref =
-  "mailto:info@innovaindustriesperu.com?subject=Consulta%20desde%20la%20web%20de%20INNOVA&body=Hola%20equipo%20de%20INNOVA%2C%0A%0AMe%20comunico%20desde%20la%20web%20para%20realizar%20una%20consulta.%0A%0ANombre%3A%0AEmpresa%3A%0ATel%C3%A9fono%3A%0AMensaje%3A";
 
 type SubmitState = {
   type: "idle" | "success" | "error";
@@ -31,10 +25,6 @@ type SubmitState = {
 
 export function Contact() {
   const { locale } = useLanguage();
-  const whatsappHref = getWhatsappHref(locale);
-  const localizedEmailHref = locale === "es"
-    ? emailHref
-    : "mailto:info@innovaindustriesperu.com?subject=Inquiry%20from%20the%20INNOVA%20website&body=Hello%20INNOVA%20team%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry.%0A%0AName%3A%0ACompany%3A%0APhone%3A%0AMessage%3A";
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
@@ -44,30 +34,28 @@ export function Contact() {
     ? {
         eyebrow: "Contacto", title: "Hablemos de tu", accent: "próximo proyecto",
         intro: "Compártenos los objetivos y requerimientos de tu operación. Nuestro equipo técnico evaluará cada necesidad para ofrecer una respuesta precisa, viable y alineada con tu proyecto.",
-        channels: "Canales directos", channelsText: "Conecta con nuestro equipo a través del canal que mejor se adapte a tu consulta.",
-        email: "Correo", emailAria: "Enviar correo a INNOVA", whatsapp: "WhatsApp comercial",
-        conversation: "Iniciar una conversación", location: "Ubicación", formTitle: "Cuéntanos qué necesitas",
+        channels: "Nuestra ubicación", channelsText: "Encuentra nuestras instalaciones y envíanos tu consulta mediante el formulario.",
+        location: "Ubicación", formTitle: "Cuéntanos qué necesitas",
         requiredNote: "Los campos marcados con * son obligatorios.", name: "Nombre *", company: "Empresa *",
-        emailField: "Correo *", phone: "Teléfono", subject: "Asunto *", message: "Mensaje *",
+        emailField: "Correo *", subject: "Asunto *", message: "Mensaje *",
         namePlaceholder: "Tu nombre", companyPlaceholder: "Nombre de la empresa", subjectPlaceholder: "¿En qué podemos ayudarte?",
         messagePlaceholder: "Describe brevemente tu requerimiento", submitting: "Enviando...", submit: "Enviar consulta",
         missing: "Complete los campos obligatorios antes de enviar la consulta",
         success: "Consulta enviada correctamente. Nuestro equipo se pondrá en contacto contigo",
-        error: "No se pudo enviar la consulta. Intenta nuevamente o escríbenos por WhatsApp"
+        error: "No se pudo enviar la consulta. Intenta nuevamente"
       }
     : {
         eyebrow: "Contact", title: "Let's discuss your", accent: "next project",
         intro: "Share your operation's objectives and requirements. Our technical team will assess each need to provide a precise, viable response aligned with your project.",
-        channels: "Direct channels", channelsText: "Connect with our team through the channel that best suits your inquiry.",
-        email: "Email", emailAria: "Email INNOVA", whatsapp: "Business WhatsApp",
-        conversation: "Start a conversation", location: "Location", formTitle: "Tell us what you need",
+        channels: "Our location", channelsText: "Find our facilities and send us your inquiry through the form.",
+        location: "Location", formTitle: "Tell us what you need",
         requiredNote: "Fields marked with * are required.", name: "Name *", company: "Company *",
-        emailField: "Email *", phone: "Phone", subject: "Subject *", message: "Message *",
+        emailField: "Email *", subject: "Subject *", message: "Message *",
         namePlaceholder: "Your name", companyPlaceholder: "Company name", subjectPlaceholder: "How can we help?",
         messagePlaceholder: "Briefly describe your requirements", submitting: "Sending...", submit: "Send inquiry",
         missing: "Please complete the required fields before sending your inquiry",
         success: "Your inquiry was sent successfully. Our team will contact you shortly",
-        error: "We couldn't send your inquiry. Please try again or contact us on WhatsApp"
+        error: "We couldn't send your inquiry. Please try again"
       };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -154,42 +142,6 @@ export function Contact() {
               </CardDescription>
             </CardHeader>
             <CardContent className="divide-y divide-border/60 px-5 pb-5 pt-0 sm:px-8 sm:pb-8">
-              <a
-                href={localizedEmailHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-start gap-4 py-4 outline-none transition-colors focus-visible:text-primary sm:py-5"
-                title={copy.emailAria}
-                aria-label={copy.emailAria}
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
-                  <Mail className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="min-w-0 pt-0.5">
-                  <span className="block text-base font-semibold text-innova-black">{copy.email}</span>
-                  <span className="mt-1 block break-all text-[0.9375rem] text-muted-foreground transition-colors group-hover:text-primary">
-                    info@innovaindustriesperu.com
-                  </span>
-                </span>
-              </a>
-              <Link
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-start gap-4 py-4 outline-none transition-colors focus-visible:text-primary sm:py-5"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
-                  <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="pt-0.5">
-                  <span className="block text-base font-semibold text-innova-black">
-                    {copy.whatsapp}
-                  </span>
-                  <span className="mt-1 block text-[0.9375rem] text-muted-foreground transition-colors group-hover:text-primary">
-                    {copy.conversation}
-                  </span>
-                </span>
-              </Link>
               <div className="flex items-start gap-4 py-4 sm:py-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
                   <MapPin className="h-4 w-4" aria-hidden="true" />
@@ -230,7 +182,7 @@ export function Contact() {
                     tabIndex={-1}
                   />
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4">
                   <div className="grid gap-2">
                     <Label htmlFor="name">{copy.name}</Label>
                     <Input
@@ -268,18 +220,6 @@ export function Contact() {
                       placeholder="nombre@empresa.com"
                       className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                       required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="phone">{copy.phone}</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      maxLength={40}
-                      placeholder="+51 999 999 999"
-                      className="surface-field h-11 rounded-xl md:text-[0.9375rem]"
                     />
                   </div>
                 </div>
@@ -320,7 +260,7 @@ export function Contact() {
                   </p>
                 ) : null}
 
-                <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+                <div className="flex pt-1">
                   <Button
                     type="submit"
                     size="lg"
@@ -329,18 +269,6 @@ export function Contact() {
                   >
                     {isSubmitting ? copy.submitting : copy.submit}
                     <Send />
-                  </Button>
-                  <Button
-                    type="button"
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="h-12 rounded-full border-border bg-background px-7 text-base text-innova-black shadow-none hover:border-primary/20 hover:bg-muted"
-                  >
-                    <Link href={whatsappHref} target="_blank" rel="noopener noreferrer">
-                      <FaWhatsapp className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                      WhatsApp
-                    </Link>
                   </Button>
                 </div>
               </form>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { FloatingWhatsApp } from "@/components/sections/floating-whatsapp";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
 import { Card } from "@/components/ui/card";
@@ -45,15 +44,13 @@ export default function CookiePolicyPage() {
             <section>
               <h2 className="text-xl font-semibold text-innova-black">Contacto</h2>
               <p className="mt-3 leading-7 text-muted-foreground">
-                Para consultas relacionadas con esta política, escribe a{" "}
-                <a className="font-medium text-primary hover:underline" href="mailto:info@innovaindustriesperu.com">info@innovaindustriesperu.com</a>.
+                Para consultas relacionadas con esta política, utiliza el formulario disponible en la sección de contacto.
               </p>
             </section>
           </Card>
         </div>
       </main>
       <Footer />
-      <FloatingWhatsApp />
     </>
   );
 }
