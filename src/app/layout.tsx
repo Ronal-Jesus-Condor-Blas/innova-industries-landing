@@ -5,11 +5,7 @@ import { AppProviders } from "@/components/providers/app-providers";
 import { CookieBanner } from "@/components/cookie-banner";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-  : process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? new URL(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
-    : new URL("https://www.innovaindustriesperu.com");
+const siteUrl = new URL("https://www.innovaindustriesperu.com");
 const socialImageUrl = new URL("/opengraph-image.png", siteUrl).toString();
 
 export const metadata: Metadata = {
