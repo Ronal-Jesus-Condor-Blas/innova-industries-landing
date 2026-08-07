@@ -1,6 +1,11 @@
 import { Resend } from "resend";
 
 import {
+  internalContactEmail,
+  visitorConfirmationEmail
+} from "@/lib/server/contact-emails";
+
+import {
   assertContentType,
   assertSameOrigin,
   cleanText,
@@ -74,27 +79,26 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(apiKey);
-    const response = await resend.emails.send({
-      from:
-        process.env.RESEND_FROM_EMAIL ??
-        "INNOVA Landing <onboarding@resend.dev>",
-      to:
-        process.env.INNOVA_CONTACT_TO_EMAIL ??
-        "a.rios@innovaindustriesperu.com",
-      replyTo: payload.email,
-      subject: "Nueva consulta desde la web de INNOVA",
-      text: [
-        "Nueva consulta desde la web de INNOVA",
-        "",
-        `Nombre: ${payload.name}`,
-        `Empresa: ${payload.company}`,
-        `Correo: ${payload.email}`,
-        `Asunto: ${payload.subject}`,
-        "",
-        "Mensaje:",
-        payload.message
-      ].join("\n")
-    });
+    const from =
+      process.env.RESEND_FROM_EMAIL ??
+      "INNOVA Industries America <contacto@mail.innovaindustriesperu.com>";
+    const internalEmail = internalContactEmail(payload);
+    const confirmationEmail = visitorConfirmationEmail(payload);
+    const response = await resend.batch.send([
+      {
+        from,
+        to:
+          process.env.INNOVA_CONTACT_TO_EMAIL ??
+          "a.rios@innovaindustriesperu.com",
+        replyTo: payload.email,
+        ...internalEmail
+      },
+      {
+        from,
+        to: payload.email,
+        ...confirmationEmail
+      }
+    ]);
 
     if (response.error) {
       return jsonNoStore(
