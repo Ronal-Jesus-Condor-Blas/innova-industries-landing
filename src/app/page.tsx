@@ -11,7 +11,7 @@ import { TrustedCompanies } from "@/components/sections/trusted-companies";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Soluciones industriales para minería y construcción en Perú",
+  title: "INNOVA INDUSTRIES AMERICA SAC | Soluciones industriales en Perú",
   path: "/"
 });
 
