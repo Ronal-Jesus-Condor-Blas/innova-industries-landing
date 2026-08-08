@@ -2,6 +2,7 @@ export const brand = {
   name: "INNOVA INDUSTRIES AMERICA SAC",
   shortName: "Innova America",
   domain: "www.innovaindustriesperu.com",
+  ruc: "20610171550",
   linkedin: "https://www.linkedin.com/company/innova-industries-america-sac/",
   colors: {
     blue: "#1C6DB5",

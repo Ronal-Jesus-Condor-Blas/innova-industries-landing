@@ -25,13 +25,13 @@ export function CookieBanner() {
   const copy = locale === "es"
     ? {
         title: "Tu privacidad importa",
-        description: "Usamos únicamente las cookies necesarias para recordar tus preferencias y asegurar el funcionamiento del sitio.",
+        description: "Usamos almacenamiento local necesario y medición anónima sin cookies publicitarias para mejorar el sitio.",
         policy: "Política de cookies",
         accept: "Entendido"
       }
     : {
         title: "Your privacy matters",
-        description: "We only use the cookies required to remember your preferences and keep the website working properly.",
+        description: "We use necessary local storage and anonymous measurement without advertising cookies to improve the website.",
         policy: "Cookie policy",
         accept: "Got it"
       };
@@ -56,7 +56,12 @@ export function CookieBanner() {
                 {copy.policy}
               </Link>
             </p>
-            <Button type="button" size="sm" onClick={acceptCookies} className="mt-3 rounded-full px-5">
+            <Button
+              type="button"
+              size="sm"
+              onClick={acceptCookies}
+              className="mt-3 rounded-full bg-[var(--consent-action)] px-5 font-semibold text-white hover:bg-[var(--consent-action-hover)]"
+            >
               {copy.accept}
             </Button>
           </div>

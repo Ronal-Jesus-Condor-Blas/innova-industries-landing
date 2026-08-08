@@ -33,6 +33,8 @@
   --surface-field: oklch(0.985 0.001 286.375);
   --surface-border: oklch(0.89 0.006 286.32);
   --surface-border-hover: color-mix(in srgb, var(--innova-blue) 30%, white);
+  --consent-action: #1a639f;
+  --consent-action-hover: #155486;
 }
 
 .dark {
@@ -62,6 +64,8 @@
   --surface-field: #0a0a0a;
   --surface-border: #262626;
   --surface-border-hover: #373737;
+  --consent-action: #1a639f;
+  --consent-action-hover: #155486;
 }
 
 @theme inline {

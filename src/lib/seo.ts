@@ -52,6 +52,8 @@ export const organizationStructuredData = {
   "@type": "Organization",
   "@id": `${siteUrl}/#organization`,
   name: brand.name,
+  legalName: brand.name,
+  taxID: brand.ruc,
   alternateName: [
     brand.shortName,
     "Innova Industries",

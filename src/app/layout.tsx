@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AppProviders } from "@/components/providers/app-providers";
 import { CookieBanner } from "@/components/cookie-banner";
 import { organizationStructuredData, siteUrl } from "@/lib/seo";
@@ -8,6 +10,7 @@ import "./globals.css";
 
 const metadataBase = new URL(siteUrl);
 const socialImageUrl = new URL("/opengraph-image.png", metadataBase).toString();
+const isVercelDeployment = process.env.VERCEL === "1";
 
 export const metadata: Metadata = {
   metadataBase,
@@ -72,6 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
@@ -102,6 +106,8 @@ export default function RootLayout({
         <AppProviders>
           {children}
           <CookieBanner />
+          {isVercelDeployment ? <Analytics /> : null}
+          {isVercelDeployment ? <SpeedInsights sampleRate={0.5} /> : null}
         </AppProviders>
       </body>
     </html>

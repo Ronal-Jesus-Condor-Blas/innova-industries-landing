@@ -6,47 +6,23 @@ export function HeroMolecularBackground() {
       aria-hidden="true"
       className="hero-molecule-bottom-fade pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      {/* Mobile remains static so Safari renders both theme assets consistently. */}
       <div className="absolute inset-0 bg-white dark:bg-[#0a0a0a] md:hidden" />
-      <div className="hero-molecule-breathe absolute inset-0 origin-[55%_50%] md:hidden">
-        <Image
-          src="/images/hero-molecular-3d.png"
-          alt=""
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          className="object-cover object-[54%_center] opacity-[0.92] contrast-[1.06] saturate-[0.8] dark:hidden"
-        />
-        <Image
-          src="/images/hero-molecular-3d-0a-transparent.png"
-          alt=""
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          className="hidden object-cover object-[55%_center] opacity-[0.82] dark:block"
-        />
-      </div>
-
-      <div className="hero-molecule-breathe absolute -inset-3 hidden origin-[62%_50%] md:block">
-        <div className="absolute inset-0 scale-[1.025]">
+      <div className="hero-molecule-breathe absolute inset-0 origin-[55%_50%] md:-inset-3 md:origin-[62%_50%]">
+        <div className="absolute inset-0 md:scale-[1.025]">
           <Image
             src="/images/hero-molecular-3d.png"
             alt=""
             fill
-            priority
             sizes="100vw"
-            className="object-cover object-[62%_center] opacity-100 dark:hidden lg:object-center"
+            className="object-cover object-[54%_center] opacity-[0.92] contrast-[1.06] saturate-[0.8] dark:hidden md:object-[62%_center] md:opacity-100 md:saturate-100 lg:object-center"
           />
           <Image
             src="/images/hero-molecular-3d-0a-transparent.png"
             alt=""
             fill
             priority
-            unoptimized
             sizes="100vw"
-            className="hidden object-cover object-[62%_center] opacity-[0.94] dark:block lg:object-center"
+            className="hidden object-cover object-[55%_center] opacity-[0.82] dark:block md:object-[62%_center] md:opacity-[0.94] lg:object-center"
           />
         </div>
       </div>

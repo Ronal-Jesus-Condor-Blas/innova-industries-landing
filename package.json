@@ -19,6 +19,8 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/postcss": "latest",
     "@upstash/redis": "^1.38.2",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "latest",
     "clsx": "latest",
     "geist": "^1.7.2",

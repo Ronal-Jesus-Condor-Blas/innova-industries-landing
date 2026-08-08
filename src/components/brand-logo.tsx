@@ -30,6 +30,7 @@ export function BrandLogo({ className, darkVariant = "brand" }: BrandLogoProps) 
         width={2050}
         height={513}
         priority
+        sizes="(min-width: 640px) 184px, 126px"
         className="h-full w-full object-contain object-left dark:hidden"
       />
       <span className="relative hidden h-full w-full overflow-hidden dark:block">
@@ -38,7 +39,8 @@ export function BrandLogo({ className, darkVariant = "brand" }: BrandLogoProps) 
           alt="Innova America Industries Resources"
           width={darkLogo.width}
           height={darkLogo.height}
-          priority
+        priority
+        sizes="(min-width: 640px) 184px, 126px"
           unoptimized={darkLogo.src.endsWith(".svg")}
           className={cn("absolute", darkLogo.className)}
         />

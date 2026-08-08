@@ -13,6 +13,9 @@ type LegalDocumentProps = {
   title: string;
   introduction: string;
   updatedAt: string;
+  updatedLabel: string;
+  contactPrompt: string;
+  contactLabel: string;
   sections: LegalSection[];
 };
 
@@ -21,6 +24,9 @@ export function LegalDocument({
   title,
   introduction,
   updatedAt,
+  updatedLabel,
+  contactPrompt,
+  contactLabel,
   sections
 }: LegalDocumentProps) {
   return (
@@ -36,7 +42,7 @@ export function LegalDocument({
           {introduction}
         </p>
         <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-          Última actualización: {updatedAt}
+          {updatedLabel}: {updatedAt}
         </p>
 
         <Card className="carbon-card mt-10 divide-y divide-border/60 rounded-2xl px-6 sm:px-10">
@@ -53,12 +59,12 @@ export function LegalDocument({
         </Card>
 
         <p className="mt-8 text-sm leading-6 text-muted-foreground">
-          ¿Necesitas comunicarte con nosotros?{" "}
+          {contactPrompt}{" "}
           <Link
             href="/contacto"
             className="font-medium text-foreground underline underline-offset-4 transition-colors hover:text-primary"
           >
-            Ir a contacto
+            {contactLabel}
           </Link>
           .
         </p>
