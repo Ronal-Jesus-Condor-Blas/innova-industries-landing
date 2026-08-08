@@ -1,11 +1,13 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import Link from "next/link";
 import { MapPin, Send } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { brand } from "@/lib/site";
 import {
   Card,
@@ -53,6 +55,9 @@ export function Contact() {
         emailField: "Correo *", subject: "Asunto *", message: "Mensaje *",
         namePlaceholder: "Tu nombre", companyPlaceholder: "Nombre de la empresa", subjectPlaceholder: "¿En qué podemos ayudarte?",
         messagePlaceholder: "Describe brevemente tu requerimiento", submitting: "Enviando...", submit: "Enviar consulta",
+        consentStart: "He leído la",
+        consentLink: "Política de privacidad",
+        consentEnd: "y autorizo el tratamiento de mis datos para atender esta consulta.",
         missing: "Complete los campos obligatorios antes de enviar la consulta",
         success: "Consulta enviada correctamente. Nuestro equipo se pondrá en contacto contigo",
         rateLimited: "Este correo ya alcanzó el máximo permitido de 2 consultas",
@@ -67,6 +72,9 @@ export function Contact() {
         emailField: "Email *", subject: "Subject *", message: "Message *",
         namePlaceholder: "Your name", companyPlaceholder: "Company name", subjectPlaceholder: "How can we help?",
         messagePlaceholder: "Briefly describe your requirements", submitting: "Sending...", submit: "Send inquiry",
+        consentStart: "I have read the",
+        consentLink: "Privacy policy",
+        consentEnd: "and authorize the processing of my data to respond to this inquiry.",
         missing: "Please complete the required fields before sending your inquiry",
         success: "Your inquiry was sent successfully. Our team will contact you shortly",
         rateLimited: "This email has reached the maximum allowed limit of 2 inquiries",
@@ -82,7 +90,8 @@ export function Contact() {
       Array.from(formData.entries()).map(([key, value]) => [key, String(value).trim()])
     );
 
-    const hasMissingFields = requiredFields.some((field) => !payload[field]);
+    const hasMissingFields =
+      requiredFields.some((field) => !payload[field]) || payload.consent !== "on";
 
     if (hasMissingFields) {
       setSubmitState({
@@ -292,6 +301,20 @@ export function Contact() {
                     className="surface-field min-h-28 resize-y rounded-xl md:text-[0.9375rem]"
                     required
                   />
+                </div>
+
+                <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/35 p-4">
+                  <Checkbox id="contact-consent" name="consent" className="mt-0.5" required />
+                  <Label htmlFor="contact-consent" className="font-normal leading-6 text-muted-foreground">
+                    {copy.consentStart}{" "}
+                    <Link
+                      href="/politica-de-privacidad"
+                      className="font-medium text-foreground underline underline-offset-4 transition-colors hover:text-primary"
+                    >
+                      {copy.consentLink}
+                    </Link>{" "}
+                    {copy.consentEnd} *
+                  </Label>
                 </div>
 
                 {submitState.message ? (

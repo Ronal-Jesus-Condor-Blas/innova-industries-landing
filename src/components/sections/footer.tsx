@@ -17,6 +17,8 @@ export function Footer() {
         contact: "Contacto",
         location: ["San Antonio, Huarochirí", "Lima, Perú"],
         rights: "Todos los derechos reservados",
+        privacy: "Política de privacidad",
+        terms: "Términos de uso",
         cookies: "Política de cookies",
         nav: ["Inicio", "Comunicados", "Contacto"]
       }
@@ -27,6 +29,8 @@ export function Footer() {
         contact: "Contact",
         location: ["San Antonio, Huarochirí", "Lima, Peru"],
         rights: "All rights reserved",
+        privacy: "Privacy policy",
+        terms: "Terms of use",
         cookies: "Cookie policy",
         nav: ["Home", "Newsroom", "Contact"]
       };
@@ -97,12 +101,24 @@ export function Footer() {
         <p className="mx-auto max-w-md text-xs leading-5 text-muted-foreground">
           © 2026 {brand.name}. {copy.rights}
         </p>
-        <Link
-          href="/politica-de-cookies"
-          className="mt-2 inline-block text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline focus:text-primary focus:outline-none"
+        <nav
+          aria-label={locale === "es" ? "Enlaces legales" : "Legal links"}
+          className="mt-3 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
         >
-          {copy.cookies}
-        </Link>
+          {[
+            ["/politica-de-privacidad", copy.privacy],
+            ["/terminos-de-uso", copy.terms],
+            ["/politica-de-cookies", copy.cookies]
+          ].map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline focus:text-primary focus:outline-none"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </footer>
   );

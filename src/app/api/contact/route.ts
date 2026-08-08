@@ -27,6 +27,7 @@ type ContactPayload = {
   subject?: unknown;
   message?: unknown;
   website?: unknown;
+  consent?: unknown;
 };
 
 const maxJsonBytes = 32 * 1024;
@@ -52,7 +53,8 @@ export async function POST(request: Request) {
       company: cleanSingleLine(body.company, 160),
       email: cleanSingleLine(body.email, 254),
       subject: cleanSingleLine(body.subject, 160),
-      message: cleanText(body.message, 4000)
+      message: cleanText(body.message, 4000),
+      consent: body.consent === "on" || body.consent === true
     };
 
     if (
@@ -61,6 +63,7 @@ export async function POST(request: Request) {
       !payload.email ||
       !payload.subject ||
       !payload.message ||
+      !payload.consent ||
       !isValidEmail(payload.email)
     ) {
       return jsonNoStore(

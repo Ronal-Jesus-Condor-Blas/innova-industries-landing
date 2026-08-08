@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -118,7 +119,9 @@ export function Careers() {
         documentsSection: "CV y autorización",
         selectFile: "Seleccionar CV",
         noFile: "Ningún archivo seleccionado",
-        consent: "Autorizo el uso de mis datos para procesos de selección de Innova América.",
+        consentStart: "He leído la",
+        consentLink: "Política de privacidad",
+        consentEnd: "y autorizo el uso de mis datos para procesos de selección de Innova América.",
         submit: "Enviar postulación",
         submitting: "Enviando...",
         incomplete: "Completa los campos requeridos, adjunta tu CV y acepta la autorización",
@@ -182,7 +185,9 @@ export function Careers() {
         documentsSection: "Résumé and authorization",
         selectFile: "Select résumé",
         noFile: "No file selected",
-        consent: "I authorize Innova America to use my data for recruitment processes.",
+        consentStart: "I have read the",
+        consentLink: "Privacy policy",
+        consentEnd: "and authorize Innova America to use my data for recruitment processes.",
         submit: "Submit application",
         submitting: "Submitting...",
         incomplete: "Complete the required fields, attach your résumé and accept the authorization",
@@ -484,7 +489,14 @@ export function Careers() {
                 <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/35 p-4">
                   <Checkbox id="career-consent" name="consent" className="mt-0.5" required />
                   <Label htmlFor="career-consent" className="font-normal leading-6 text-muted-foreground">
-                    {copy.consent} *
+                    {copy.consentStart}{" "}
+                    <Link
+                      href="/politica-de-privacidad"
+                      className="font-medium text-foreground underline underline-offset-4 transition-colors hover:text-primary"
+                    >
+                      {copy.consentLink}
+                    </Link>{" "}
+                    {copy.consentEnd} *
                   </Label>
                 </div>
                 </fieldset>
