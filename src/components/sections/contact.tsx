@@ -2,11 +2,11 @@
 
 import { FormEvent, useState } from "react";
 import { MapPin, Send } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 import { brand } from "@/lib/site";
-import { LinkedInIcon } from "@/components/ui/linkedin-icon";
 import {
   Card,
   CardContent,
@@ -169,7 +169,7 @@ export function Contact() {
                 className="group flex items-start gap-4 py-4 sm:py-5"
               >
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/[0.1]">
-                  <LinkedInIcon className="h-4 w-4" />
+                  <FaLinkedin className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="pt-0.5">
                   <span className="block text-base font-semibold text-innova-black">LinkedIn</span>

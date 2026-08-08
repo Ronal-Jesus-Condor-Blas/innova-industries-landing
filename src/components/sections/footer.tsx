@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LinkedInIcon } from "@/components/ui/linkedin-icon";
+import { FaLinkedin } from "react-icons/fa";
 
 import { BrandLogo } from "@/components/brand-logo";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -82,7 +82,7 @@ export function Footer() {
                     : "Innova Industries America on LinkedIn"
                 }
               >
-                <LinkedInIcon className="h-4 w-4" />
+                <FaLinkedin className="h-[18px] w-[18px]" aria-hidden="true" />
                 <span>LinkedIn</span>
               </a>
               <address className="mt-1 grid not-italic">

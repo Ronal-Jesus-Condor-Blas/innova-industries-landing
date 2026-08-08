@@ -63,23 +63,27 @@ export const communications: Communication[] = [
     icon: ClipboardCheck
   },
   {
-    id: "comunicado-cambio-gerencia",
-    title: "Cambio en la gerencia general",
-    titleEn: "General management change",
+    id: "comunicado-operativo-agosto",
+    title: "Comunicado operativo de agosto",
+    titleEn: "August operational announcement",
     category: "Comunicados oficiales",
-    date: "2026-05-18",
-    summary: "Se comunica el nombramiento de un nuevo gerente general para el periodo 2026-2028.",
-    summaryEn: "The appointment of a new general manager for the 2026–2028 term is hereby announced.",
+    date: "2026-08-05",
+    summary:
+      "Innova Industries America informa los lineamientos de coordinación operativa para agosto, orientados a asegurar la continuidad de las actividades, la atención oportuna y el cumplimiento de los protocolos internos.",
+    summaryEn:
+      "Innova Industries America announces its operational coordination guidelines for August, focused on ensuring business continuity, timely service and compliance with internal protocols.",
     icon: Factory
   },
   {
-    id: "revision-manual-calidad",
-    title: "Actualización del manual de control de calidad",
-    titleEn: "Quality control manual update",
-    category: "Política de calidad",
-    date: "2026-04-01",
-    summary: "El comité técnico ha aprobado la versión 4.0 de nuestro manual de inspección, reforzando las tolerancias radiográficas y dimensionales.",
-    summaryEn: "The technical committee has approved version 4.0 of our inspection manual, strengthening radiographic and dimensional tolerances.",
-    icon: ClipboardCheck
+    id: "comunicado-operativo-julio",
+    title: "Comunicado operativo de julio",
+    titleEn: "July operational announcement",
+    category: "Comunicados oficiales",
+    date: "2026-07-08",
+    summary:
+      "Se comunican las disposiciones operativas vigentes para julio, con énfasis en la planificación de entregas, la coordinación entre áreas y la continuidad del servicio.",
+    summaryEn:
+      "The operational provisions for July are announced, with an emphasis on delivery planning, cross-functional coordination and service continuity.",
+    icon: Factory
   }
 ];
