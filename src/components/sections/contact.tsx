@@ -165,14 +165,14 @@ export function Contact() {
                     ? "LinkedIn: conoce nuestras novedades y perfil corporativo"
                     : "LinkedIn: discover our latest updates and company profile"
                 }
-                className="group flex items-start gap-4 py-4 sm:py-5"
+                className="group flex cursor-pointer items-start gap-4 rounded-lg py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-4 focus-visible:ring-offset-background sm:py-5"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/[0.1]">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary transition-colors group-hover:border-primary/40 group-hover:bg-primary/[0.14] group-focus-visible:border-primary/40 group-focus-visible:bg-primary/[0.14]">
                   <FaLinkedin className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="pt-0.5">
-                  <span className="block text-base font-semibold text-innova-black">LinkedIn</span>
-                  <span className="mt-1 block text-[0.9375rem] leading-6 text-muted-foreground transition-colors group-hover:text-innova-black">
+                  <span className="block text-base font-semibold text-innova-black transition-colors group-hover:text-primary group-focus-visible:text-primary">LinkedIn</span>
+                  <span className="mt-1 block text-[0.9375rem] leading-6 text-muted-foreground transition-colors group-hover:text-primary group-focus-visible:text-primary">
                     {locale === "es"
                       ? "Conoce nuestras novedades y perfil corporativo"
                       : "Discover our latest updates and company profile"}
