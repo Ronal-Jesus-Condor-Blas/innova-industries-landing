@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LinkedInIcon } from "@/components/ui/linkedin-icon";
 
 import { BrandLogo } from "@/components/brand-logo";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -70,6 +71,20 @@ export function Footer() {
             </h3>
             <div className="mt-5 grid justify-items-center gap-3 text-sm leading-6 text-muted-foreground md:justify-items-start">
               <span>{brand.domain}</span>
+              <a
+                href={brand.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 transition-colors hover:text-primary focus:text-primary focus:outline-none"
+                aria-label={
+                  locale === "es"
+                    ? "LinkedIn de Innova Industries America"
+                    : "Innova Industries America on LinkedIn"
+                }
+              >
+                <LinkedInIcon className="h-4 w-4" />
+                <span>LinkedIn</span>
+              </a>
               <address className="mt-1 grid not-italic">
                 {copy.location.map((line) => <span key={line}>{line}</span>)}
               </address>

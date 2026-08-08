@@ -5,6 +5,8 @@ import { MapPin, Send } from "lucide-react";
 
 import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
+import { brand } from "@/lib/site";
+import { LinkedInIcon } from "@/components/ui/linkedin-icon";
 import {
   Card,
   CardContent,
@@ -155,6 +157,29 @@ export function Contact() {
                   </address>
                 </div>
               </div>
+              <a
+                href={brand.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={
+                  locale === "es"
+                    ? "LinkedIn: conoce nuestras novedades y perfil corporativo"
+                    : "LinkedIn: discover our latest updates and company profile"
+                }
+                className="group flex items-start gap-4 py-4 sm:py-5"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/[0.1]">
+                  <LinkedInIcon className="h-4 w-4" />
+                </span>
+                <span className="pt-0.5">
+                  <span className="block text-base font-semibold text-innova-black">LinkedIn</span>
+                  <span className="mt-1 block text-[0.9375rem] leading-6 text-muted-foreground transition-colors group-hover:text-innova-black">
+                    {locale === "es"
+                      ? "Conoce nuestras novedades y perfil corporativo"
+                      : "Discover our latest updates and company profile"}
+                  </span>
+                </span>
+              </a>
             </CardContent>
           </div>
 
