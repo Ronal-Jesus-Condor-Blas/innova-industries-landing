@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { MapPin, Send } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 
@@ -32,6 +32,17 @@ export function Contact() {
     type: "idle",
     message: ""
   });
+
+  useEffect(() => {
+    if (submitState.type !== "success") return;
+
+    const timeoutId = window.setTimeout(() => {
+      setSubmitState({ type: "idle", message: "" });
+    }, 60_000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [submitState.message, submitState.type]);
+
   const copy = locale === "es"
     ? {
         eyebrow: "Contacto", title: "Hablemos de tu", accent: "próximo proyecto",
