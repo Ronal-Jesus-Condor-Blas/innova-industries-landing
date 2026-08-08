@@ -488,7 +488,7 @@ export function Careers() {
 
                 <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/35 p-4">
                   <Checkbox id="career-consent" name="consent" className="mt-0.5" required />
-                  <Label htmlFor="career-consent" className="font-normal leading-6 text-muted-foreground">
+                  <Label htmlFor="career-consent" className="cursor-pointer font-normal leading-6 text-muted-foreground">
                     {copy.consentStart}{" "}
                     <Link
                       href="/politica-de-privacidad"
