@@ -10,7 +10,6 @@ import "./globals.css";
 
 const metadataBase = new URL(siteUrl);
 const socialImageUrl = new URL("/opengraph-image.png", metadataBase).toString();
-const isVercelDeployment = process.env.VERCEL === "1";
 
 export const metadata: Metadata = {
   metadataBase,
@@ -106,8 +105,8 @@ export default function RootLayout({
         <AppProviders>
           {children}
           <CookieBanner />
-          {isVercelDeployment ? <Analytics /> : null}
-          {isVercelDeployment ? <SpeedInsights sampleRate={0.5} /> : null}
+          <Analytics />
+          <SpeedInsights sampleRate={0.5} />
         </AppProviders>
       </body>
     </html>
