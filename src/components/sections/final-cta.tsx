@@ -27,7 +27,7 @@ export function FinalCta() {
   return (
     <section className="bg-background px-4 pb-24 pt-4 sm:px-6 sm:pb-28 lg:px-8 lg:pb-32 xl:pb-24" aria-labelledby="final-cta-title">
       <Reveal className="mx-auto max-w-[68rem]">
-        <Card className="carbon-card overflow-hidden rounded-[1.75rem] border-border/60 bg-card shadow-none">
+        <Card className="carbon-card surface-featured overflow-hidden rounded-[1.75rem] border-border/60 bg-card">
           <CardContent className="flex flex-col items-start gap-8 p-7 sm:p-10 md:flex-row md:items-center md:justify-between lg:p-12">
             <div className="max-w-3xl">
               <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-primary">{copy.eyebrow}</p>
