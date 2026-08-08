@@ -4,6 +4,7 @@ import {
   internalContactEmail,
   visitorConfirmationEmail
 } from "@/lib/server/contact-emails";
+import { reserveContactSubmission } from "@/lib/server/contact-rate-limit";
 
 import {
   assertContentType,
@@ -78,39 +79,63 @@ export async function POST(request: Request) {
       );
     }
 
-    const resend = new Resend(apiKey);
-    const from =
-      process.env.RESEND_FROM_EMAIL ??
-      "Innova Industries America <contacto@mail.innovaindustriesperu.com>";
-    const internalEmail = internalContactEmail(payload);
-    const confirmationEmail = visitorConfirmationEmail(payload);
-    const response = await resend.batch.send([
-      {
-        from,
-        to:
-          process.env.INNOVA_CONTACT_TO_EMAIL ??
-          "a.rios@innovaindustriesperu.com",
-        replyTo: payload.email,
-        ...internalEmail
-      },
-      {
-        from,
-        to: payload.email,
-        ...confirmationEmail
-      }
-    ]);
-
-    if (response.error) {
+    const reservation = await reserveContactSubmission(payload.email);
+    if (!reservation.allowed) {
       return jsonNoStore(
         {
           success: false,
-          error: "No se pudo enviar la consulta. Inténtalo nuevamente."
+          code: "EMAIL_RATE_LIMIT",
+          error: "Este correo ya alcanzó el máximo de 2 consultas en 24 horas."
         },
-        { status: 502 }
+        {
+          status: 429,
+          headers: { "Retry-After": String(reservation.retryAfter) }
+        }
       );
     }
 
-    return jsonNoStore({ success: true });
+    let submissionSucceeded = false;
+
+    try {
+      const resend = new Resend(apiKey);
+      const from =
+        process.env.RESEND_FROM_EMAIL ??
+        "Innova Industries America <contacto@mail.innovaindustriesperu.com>";
+      const internalEmail = internalContactEmail(payload);
+      const confirmationEmail = visitorConfirmationEmail(payload);
+      const response = await resend.batch.send([
+        {
+          from,
+          to:
+            process.env.INNOVA_CONTACT_TO_EMAIL ??
+            "a.rios@innovaindustriesperu.com",
+          replyTo: payload.email,
+          ...internalEmail
+        },
+        {
+          from,
+          to: payload.email,
+          ...confirmationEmail
+        }
+      ]);
+
+      if (response.error) {
+        return jsonNoStore(
+          {
+            success: false,
+            error: "No se pudo enviar la consulta. Inténtalo nuevamente."
+          },
+          { status: 502 }
+        );
+      }
+
+      submissionSucceeded = true;
+      return jsonNoStore({ success: true });
+    } finally {
+      if (!submissionSucceeded) {
+        await reservation.release().catch(() => undefined);
+      }
+    }
   } catch (error) {
     return securityErrorResponse(error);
   }

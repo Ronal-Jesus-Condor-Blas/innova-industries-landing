@@ -18,6 +18,7 @@
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/postcss": "latest",
+    "@upstash/redis": "^1.38.2",
     "class-variance-authority": "latest",
     "clsx": "latest",
     "geist": "^1.7.2",

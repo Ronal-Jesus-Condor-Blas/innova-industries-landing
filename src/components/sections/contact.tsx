@@ -44,6 +44,7 @@ export function Contact() {
         messagePlaceholder: "Describe brevemente tu requerimiento", submitting: "Enviando...", submit: "Enviar consulta",
         missing: "Complete los campos obligatorios antes de enviar la consulta",
         success: "Consulta enviada correctamente. Nuestro equipo se pondrá en contacto contigo",
+        rateLimited: "Este correo ya envió el máximo de 2 consultas en 24 horas. Intenta nuevamente más tarde",
         error: "No se pudo enviar la consulta. Intenta nuevamente"
       }
     : {
@@ -57,6 +58,7 @@ export function Contact() {
         messagePlaceholder: "Briefly describe your requirements", submitting: "Sending...", submit: "Send inquiry",
         missing: "Please complete the required fields before sending your inquiry",
         success: "Your inquiry was sent successfully. Our team will contact you shortly",
+        rateLimited: "This email has reached the maximum of 2 inquiries in 24 hours. Please try again later",
         error: "We couldn't send your inquiry. Please try again"
       };
 
@@ -89,10 +91,20 @@ export function Contact() {
         body: JSON.stringify(payload)
       });
 
-      const result = (await response.json()) as { success?: boolean; error?: string };
+      const result = (await response.json()) as {
+        success?: boolean;
+        code?: string;
+        error?: string;
+      };
 
       if (!response.ok || !result.success) {
-        throw new Error(locale === "es" ? (result.error ?? copy.error) : copy.error);
+        throw new Error(
+          result.code === "EMAIL_RATE_LIMIT"
+            ? copy.rateLimited
+            : locale === "es"
+              ? (result.error ?? copy.error)
+              : copy.error
+        );
       }
 
       form.reset();
@@ -144,19 +156,6 @@ export function Contact() {
               </CardDescription>
             </CardHeader>
             <CardContent className="divide-y divide-border/60 px-5 pb-5 pt-0 sm:px-8 sm:pb-8">
-              <div className="flex items-start gap-4 py-4 sm:py-5">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
-                  <MapPin className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <div className="pt-0.5">
-                  <p className="text-base font-semibold text-innova-black">{copy.location}</p>
-                  <address className="mt-1 max-w-[20rem] text-[0.9375rem] not-italic leading-6 text-muted-foreground">
-                    Mza. B1 Lote. 3b Z.I. Lotización Industrial Hua (Alt. Petramas)<br />
-                    San Antonio, Huarochirí<br />
-                    Lima, Perú
-                  </address>
-                </div>
-              </div>
               <a
                 href={brand.linkedin}
                 target="_blank"
@@ -180,6 +179,19 @@ export function Contact() {
                   </span>
                 </span>
               </a>
+              <div className="flex items-start gap-4 py-4 sm:py-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.06] text-primary">
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <div className="pt-0.5">
+                  <p className="text-base font-semibold text-innova-black">{copy.location}</p>
+                  <address className="mt-1 max-w-[20rem] text-[0.9375rem] not-italic leading-6 text-muted-foreground">
+                    Mza. B1 Lote. 3b Z.I. Lotización Industrial Hua (Alt. Petramas)<br />
+                    San Antonio, Huarochirí<br />
+                    Lima, Perú
+                  </address>
+                </div>
+              </div>
             </CardContent>
           </div>
 
