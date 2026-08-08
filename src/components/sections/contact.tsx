@@ -195,7 +195,7 @@ export function Contact() {
             </CardContent>
           </div>
 
-          <Card className="carbon-card animate-fade-up stagger-1 rounded-2xl">
+          <Card className="carbon-card surface-featured animate-fade-up stagger-1 rounded-2xl">
             <CardHeader className="p-5 pb-3 sm:p-7 sm:pb-2">
               <CardTitle className="text-2xl tracking-[-0.02em] text-innova-black">
                 {copy.formTitle}
