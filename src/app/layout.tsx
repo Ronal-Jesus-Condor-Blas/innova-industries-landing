@@ -3,25 +3,38 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { AppProviders } from "@/components/providers/app-providers";
 import { CookieBanner } from "@/components/cookie-banner";
+import { organizationStructuredData, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
-const siteUrl = new URL("https://www.innovaindustriesperu.com");
-const socialImageUrl = new URL("/opengraph-image.png", siteUrl).toString();
+const metadataBase = new URL(siteUrl);
+const socialImageUrl = new URL("/opengraph-image.png", metadataBase).toString();
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl,
-  title: "INNOVA INDUSTRIES AMERICA SAC | Soluciones industriales",
+  metadataBase,
+  applicationName: "INNOVA INDUSTRIES AMERICA SAC",
+  title: {
+    default: "INNOVA INDUSTRIES AMERICA SAC | Soluciones industriales en Perú",
+    template: "%s | Innova Industries"
+  },
   description:
     "Soluciones químicas e industriales, productos especializados y soporte técnico para minería, construcción e industria.",
-  alternates: {
-    canonical: "/"
-  },
+  keywords: [
+    "Innova Industries America",
+    "Innova Industries",
+    "soluciones industriales Perú",
+    "soluciones para minería",
+    "química industrial",
+    "sistemas poliméricos"
+  ],
+  creator: "INNOVA INDUSTRIES AMERICA SAC",
+  publisher: "INNOVA INDUSTRIES AMERICA SAC",
+  category: "Industria",
   openGraph: {
     title: "INNOVA INDUSTRIES AMERICA",
     description:
       "Ingeniería, productos especializados y soporte técnico para minería, construcción e industria.",
-    url: siteUrl.toString(),
-    siteName: "Innova America",
+    url: siteUrl,
+    siteName: "INNOVA INDUSTRIES AMERICA SAC",
     locale: "es_PE",
     type: "website",
     images: [
@@ -45,7 +58,10 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" }
   },
-  formatDetection: { telephone: false }
+  formatDetection: { telephone: false },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION
+  }
 };
 
 export default function RootLayout({
@@ -60,6 +76,15 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationStructuredData).replace(
+              /</g,
+              "\\u003c"
+            )
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

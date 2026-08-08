@@ -8,15 +8,18 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
+  "frame-src 'none'",
   "form-action 'self'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
   "script-src 'self' 'unsafe-inline'",
+  "script-src-attr 'none'",
   "connect-src 'self'",
   "manifest-src 'self'",
   "media-src 'self'",
-  "worker-src 'self' blob:"
+  "worker-src 'self' blob:",
+  "upgrade-insecure-requests"
 ].join("; ");
 
 const securityHeaders = [

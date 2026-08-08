@@ -35,3 +35,16 @@ Configura en Vercel las variables documentadas en `.env.example`. El formulario 
 3. Vuelve a desplegar el proyecto.
 
 Si Redis o el secreto no están disponibles, el formulario continúa funcionando con un contador en memoria por instancia. Este respaldo evita interrumpir el contacto, pero la garantía estricta del límite entre todas las instancias de Vercel requiere conectar Upstash Redis.
+
+## Indexación en Google
+
+El sitio publica automáticamente `https://www.innovaindustriesperu.com/robots.txt` y `https://www.innovaindustriesperu.com/sitemap.xml`.
+
+1. Crea una propiedad de dominio para `innovaindustriesperu.com` en Google Search Console.
+2. Verifica la propiedad mediante el registro DNS TXT solicitado por Google. Como alternativa, configura `GOOGLE_SITE_VERIFICATION` en Vercel y vuelve a desplegar.
+3. Envía `https://www.innovaindustriesperu.com/sitemap.xml` desde la sección Sitemaps.
+4. Usa Inspección de URLs para solicitar la indexación inicial de la página principal, `/comunicados` y `/contacto`.
+
+## Seguridad operativa
+
+Vercel aplica mitigación DDoS automática. Para una protección adicional ante abuso de formularios, conecta Upstash Redis y configura reglas de Vercel WAF inicialmente en modo de registro, revisando el tráfico antes de bloquear o desafiar solicitudes reales. El repositorio ejecuta auditoría de dependencias y lint en GitHub Actions, y Dependabot revisa actualizaciones semanalmente.

@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
 import { Card } from "@/components/ui/card";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Política de cookies | INNOVA INDUSTRIES AMERICA SAC",
+export const metadata: Metadata = createPageMetadata({
+  title: "Política de cookies",
   description: "Información sobre el uso de cookies y almacenamiento local en el sitio web de Innova América.",
-  alternates: { canonical: "/politica-de-cookies" }
-};
+  path: "/politica-de-cookies"
+});
 
 export default function CookiePolicyPage() {
   return (

@@ -4,6 +4,7 @@ import {
   assertContentLength,
   assertContentType,
   assertSameOrigin,
+  cleanSingleLine,
   cleanText,
   consumeRateLimit,
   isSafeHttpUrl,
@@ -42,6 +43,10 @@ const experienceLabels: Record<string, string> = {
 
 function getText(formData: FormData, name: string, maxLength: number) {
   return cleanText(formData.get(name), maxLength);
+}
+
+function getSingleLine(formData: FormData, name: string, maxLength: number) {
+  return cleanSingleLine(formData.get(name), maxLength);
 }
 
 function hasValidSignature(bytes: Buffer, extension: string) {
@@ -84,13 +89,13 @@ export async function POST(request: Request) {
     }
 
     const payload = {
-      name: getText(formData, "name", 120),
-      email: getText(formData, "email", 254),
-      phone: getText(formData, "phone", 40),
-      location: getText(formData, "location", 120),
-      area: getText(formData, "area", 40),
-      experience: getText(formData, "experience", 40),
-      linkedin: getText(formData, "linkedin", 240),
+      name: getSingleLine(formData, "name", 120),
+      email: getSingleLine(formData, "email", 254),
+      phone: getSingleLine(formData, "phone", 40),
+      location: getSingleLine(formData, "location", 120),
+      area: getSingleLine(formData, "area", 40),
+      experience: getSingleLine(formData, "experience", 40),
+      linkedin: getSingleLine(formData, "linkedin", 240),
       profile: getText(formData, "profile", 1200),
       consent: formData.get("consent") === "on"
     };

@@ -9,6 +9,7 @@ import { reserveContactSubmission } from "@/lib/server/contact-rate-limit";
 import {
   assertContentType,
   assertSameOrigin,
+  cleanSingleLine,
   cleanText,
   consumeRateLimit,
   isValidEmail,
@@ -47,10 +48,10 @@ export async function POST(request: Request) {
     }
 
     const payload = {
-      name: cleanText(body.name, 120),
-      company: cleanText(body.company, 160),
-      email: cleanText(body.email, 254),
-      subject: cleanText(body.subject, 160),
+      name: cleanSingleLine(body.name, 120),
+      company: cleanSingleLine(body.company, 160),
+      email: cleanSingleLine(body.email, 254),
+      subject: cleanSingleLine(body.subject, 160),
       message: cleanText(body.message, 4000)
     };
 

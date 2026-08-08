@@ -41,7 +41,28 @@ export function assertSameOrigin(request: Request) {
   }
 
   const origin = request.headers.get("origin");
-  if (origin && origin !== getExpectedOrigin(request)) {
+  if (!origin) {
+    if (process.env.NODE_ENV === "production") {
+      throw new RequestSecurityError("Solicitud no permitida.", 403);
+    }
+    return;
+  }
+
+  const allowedOrigins = new Set([
+    new URL(request.url).origin,
+    getExpectedOrigin(request)
+  ]);
+  const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+  if (configuredSiteUrl) {
+    try {
+      allowedOrigins.add(new URL(configuredSiteUrl).origin);
+    } catch {
+      // Ignore an invalid optional URL and retain request-derived origins.
+    }
+  }
+
+  if (!allowedOrigins.has(origin)) {
     throw new RequestSecurityError("Solicitud no permitida.", 403);
   }
 }
@@ -86,11 +107,19 @@ export function consumeRateLimit(
   globalStore.innovaRateLimits = store;
 
   const now = Date.now();
-  if (store.size > 1000) {
+  if (store.size >= 1000) {
     for (const [storedKey, entry] of store) {
       if (entry.resetAt <= now) {
         store.delete(storedKey);
       }
+    }
+  }
+
+  if (store.size >= 5000) {
+    while (store.size > 4000) {
+      const oldestKey = store.keys().next().value;
+      if (!oldestKey) break;
+      store.delete(oldestKey);
     }
   }
 
@@ -153,6 +182,16 @@ export function cleanText(value: unknown, maxLength: number) {
   const normalized = value.trim().replace(/\0/g, "");
   if (normalized.length > maxLength) {
     throw new RequestSecurityError("Uno de los campos supera el límite permitido.", 400);
+  }
+
+  return normalized;
+}
+
+export function cleanSingleLine(value: unknown, maxLength: number) {
+  const normalized = cleanText(value, maxLength);
+
+  if (/\r|\n/.test(normalized)) {
+    throw new RequestSecurityError("Uno de los campos no es válido.", 400);
   }
 
   return normalized;
