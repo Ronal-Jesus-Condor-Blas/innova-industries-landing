@@ -85,12 +85,9 @@ export async function POST(request: Request) {
         {
           success: false,
           code: "EMAIL_RATE_LIMIT",
-          error: "Este correo ya alcanzó el máximo de 2 consultas en 24 horas."
+          error: "Este correo ya alcanzó el máximo permitido de 2 consultas."
         },
-        {
-          status: 429,
-          headers: { "Retry-After": String(reservation.retryAfter) }
-        }
+        { status: 429 }
       );
     }
 

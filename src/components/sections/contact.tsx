@@ -44,7 +44,7 @@ export function Contact() {
         messagePlaceholder: "Describe brevemente tu requerimiento", submitting: "Enviando...", submit: "Enviar consulta",
         missing: "Complete los campos obligatorios antes de enviar la consulta",
         success: "Consulta enviada correctamente. Nuestro equipo se pondrá en contacto contigo",
-        rateLimited: "Este correo ya envió el máximo de 2 consultas en 24 horas. Intenta nuevamente más tarde",
+        rateLimited: "Este correo ya alcanzó el máximo permitido de 2 consultas",
         error: "No se pudo enviar la consulta. Intenta nuevamente"
       }
     : {
@@ -58,7 +58,7 @@ export function Contact() {
         messagePlaceholder: "Briefly describe your requirements", submitting: "Sending...", submit: "Send inquiry",
         missing: "Please complete the required fields before sending your inquiry",
         success: "Your inquiry was sent successfully. Our team will contact you shortly",
-        rateLimited: "This email has reached the maximum of 2 inquiries in 24 hours. Please try again later",
+        rateLimited: "This email has reached the maximum allowed limit of 2 inquiries",
         error: "We couldn't send your inquiry. Please try again"
       };
 
